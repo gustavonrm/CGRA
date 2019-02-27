@@ -24,17 +24,21 @@ class MyScene extends CGFscene {
         this.diamond = new MyDiamond(this);
         this.triangle = new MyTriangle(this); 
         this.parallelogram = new MyParallelogram(this); 
-        this.small_triangle = new MyTriangleSmall(this); 
-        this.big_triangle = new MyTriangleBig(this); 
+        this.small_triangle_1 = new MyTriangleSmall(this); 
+        this.big_triangle_1 = new MyTriangleBig(this); 
+        this.small_triangle_2 = new MyTriangleSmall(this); 
+        this.big_triangle_2 = new MyTriangleBig(this); 
         
         //Objects connected to MyInterface
         this.displayAxis = true;
         this.scaleFactor = 1;
         this.displayDiamond =true; 
-        this.displayTriangle =false;
+        this.displayTriangle =true;
         this.displayParallelogram =false;  
-        this.displayTriangleSmall =false;  
-        this.displayTriangleBig =false;  
+        this.displayTriangleSmall1 =false;  
+        this.displayTriangleBig1 =true;  
+        this.displayTriangleSmall2 =false;  
+        this.displayTriangleBig2 =true;  
 
     }
     initLights() {
@@ -99,15 +103,38 @@ class MyScene extends CGFscene {
             this.diamond.display();
             this.popMatrix();
         }
-           
-        if (this.displayTriangle)
+         
+        if (this.displayTriangle){
+            this.pushMatrix();
+            this.translate(-3,-1,0); 
             this.triangle.display();
+            this.popMatrix();   
+        }
+        //TODO
         if (this.displayParallelogram)
             this.parallelogram.display();
-        if (this.displayTriangleSmall)
-            this.small_triangle.display();
-        if (this.displayTriangleBig)
-            this.big_triangle.display();
+        //TODO
+        if (this.displayTriangleSmall1)
+            this.small_triangle_1.display();
+        
+        if (this.displayTriangleBig1){
+            this.pushMatrix();
+            this.translate(-2,0,0); 
+            this.rotate(Math.PI,0,0,1);
+            this.big_triangle_1.display();
+             this.popMatrix();
+        }
+        //TODO 
+        if (this.displayTriangleSmall2)
+            this.small_triangle_2.display();
+
+        if (this.displayTriangleBig2){
+            this.pushMatrix();
+            this.translate(Math.sqrt(2),Math.sqrt(2),0); 
+            this.rotate(Math.PI/4,0,0,1);
+            this.big_triangle_2.display();
+            this.popMatrix();
+        }
 
         // ---- END Primitive drawing section
     }
