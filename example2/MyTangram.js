@@ -55,18 +55,18 @@ class MyTangram extends CGFobject {
     
 
         // Parallelogram
-        this.pushMatrix();
-        this.scale(-1, 1, 1);
-        this.rotate(Math.PI/4, 0,0,1);
+        this.scene.pushMatrix();
+        this.scene.scale(-1, 1, 1);
+        this.scene.rotate(Math.PI/4, 0,0,1);
         this.parallelogram.display();
-        this.popMatrix();
+        this.scene.popMatrix();
     
         // Small Triangle 1
-        this.pushMatrix();            
-        this.rotate(Math.PI/2 + Math.PI/4, 0,0,1);
-        this.translate(1,0,0);
+        this.scene.pushMatrix();            
+        this.scene.rotate(Math.PI/2 + Math.PI/4, 0,0,1);
+        this.scene.translate(1,0,0);
         this.small_triangle_1.display();
-        this.popMatrix();
+        this.scene.popMatrix();
     
         
         // Big Triangle 1
@@ -77,12 +77,12 @@ class MyTangram extends CGFobject {
         this.scene.popMatrix();
     
         // Small Triangle 2    
-        this.pushMatrix();
-        this.translate(0,Math.sqrt(2),0);
-        this.rotate(-Math.PI/4, 0,0,1);
-        this.translate(-1,0,0);
+        this.scene.pushMatrix();
+        this.scene.translate(0,Math.sqrt(2),0);
+        this.scene.rotate(-Math.PI/4, 0,0,1);
+        this.scene.translate(-1,0,0);
         this.small_triangle_2.display();
-        this.popMatrix();
+        this.scene.popMatrix();
 
         // Big Triangle 2
         this.scene.pushMatrix();
