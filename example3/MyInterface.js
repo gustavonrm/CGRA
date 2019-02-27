@@ -24,13 +24,8 @@ class MyInterface extends CGFinterface {
         this.gui.add(this.scene, 'scaleFactor', 0.1, 5).name('Scale Factor');
 
         //Did on class 
-        this.gui.add(this.scene, 'displayDiamond').name('Diamond');
-        this.gui.add(this.scene, 'displayTriangle').name('Triangle');
-        this.gui.add(this.scene, 'displayParallelogram').name('Parallelogram');
-        this.gui.add(this.scene, 'displayTriangleSmall1').name('Triangle small 1');
-        this.gui.add(this.scene, 'displayTriangleBig1').name('Triangle big 1');
-        this.gui.add(this.scene, 'displayTriangleSmall2').name('Triangle small 2');
-        this.gui.add(this.scene, 'displayTriangleBig2').name('Triangle big 2');
+        this.gui.add(this.scene, 'displayMyUnitCube').name('Cube');
+
 
         return true;
     }
