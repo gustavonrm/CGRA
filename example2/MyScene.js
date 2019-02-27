@@ -21,24 +21,15 @@ class MyScene extends CGFscene {
 
         //Initialize scene objects
         this.axis = new CGFaxis(this);
-        this.diamond = new MyDiamond(this);
-        this.triangle = new MyTriangle(this); 
-        this.parallelogram = new MyParallelogram(this); 
-        this.small_triangle_1 = new MyTriangleSmall(this); 
-        this.big_triangle_1 = new MyTriangleBig(this); 
-        this.small_triangle_2 = new MyTriangleSmall(this); 
-        this.big_triangle_2 = new MyTriangleBig(this); 
-        
+        this.cube = new MyUnitCube(this);
+        this.tangram = new MyTangram(this);  //???????????????????????
+
+
         //Objects connected to MyInterface
         this.displayAxis = true;
         this.scaleFactor = 1;
-        this.displayDiamond =true; 
-        this.displayTriangle =true;
-        this.displayParallelogram =false;  
-        this.displayTriangleSmall1 =false;  
-        this.displayTriangleBig1 =true;  
-        this.displayTriangleSmall2 =false;  
-        this.displayTriangleBig2 =true;  
+        this.displayMyUnitCube = true; 
+        this.displayMyTangram = true; 
 
     }
     initLights() {
@@ -81,77 +72,23 @@ class MyScene extends CGFscene {
 
 
         // ---- BEGIN Primitive drawing section
-            var mT=[
-                1,  0,  0,  0,
-                0,  1,  0,  0,
-                0,  0,  1,  0,
-                -1.5* Math.sqrt(2), Math.sqrt(2)*0.5, 0,  1
-            ];
-  
-            var mR=[
-               Math.cos(Math.PI/4),     Math.sin(Math.PI/4),    0,  0,
-               -(Math.sin(Math.PI/4)),  Math.cos(Math.PI/4),    0,  0,
-               0,                       0,                      1,  0,
-               0,                       0,                      0,  1
-            ];
 
-
-        if (this.displayDiamond){
+        /*if (this.displayMyUnitCube){
             this.pushMatrix();
-            this.multMatrix(mT);
-            this.multMatrix(mR);
-            this.diamond.display();
-            this.popMatrix();
-        }
-         
-        if (this.displayTriangle){
-            this.pushMatrix();
-            this.translate(-3,-1,0); 
-            this.triangle.display();
-            this.popMatrix();   
-        }
+            this.translate(0,0,-0.5);  //change here
+            this.cube.display(); 
+            this.popMatrix(); 
+        }*/
         
-        if (this.displayParallelogram){
+       if(this.displayMyTangram){
             this.pushMatrix();
-            this.scale(-1, 1, 1);
-            this.rotate(Math.PI/4, 0,0,1);
-            this.parallelogram.display();
-            this.popMatrix();
-        }
-        
-        if (this.displayTriangleSmall1){
-            this.pushMatrix();            
-            this.rotate(Math.PI/2 + Math.PI/4, 0,0,1);
-            this.translate(1,0,0);
-            this.small_triangle_1.display();
-            this.popMatrix();
-        }
-        
-        if (this.displayTriangleBig1){
-            this.pushMatrix();
-            this.translate(-2,0,0); 
-            this.rotate(Math.PI,0,0,1);
-            this.big_triangle_1.display();
-             this.popMatrix();
-        }
-        
-        if (this.displayTriangleSmall2){
-            this.pushMatrix();
-            this.translate(0,Math.sqrt(2),0);
-            this.rotate(-Math.PI/4, 0,0,1);
-            this.translate(-1,0,0);
-            this.small_triangle_2.display();
-            this.popMatrix();
-        }
-
-        if (this.displayTriangleBig2){
-            this.pushMatrix();
-            this.translate(Math.sqrt(2),Math.sqrt(2),0); 
-            this.rotate(Math.PI/4,0,0,1);
-            this.big_triangle_2.display();
-            this.popMatrix();
-        }
-
+            this
+            this.tangram.display(); //change for the tangram   //n tenho qt a esta tranformaçao 5)
+            this.popMatrix(); 
+       }
+     
+           
+       
         // ---- END Primitive drawing section
     }
 }
