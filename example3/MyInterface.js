@@ -23,6 +23,12 @@ class MyInterface extends CGFinterface {
         // and an event handler to be called when the selection changes
         this.gui.add(this.scene, 'selectedObject', this.scene.objectIDs).name('Selected Object').onChange(this.scene.updateObjectComplexity.bind(this.scene));
 
+        //ambient light
+        this.gui.add(this.scene, 'redFactor', 0.0, 1.0).name('Red');
+        this.gui.add(this.scene, 'greenFactor', 0.0, 1.0).name('Green');
+        this.gui.add(this.scene, 'blueFactor', 0.0, 1.0).name('Blue');
+        this.gui.add(this.scene, 'alphaFactor', 0.0, 1.0).name('Alpha');
+
         this.gui.add(this.scene, 'scaleFactor', 0.1, 10.0).name('Scale');
         this.gui.add(this.scene, 'objectComplexity', 0.01, 1.0).onChange(this.scene.updateObjectComplexity.bind(this.scene));
 

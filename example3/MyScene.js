@@ -38,10 +38,15 @@ class MyScene extends CGFscene {
         this.displayNormals = false;
         this.objectComplexity = 0.5;
         this.scaleFactor = 2.0;
+        this.redFactor =0.3;
+        this.greenFactor=0.3;
+        this.blueFactor=0.3;
+        this.alphaFactor=1.0;
+       
 
     }
     initLights() {
-        this.setGlobalAmbientLight(0.3, 0.3, 0.3, 1.0);
+        this.setGlobalAmbientLight(this.redFactor, this.greenFactor, this.blueFactor, this.alphaFactor);
 
         this.lights[0].setPosition(2.0, 2.0, -1.0, 1.0);
         this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
@@ -163,6 +168,7 @@ class MyScene extends CGFscene {
 
         this.pushMatrix();
         this.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
+        this.setGlobalAmbientLight(this.redFactor, this.greenFactor, this.blueFactor, this.alphaFactor);
         
         if (this.displayNormals)
             this.objects[this.selectedObject].enableNormalViz();
