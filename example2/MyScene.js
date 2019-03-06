@@ -74,11 +74,12 @@ class MyScene extends CGFscene {
         // ---- BEGIN Primitive drawing section
         
         this.pushMatrix();
-        this.translate(0.5,1,0.5);
+        this.translate(4,0,3);
         this.rotate(-Math.PI/2,1,0,0);
         if (this.displayMyUnitCube){
             this.pushMatrix();
             this.translate(0,0,-0.5);  //change here
+            this.scale(8,6,1); 
             this.cube.display(); 
             this.popMatrix(); 
         }
