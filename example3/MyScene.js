@@ -6,7 +6,10 @@ class MyScene extends CGFscene {
     constructor() {
         super();
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> d13c2aee7ce598e12fbe0f2ab9383ab03f1287d8
     init(application) {
         super.init(application);
         this.initCameras();
