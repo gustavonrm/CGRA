@@ -21,8 +21,26 @@ class MyTangram extends CGFobject {
         this.small_triangle_1.initBuffers();
         this.big_triangle_1.initBuffers();
         this.small_triangle_2.initBuffers();
-        this.big_triangle_2.initBuffers(); 
-	}
+        this.big_triangle_2.initBuffers();
+
+        this.initBuffers();
+
+    }
+    
+    initBuffers(){
+
+        this.vertices = [];
+        this.normals = [];
+        this.indices = [];
+        
+        this.vertices.push(this.diamond.vertices);
+        this.normals.push(this.diamond.normals);
+        this.indices.push(this.diamond.indices);
+        
+
+        this.primitiveType = this.scene.gl.TRIANGLES;
+		this.initGLBuffers();
+    }
 	display() {
       
 

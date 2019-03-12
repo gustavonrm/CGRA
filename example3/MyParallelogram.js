@@ -23,6 +23,21 @@ class MyParallelogram extends CGFobject {
 			2,1,0,
 			2,3,1
 		];
+<<<<<<< HEAD
+=======
+
+		this.normals = [
+			0,0,1,
+			0,0,1,
+			0,0,1,
+			0,0,1,
+			0,0,-1,
+			0,0,-1,
+			0,0,-1,
+			0,0,-1
+		];
+		
+>>>>>>> 9bb08d830827ff762f0e5b1535a0d9315a0ce320
 		this.primitiveType = this.scene.gl.TRIANGLES;
 		this.initGLBuffers();
 	}
