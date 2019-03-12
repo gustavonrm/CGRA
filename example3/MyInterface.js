@@ -59,7 +59,7 @@ class MyInterface extends CGFinterface {
 
         // Ambient light slider
 
-        this.gui.add(this.scene, 'ambLightR', 0.0, 1.0).name('AmbientLightRed');
+        this.gui.add(this.scene, 'ambLightR', 0.0, 1.0).name('AmbientLight');
         this.gui.add(this.scene, 'ambLightG', 0.0, 1.0).name('AmbientLightGreen');
         this.gui.add(this.scene, 'ambLightB', 0.0, 1.0).name('AmbientLightBlue');
         this.gui.add(this.scene, 'ambLighta', 0.0, 1.0).name('AmbientLightAlfa');
