@@ -75,7 +75,6 @@ class MyTangram extends CGFobject {
         this.initBuffers();
 
     }
-    
     initBuffers(){
 
         this.vertices = [];
@@ -89,6 +88,24 @@ class MyTangram extends CGFobject {
 
         this.primitiveType = this.scene.gl.TRIANGLES;
 		this.initGLBuffers();
+    }
+    enableNormalViz(){
+        this.diamond.enableNormalViz(); 
+        this.triangle.enableNormalViz();
+        this.big_triangle_1.enableNormalViz();
+        this.big_triangle_2.enableNormalViz();
+        this.small_triangle_1.enableNormalViz();
+        this.small_triangle_2.enableNormalViz();
+        this.parallelogram.enableNormalViz();
+    }
+    enableDisableViz(){
+        this.diamond.enableDisableViz(); 
+        this.triangle.enableNormalViz();
+        this.big_triangle_1.enableDisableViz();
+        this.big_triangle_2.enableDisableViz();
+        this.small_triangle_1.enableDisableViz();
+        this.small_triangle_2.enableDisableViz();
+        this.parallelogram.enableDisableViz();
     }
 	display() {
       
@@ -111,7 +128,7 @@ class MyTangram extends CGFobject {
         this.scene.pushMatrix();
         this.scene.multMatrix(mT);
         this.scene.multMatrix(mR);
-        //this.green.apply(); //if i dont put anything here, can it be controlled by custom?
+        this.scene.customMaterial.apply(); 
         this.diamond.display();
         this.scene.popMatrix();
 
