@@ -26,9 +26,9 @@ class MyScene extends CGFscene {
         this.quad = new MyQuad(this);
         this.tangram = new MyTangram(this);
 
-        this.objects = [this.quad, this.tangram];
+        this.objects = [this.quad, this.tangram, null];
 
-        this.objectIDs = { 'Quad': 0 ,'Tangram': 1};
+        this.objectIDs = { 'Quad': 0 ,'Tangram': 1, '':2};
 
         this.selectedObject = 0;
 
@@ -59,7 +59,7 @@ class MyScene extends CGFscene {
         this.texCoords = [0.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 0.0];
         this.wrappingMethods = ['REPEAT', 'CLAMP_TO_EDGE', 'MIRRORED_REPEAT'];
 
-        this.textureIds = { 'Board': 0, 'Floor': 1, 'Window': 2 };
+        this.textureIds = { 'Board': 0, 'Floor': 1, 'Window': 2};
         this.wrappingS = { 'Repeat': 0, 'Clamp to edge': 1, 'Mirrored repeat': 2 };
         this.wrappingT = { 'Repeat': 0, 'Clamp to edge': 1, 'Mirrored repeat': 2 };
 

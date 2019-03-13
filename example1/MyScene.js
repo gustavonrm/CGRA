@@ -22,21 +22,6 @@ class MyScene extends CGFscene {
         //Initialize scene objects
         this.axis = new CGFaxis(this);
         this.diamond = new MyDiamond(this);
-<<<<<<< HEAD
-        this.triangle = new MyTriangle(this);
-        this.paralelogramo = new MyParalelogramo(this);
-
-        this.triangleBig = new MyTriangleBig(this);
-        this.triangleSmall = new MyTriangleSmall(this);
-        
-
-        //Objects connected to MyInterface
-        this.displayAxis = true;
-        this.scaleFactor = 1;
-        this.displayTriangle = true;
-        this.displaySquare = true;
-        this.displayParalelogramo = false;
-=======
         this.triangle = new MyTriangle(this); 
         this.parallelogram = new MyParallelogram(this); 
         this.small_triangle = new MyTriangleSmall(this); 
@@ -50,7 +35,6 @@ class MyScene extends CGFscene {
         this.displayParallelogram =false;  
         this.displayTriangleSmall =false;  
         this.displayTriangleBig =false;  
->>>>>>> 43e17b155fba82094b6aab1d0e9604b73fb49a13
 
     }
     initLights() {
@@ -94,25 +78,6 @@ class MyScene extends CGFscene {
 
         // ---- BEGIN Primitive drawing section
 
-<<<<<<< HEAD
-        
-        if (this.displayTriangle)
-            this.triangle.display();
-
-        if (this.displaySquare)
-            this.diamond.display();
-
-        if (this.displayParalelogramo)
-            this.paralelogramo.display();
-        
-
-        // BIG and SMALL TRIANGLES ARE ON THE OTHER SIDE
-        if (this.displaySquare)
-            this.triangleBig.display(); 
-
-        if (this.displayParalelogramo)
-            this.triangleSmall.display();
-=======
         if (this.displayDiamond)
             this.diamond.display();
         if (this.displayTriangle)
@@ -123,7 +88,6 @@ class MyScene extends CGFscene {
             this.small_triangle.display();
         if (this.displayTriangleBig)
             this.big_triangle.display();
->>>>>>> 43e17b155fba82094b6aab1d0e9604b73fb49a13
 
         // ---- END Primitive drawing section
     }
