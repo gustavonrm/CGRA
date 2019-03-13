@@ -24,6 +24,13 @@ class MyScene extends CGFscene {
         //Initialize scene objects
         this.axis = new CGFaxis(this);
         this.quad = new MyQuad(this);
+        this.tangram = new MyTangram(this);
+
+        this.objects = [this.quad, this.tangram];
+
+        this.objectIDs = { 'Quad': 0 ,'Tangram': 1};
+
+        this.selectedObject = 0;
 
         //------ Applied Material
         this.quadMaterial = new CGFappearance(this);
@@ -76,6 +83,10 @@ class MyScene extends CGFscene {
         this.setShininess(10.0);
     }
 
+    updateObjectComplexity(){
+        this.objects[this.selectedObject].updateBuffers(this.objectComplexity);
+    }
+
     //Function that resets selected texture in quadMaterial
     updateAppliedTexture() {
         this.quadMaterial.setTexture(this.textures[this.selectedTexture]);
@@ -121,7 +132,7 @@ class MyScene extends CGFscene {
         
         // this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MAG_FILTER, this.gl.NEAREST);
 
-        this.quad.display();
+        this.objects[this.selectedObject].display();
 
         // ---- END Primitive drawing section
     }
