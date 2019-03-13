@@ -71,8 +71,6 @@ class MyTangram extends CGFobject {
         this.TangramMaterial.setSpecular(0.1, 0.1, 0.1, 1);
         this.TangramMaterial.setShininess(10.0);
         this.TangramMaterial.loadTexture('images/tangram.png');
-        //this.TangramMaterial.setTextureWrap('REPEAT', 'REPEAT');
-        
         
         this.diamond.initBuffers();
         this.triangle.initBuffers();

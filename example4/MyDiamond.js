@@ -39,6 +39,10 @@ class MyDiamond extends CGFobject {
 			0,0,-1
 		];
 		
+		this.texCoord = [
+			0, 1, 1, 1, 0, 0, 1, 0  //idk...
+		]
+
 		this.primitiveType = this.scene.gl.TRIANGLES;
 		this.initGLBuffers();
 	}

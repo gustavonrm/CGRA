@@ -28,7 +28,7 @@ class MyScene extends CGFscene {
 
         this.objects = [this.quad, this.tangram, null];
 
-        this.objectIDs = { 'Quad': 0 ,'Tangram': 1, '':2};
+        this.objectIDs = { 'Quad': 0 ,'Tangram': 1, 'Empty':2};
 
         this.selectedObject = 0;
 
@@ -59,7 +59,7 @@ class MyScene extends CGFscene {
         this.texCoords = [0.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 0.0];
         this.wrappingMethods = ['REPEAT', 'CLAMP_TO_EDGE', 'MIRRORED_REPEAT'];
 
-        this.textureIds = { 'Board': 0, 'Floor': 1, 'Window': 2};
+        this.textureIds = { 'Board': 0, 'Floor': 1, 'Window': 2,'Empty': 3};
         this.wrappingS = { 'Repeat': 0, 'Clamp to edge': 1, 'Mirrored repeat': 2 };
         this.wrappingT = { 'Repeat': 0, 'Clamp to edge': 1, 'Mirrored repeat': 2 };
 
@@ -89,7 +89,9 @@ class MyScene extends CGFscene {
 
     //Function that resets selected texture in quadMaterial
     updateAppliedTexture() {
-        this.quadMaterial.setTexture(this.textures[this.selectedTexture]);
+       
+            this.quadMaterial.setTexture(this.textures[this.selectedTexture]);
+        
     }
 
     //Function that updates wrapping mode in quadMaterial
@@ -130,10 +132,12 @@ class MyScene extends CGFscene {
         // Uncomment next line for NEAREST when magnifying, or 
         // add a checkbox in the GUI to alternate in real time
         
-        // this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MAG_FILTER, this.gl.NEAREST);
+        //this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MAG_FILTER, this.gl.NEAREST);
+        if(this.selectedObject !=2){
+            this.objects[this.selectedObject].display();
+        }//else does nothing 
 
-        this.objects[this.selectedObject].display();
-
+       
         // ---- END Primitive drawing section
     }
 }
