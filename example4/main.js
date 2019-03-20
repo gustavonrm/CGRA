@@ -9,13 +9,10 @@ serialInclude(['../lib/CGF.js',
     'MyTangram.js',
     'MyUnitCubeQuad.js',
     'MyDiamond.js',
-    'MyScene.js',
-    'MyInterface.js',
     'MyTriangle.js',
     'MyParallelogram.js', //include files and classes
     'MyTriangleSmall.js',
     'MyTriangleBig.js',
-    'MyUnitCubeQuad.js',
 
     main = function () {
         var app = new CGFapplication(document.body);

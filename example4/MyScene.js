@@ -52,7 +52,7 @@ class MyScene extends CGFscene {
 
         //-------Objects connected to MyInterface
         this.displayAxis = true;
-        this.scaleFactor = 1;  //change scale
+        this.scaleFactor = 5;  //change scale
         this.selectedTexture = -1;        
         this.wrapS = 0;
         this.wrapT = 0;
@@ -135,7 +135,7 @@ class MyScene extends CGFscene {
         // add a checkbox in the GUI to alternate in real time
         
         //this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MAG_FILTER, this.gl.NEAREST);
-        if(this.selectedObject !=2){
+        if(this.selectedObject !=3){
             this.objects[this.selectedObject].display();
         }//else does nothing 
 
