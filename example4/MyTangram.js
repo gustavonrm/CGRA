@@ -65,14 +65,13 @@ class MyTangram extends CGFobject {
         this.orange.setShininess(10.0);
         
         //tangram.png
-        this.TangramTexture = new CGFtexture(this.scene, 'images/tangram-pattern.jpg');
-
+    
         this.TangramMaterial = new CGFappearance(this.scene);
-        this.TangramMaterial.setAmbient(0.1, 0.1, 0.1, 1);
+        this.TangramMaterial.setAmbient(1, 1, 1, 1);
         this.TangramMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
         this.TangramMaterial.setSpecular(0.1, 0.1, 0.1, 1);
         this.TangramMaterial.setShininess(10.0);
-        this.TangramMaterial.setTexture(this.TangramTexture);
+        this.TangramMaterial.loadTexture('images/tangram-pattern.jpg');
 
         
         this.diamond.initBuffers();
@@ -85,15 +84,6 @@ class MyTangram extends CGFobject {
 
         this.initBuffers();
 
-    }
-    initBuffers(){
-
-        this.vertices = [];
-        this.normals = [];
-        this.indices = [];
-        this.texCoords =[];
-        this.primitiveType = this.scene.gl.TRIANGLES;
-		this.initGLBuffers();
     }
     enableNormalViz(){
         this.diamond.enableNormalViz(); 

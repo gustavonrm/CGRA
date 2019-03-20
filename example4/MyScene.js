@@ -25,10 +25,12 @@ class MyScene extends CGFscene {
         this.axis = new CGFaxis(this);
         this.quad = new MyQuad(this);
         this.tangram = new MyTangram(this);
+        this.cube = new MyUnitCubeQuad(this);
 
-        this.objects = [this.quad, this.tangram, null];
 
-        this.objectIDs = { 'Quad': 0 ,'Tangram': 1, 'Empty':2};
+        this.objects = [this.quad, this.tangram,this.cube,null];
+
+        this.objectIDs = { 'Quad': 0 ,'Tangram': 1, 'cube':2,'Empty':3};
 
         this.selectedObject = 0;
 
@@ -50,7 +52,7 @@ class MyScene extends CGFscene {
 
         //-------Objects connected to MyInterface
         this.displayAxis = true;
-        this.scaleFactor = 1;  //change scale
+        this.scaleFactor = 5;  //change scale
         this.selectedTexture = -1;        
         this.wrapS = 0;
         this.wrapT = 0;
@@ -133,7 +135,7 @@ class MyScene extends CGFscene {
         // add a checkbox in the GUI to alternate in real time
         
         //this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MAG_FILTER, this.gl.NEAREST);
-        if(this.selectedObject !=2){
+        if(this.selectedObject !=3){
             this.objects[this.selectedObject].display();
         }//else does nothing 
 
