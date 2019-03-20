@@ -1,5 +1,5 @@
 /**
- * MyDiamond
+ * MyTangram
  * @constructor
  * @param scene - Reference to MyScene object
  */
@@ -10,10 +10,10 @@ class MyTangram extends CGFobject {
         this.diamond = new MyDiamond(this.scene);
         this.triangle = new MyTriangle(this.scene); 
         this.parallelogram = new MyParallelogram(this.scene); 
-        this.small_triangle_1 = new MyTriangleSmall(this.scene); 
-        this.big_triangle_1 = new MyTriangleBig(this.scene); 
-        this.small_triangle_2 = new MyTriangleSmall(this.scene); 
-        this.big_triangle_2 = new MyTriangleBig(this.scene); 
+        this.small_triangle_1 = new MyTriangleSmall(this.scene,0); 
+        this.big_triangle_1 = new MyTriangleBig(this.scene,0); 
+        this.small_triangle_2 = new MyTriangleSmall(this.scene,1); 
+        this.big_triangle_2 = new MyTriangleBig(this.scene,1); 
 
         //pink component 
 		this.pink = new CGFappearance(this.scene);
@@ -65,12 +65,15 @@ class MyTangram extends CGFobject {
         this.orange.setShininess(10.0);
         
         //tangram.png
+        this.TangramTexture = new CGFtexture(this.scene, 'images/tangram-pattern.jpg');
+
         this.TangramMaterial = new CGFappearance(this.scene);
         this.TangramMaterial.setAmbient(0.1, 0.1, 0.1, 1);
         this.TangramMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
         this.TangramMaterial.setSpecular(0.1, 0.1, 0.1, 1);
         this.TangramMaterial.setShininess(10.0);
-        this.TangramMaterial.loadTexture('images/tangram.png');
+        this.TangramMaterial.setTexture(this.TangramTexture);
+
         
         this.diamond.initBuffers();
         this.triangle.initBuffers();
@@ -88,12 +91,7 @@ class MyTangram extends CGFobject {
         this.vertices = [];
         this.normals = [];
         this.indices = [];
-        
-        this.vertices.push(this.diamond.vertices);
-        this.normals.push(this.diamond.normals);
-        this.indices.push(this.diamond.indices);
-        
-
+        this.texCoords =[];
         this.primitiveType = this.scene.gl.TRIANGLES;
 		this.initGLBuffers();
     }
@@ -143,7 +141,7 @@ class MyTangram extends CGFobject {
         // Triangle
         this.scene.pushMatrix();
         this.scene.translate(-3,-1,0); 
-        this.pink.apply();
+        this.TangramMaterial.apply();
         this.triangle.display();
         this.scene.popMatrix();   
     
@@ -152,7 +150,7 @@ class MyTangram extends CGFobject {
         this.scene.pushMatrix();
         this.scene.scale(-1, 1, 1);
         this.scene.rotate(Math.PI/4, 0,0,1);
-        this.yellow.apply();
+        this.TangramMaterial.apply();
         this.parallelogram.display();
         this.scene.popMatrix();
     
@@ -160,7 +158,7 @@ class MyTangram extends CGFobject {
         this.scene.pushMatrix();            
         this.scene.rotate(Math.PI/2 + Math.PI/4, 0,0,1);
         this.scene.translate(1,0,0);
-        this.purple.apply();
+        this.TangramMaterial.apply();
         this.small_triangle_1.display();
         this.scene.popMatrix();
     
@@ -169,7 +167,7 @@ class MyTangram extends CGFobject {
         this.scene.pushMatrix();
         this.scene.translate(-2,0,0); 
         this.scene.rotate(Math.PI,0,0,1);
-        this.blue.apply();
+        this.TangramMaterial.apply();
         this.big_triangle_1.display();
         this.scene.popMatrix();
     
@@ -178,7 +176,7 @@ class MyTangram extends CGFobject {
         this.scene.translate(0,Math.sqrt(2),0);
         this.scene.rotate(-Math.PI/4, 0,0,1);
         this.scene.translate(-1,0,0);
-        this.red.apply();
+        this.TangramMaterial.apply();
         this.small_triangle_2.display();
         this.scene.popMatrix();
 
@@ -186,9 +184,12 @@ class MyTangram extends CGFobject {
         this.scene.pushMatrix();
         this.scene.translate(Math.sqrt(2),Math.sqrt(2),0); 
         this.scene.rotate(Math.PI/4,0,0,1);
-        this.orange.apply();
+        this.TangramMaterial.apply();
         this.big_triangle_2.display();
         this.scene.popMatrix();
     
+    }
+    updateBuffers() {
+        
     }
 }

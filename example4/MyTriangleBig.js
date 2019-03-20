@@ -4,8 +4,33 @@
  * @param scene - Reference to MyScene object
  */
 class MyTriangleBig extends CGFobject {
-	constructor(scene) {
+	constructor(scene,id) {
 		super(scene);
+		switch(id){
+			case 0: //for pink
+			this.texCoords = [
+				1/2, 1/2,
+				1, 1,
+				1,0,
+	
+				1/2, 1/2,
+				1, 1,
+				1,0
+			];
+			break;
+			case 1: //for red 
+			this.texCoords = [
+				1/2, 1/2,
+				1, 0,
+				0,0,
+	
+				1/2, 1/2,
+				1, 0,
+				0,0
+				
+			];
+			break;
+		}
 		this.initBuffers();
 	}
 	initBuffers() {
@@ -32,9 +57,13 @@ class MyTriangleBig extends CGFobject {
 			0,0,-1,
 			0,0,-1
 		];
-		
+
 		this.primitiveType = this.scene.gl.TRIANGLES;
 		this.initGLBuffers();
+	}
+	updateTexCoord(coords){
+		this.texCoords = [...coords];
+		this.updateTexCoordsGLBuffers();
 	}
 }
 

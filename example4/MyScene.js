@@ -50,7 +50,7 @@ class MyScene extends CGFscene {
 
         //-------Objects connected to MyInterface
         this.displayAxis = true;
-        this.scaleFactor = 5;
+        this.scaleFactor = 1;  //change scale
         this.selectedTexture = -1;        
         this.wrapS = 0;
         this.wrapT = 0;
