@@ -16,31 +16,63 @@ class MyCylinder extends CGFobject {
         this.indices = [];
         this.normals = [];
 
+        var cylinderHeight = 1;
+        
         var ang = 0;
         var delta = 2*Math.PI/this.slices;
 
         for(var i = 0; i < this.slices; i++){
-            var x = Math.cos(ang);
-            var z = - Math.sin(ang);
+            var xOne = Math.cos(ang);
+            var zOne = - Math.sin(ang);
+            var xTwo = Math.cos(ang + delta);
+            var zTwo = - Math.sin(ang + delta);
 
-            this.vertices.push(x, 0 , z);
+            this.vertices.push(xOne, 0 , zOne);
+            this.vertices.push(xTwo, 0, zTwo);
+            this.vertices.push(xTwo, cylinderHeight, zTwo);
+            this.vertices.push(xOne, cylinderHeight, zOne);
 
-            var normal= [
-                
+            var normalOne= [
+                xOne,
+                0,
+                zOne                
             ];
 
-            var nsize=Math.sqrt(
-                normal[0]*normal[0]+
-                normal[1]*normal[1]+
-                normal[2]*normal[2]
+            var normalTwo= [
+                xTwo,
+                0,
+                zTwo
+            ];
+
+            var nOneSize=Math.sqrt(
+                normalOne[0]*normalOne[0]+
+                normalOne[1]*normalOne[1]+
+                normalOne[2]*normalOne[2]
                 );
-            normal[0]/=nsize;
-            normal[1]/=nsize;
-            normal[2]/=nsize;
 
+            normalOne[0]/=nOneSize;
+            normalOne[1]/=nOneSize;
+            normalOne[2]/=nOneSize;
 
-            this.indices.push(3*i, (3*i+1) , (3*i+2) );
-            ang+=alphaAng;
+            var nTwoSize=Math.sqrt(
+                normalTwo[0]*normalTwo[0]+
+                normalTwo[1]*normalTwo[1]+
+                normalTwo[2]*normalTwo[2]
+                );
+
+            normalTwo[0]/=nTwoSize;
+            normalTwo[1]/=nTwoSize;
+            normalTwo[2]/=nTwoSize;
+
+            this.normals.push(...normalOne);
+            this.normals.push(...normalTwo);
+            this.normals.push(...normalTwo);
+            this.normals.push(...normalOne);
+
+            this.indices.push(4*i, (4*i+1) , (4*i+2) );
+            this.indices.push(4*i, (4*i + 2), (4*i+3));
+
+            ang+=delta;
         }
 
         this.primitiveType = this.scene.gl.TRIANGLES;
