@@ -25,10 +25,12 @@ class MyScene extends CGFscene {
         this.axis = new CGFaxis(this);
         this.quad = new MyQuad(this);
         this.tangram = new MyTangram(this);
+        this.cube = new MyUnitCubeQuad(this);
 
-        this.objects = [this.quad, this.tangram, null];
 
-        this.objectIDs = { 'Quad': 0 ,'Tangram': 1, 'Empty':2};
+        this.objects = [this.quad, this.tangram,this.cube,null];
+
+        this.objectIDs = { 'Quad': 0 ,'Tangram': 1, 'cube':2,'Empty':3};
 
         this.selectedObject = 0;
 
