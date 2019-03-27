@@ -19,9 +19,25 @@ class MyScene extends CGFscene {
         this.gl.enable(this.gl.CULL_FACE);
         this.gl.depthFunc(this.gl.LEQUAL);
 
+        //------ Applied Material
+        //wood 
+        this.woodMaterial = new CGFappearance(this.scene);
+        this.woodMaterial.setAmbient(1, 1, 1, 1);
+        this.woodMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.woodMaterial.setSpecular(0.1, 0.1, 0.1, 1);
+        this.woodMaterial.setShininess(10.0);
+        //leaves 
+        this.leaveTexture = new CGFappearance(this.scene);
+        this.leaveTexture.setAmbient(1, 1, 1, 1);
+        this.leaveTexture.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.leaveTexture.setSpecular(0.1, 0.1, 0.1, 1);
+        this.leaveTexture.setShininess(10.0);
+
         //Initialize scene objects
         this.axis = new CGFaxis(this);
         this.cylinder = new MyCylinder(this, 100, 1);
+        this.prism = new MyPrism(this, 5, 1);
+        this.tree = new MyTree(this,2,1/2,5,2.5,this.woodTexture,this.leaveTexture);
 
         //Objects connected to MyInterface
     }
@@ -58,7 +74,10 @@ class MyScene extends CGFscene {
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
-        this.cylinder.display();
+       // this.cylinder.display();
+        //this.prism.display();
+        this.tree.display(); 
+        
 
         // ---- END Primitive drawing section
     }
