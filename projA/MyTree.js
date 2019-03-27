@@ -13,7 +13,7 @@ class MyTree extends CGFobject {
         this.treeTopHeight = treeTopHeight;
         this.treeTopRadius = treeTopRadius;  
         //textures 
-        this.trunkTexture = new CGFappearance(this.trunkTexture);
+        this.trunkTexture = trunkTexture;
         this.treeTopTexture = treeTopTexture; 
         //objects 
         this.cilinder = new MyCylinder(this.scene,10,1); 
@@ -36,7 +36,7 @@ class MyTree extends CGFobject {
         //trunk 
         this.scene.pushMatrix();
         this.scene.scale(this.trunkRadius,this.trunkHeight,this.trunkRadius);
-       // this.trunkTexture.apply(); 
+        this.trunkTexture.apply(); 
         this.cilinder.display(); 
         this.scene.popMatrix(); 
 
