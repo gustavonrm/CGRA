@@ -3,181 +3,71 @@
  * @constructor
  * @param scene - Reference to MyScene object
  */
-class MyTangram extends CGFobject {
+class MyTreeRowPatch extends CGFobject {
 	constructor(scene) {
         super(scene);
+    //wood 
+    this.trunkTexture = new CGFtexture(this.scene, 'images/wood.png');
+    //leaves 
+    this.treeTopTexture = new CGFtexture(this.scene, 'images/leave.png');;
     
-        this.diamond = new MyDiamond(this.scene);
-        this.triangle = new MyTriangle(this.scene); 
-        this.parallelogram = new MyParallelogram(this.scene); 
-        this.small_triangle_1 = new MyTriangleSmall(this.scene,0); 
-        this.big_triangle_1 = new MyTriangleBig(this.scene,0); 
-        this.small_triangle_2 = new MyTriangleSmall(this.scene,1); 
-        this.big_triangle_2 = new MyTriangleBig(this.scene,1); 
-
-        //pink component 
-		this.pink = new CGFappearance(this.scene);
-        this.pink.setAmbient(0.8, 0.41, 0.79, 1.0);
-        this.pink.setDiffuse(0, 0, 0, 1.0);
-        this.pink.setSpecular(1, 0, 0, 1.0);
-        this.pink.setShininess(10.0);
-        
-        //green component
-        this.green = new CGFappearance(this.scene);
-        this.green.setAmbient(0, 1, 0, 1.0);
-        this.green.setDiffuse(0, 0, 0, 1.0);
-        this.green.setSpecular(1, 0, 0, 1.0);
-        this.green.setShininess(10.0);
-        
-        //blue component
-        this.blue = new CGFappearance(this.scene);
-        this.blue.setAmbient(0, 0, 1, 1.0);
-        this.blue.setDiffuse(0, 0, 0, 1.0);
-        this.blue.setSpecular(1, 0, 0, 1.0);
-        this.blue.setShininess(10.0);
-        
-        //purple component
-        this.purple = new CGFappearance(this.scene);
-        this.purple.setAmbient(0.54, 0.41, 0.80, 1.0);
-        this.purple.setDiffuse(0, 0, 0, 1.0);
-        this.purple.setSpecular(1, 0, 0, 1.0);
-        this.purple.setShininess(10.0);
-        
-        //yellow component 
-        this.yellow = new CGFappearance(this.scene);
-        this.yellow.setAmbient(0.98, 0.86, 0.05, 1.0);
-        this.yellow.setDiffuse(0, 0, 0, 1.0);
-        this.yellow.setSpecular(1, 0, 0, 1.0);
-        this.yellow.setShininess(10.0);
-        
-        //red component
-        this.red = new CGFappearance(this.scene);
-        this.red.setAmbient(1, 0, 0, 1.0);
-        this.red.setDiffuse(0, 0, 0, 1.0);
-        this.red.setSpecular(1, 0, 0, 1.0);
-		this.red.setShininess(10.0);
-
-        //orange component
-        this.orange = new CGFappearance(this.scene);
-        this.orange.setAmbient(0.93, 0.46, 0, 1.0);
-        this.orange.setDiffuse(0, 0, 0, 1.0);
-        this.orange.setSpecular(1, 0, 0, 1.0);
-        this.orange.setShininess(10.0);
-        
-        //tangram.png
-    
-        this.TangramMaterial = new CGFappearance(this.scene);
-        this.TangramMaterial.setAmbient(1, 1, 1, 1);
-        this.TangramMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.TangramMaterial.setSpecular(0.1, 0.1, 0.1, 1);
-        this.TangramMaterial.setShininess(10.0);
-        this.TangramMaterial.loadTexture('images/tangram-pattern.jpg');
-
-        
-        this.diamond.initBuffers();
-        this.triangle.initBuffers();
-        this.parallelogram.initBuffers();
-        this.small_triangle_1.initBuffers();
-        this.big_triangle_1.initBuffers();
-        this.small_triangle_2.initBuffers();
-        this.big_triangle_2.initBuffers();
-
-        this.initBuffers();
+    this.tree1 = new MyTree(this.scene,2.3,1/4,4,2.3,this.trunkTexture,this.treeTopTexture);
+    this.tree2 = new MyTree(this.scene,2,1/2,5,2.5,this.trunkTexture,this.treeTopTexture);
+    this.tree3 = new MyTree(this.scene,1.8,1,4.5,2.5,this.trunkTexture,this.treeTopTexture);
+    this.tree4 = new MyTree(this.scene,2.5,1/2,5,2.5,this.trunkTexture,this.treeTopTexture);
+    this.tree5 = new MyTree(this.scene,1.5,1/2,5,2,this.trunkTexture,this.treeTopTexture);
+    this.tree6 = new MyTree(this.scene,2.1,1/3,5,1.7,this.trunkTexture,this.treeTopTexture);
 
     }
     enableNormalViz(){
-        this.diamond.enableNormalViz(); 
-        this.triangle.enableNormalViz();
-        this.big_triangle_1.enableNormalViz();
-        this.big_triangle_2.enableNormalViz();
-        this.small_triangle_1.enableNormalViz();
-        this.small_triangle_2.enableNormalViz();
-        this.parallelogram.enableNormalViz();
+        tree1.enableNormalViz(); 
+        tree2.enableNormalViz();
+        tree3.enableNormalViz();
+        tree4.enableNormalViz();
+        tree5.enableNormalViz();
+        tree6.enableNormalViz();
+    
     }
     enableDisableViz(){
-        this.diamond.enableDisableViz(); 
-        this.triangle.enableNormalViz();
-        this.big_triangle_1.enableDisableViz();
-        this.big_triangle_2.enableDisableViz();
-        this.small_triangle_1.enableDisableViz();
-        this.small_triangle_2.enableDisableViz();
-        this.parallelogram.enableDisableViz();
+        tree1.enableDisableViz(); 
+        tree2.enableDisableViz(); 
+        tree3.enableDisableViz(); 
+        tree4.enableDisableViz(); 
+        tree5.enableDisableViz(); 
+        tree6.enableDisableViz(); 
+     
     }
 	display() {
-      
-
-		var mT=[
-            1,  0,  0,  0,
-            0,  1,  0,  0,
-            0,  0,  1,  0,
-            -1.5* Math.sqrt(2), Math.sqrt(2)*0.5, 0,  1
-        ];
-
-        var mR=[
-           Math.cos(Math.PI/4),     Math.sin(Math.PI/4),    0,  0,
-           -(Math.sin(Math.PI/4)),  Math.cos(Math.PI/4),    0,  0,
-           0,                       0,                      1,  0,
-           0,                       0,                      0,  1
-        ];
-
-        // Square
         this.scene.pushMatrix();
-        this.scene.multMatrix(mT);
-        this.scene.multMatrix(mR);
-        this.TangramMaterial.apply(); 
-        this.diamond.display();
-        this.scene.popMatrix();
+        this.scene.translate(-15,0,0); 
+        this.tree1.display(); 
+        this.scene.popMatrix(); 
 
-        // Triangle
         this.scene.pushMatrix();
-        this.scene.translate(-3,-1,0); 
-        this.TangramMaterial.apply();
-        this.triangle.display();
-        this.scene.popMatrix();   
-    
+        this.scene.translate(-10,0,-2/3); 
+        this.tree2.display(); 
+        this.scene.popMatrix(); 
 
-        // Parallelogram
         this.scene.pushMatrix();
-        this.scene.scale(-1, 1, 1);
-        this.scene.rotate(Math.PI/4, 0,0,1);
-        this.TangramMaterial.apply();
-        this.parallelogram.display();
-        this.scene.popMatrix();
-    
-        // Small Triangle 1
-        this.scene.pushMatrix();            
-        this.scene.rotate(Math.PI/2 + Math.PI/4, 0,0,1);
-        this.scene.translate(1,0,0);
-        this.TangramMaterial.apply();
-        this.small_triangle_1.display();
-        this.scene.popMatrix();
-    
-        
-        // Big Triangle 1
-        this.scene.pushMatrix();
-        this.scene.translate(-2,0,0); 
-        this.scene.rotate(Math.PI,0,0,1);
-        this.TangramMaterial.apply();
-        this.big_triangle_1.display();
-        this.scene.popMatrix();
-    
-        // Small Triangle 2    
-        this.scene.pushMatrix();
-        this.scene.translate(0,Math.sqrt(2),0);
-        this.scene.rotate(-Math.PI/4, 0,0,1);
-        this.scene.translate(-1,0,0);
-        this.TangramMaterial.apply();
-        this.small_triangle_2.display();
-        this.scene.popMatrix();
+        this.scene.translate(-5,0,0); 
+        this.tree3.display(); 
+        this.scene.popMatrix(); 
 
-        // Big Triangle 2
         this.scene.pushMatrix();
-        this.scene.translate(Math.sqrt(2),Math.sqrt(2),0); 
-        this.scene.rotate(Math.PI/4,0,0,1);
-        this.TangramMaterial.apply();
-        this.big_triangle_2.display();
-        this.scene.popMatrix();
-    
+        this.scene.translate(0,0,1); 
+        this.tree4.display(); 
+        this.scene.popMatrix(); 
+
+        this.scene.pushMatrix();
+        this.scene.translate(5,0,0); 
+        this.tree5.display(); 
+        this.scene.popMatrix(); 
+
+        this.scene.pushMatrix();
+        this.scene.translate(10,0,-1/2); 
+        this.tree6.display(); 
+        this.scene.popMatrix(); 
+
     }
     updateBuffers() {
         

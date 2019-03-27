@@ -32,6 +32,7 @@ class MyScene extends CGFscene {
         this.prism = new MyPrism(this, 5, 1);
         this.tree = new MyTree(this,2,1/2,5,2.5,this.trunkTexture,this.treeTopTexture);
         this.treeGroupPatch = new MyTreeGroupPatch(this); 
+        this.treeRowPatch = new MyTreeRowPatch(this);
 
         //Objects connected to MyInterface
     }
@@ -68,10 +69,12 @@ class MyScene extends CGFscene {
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
-       // this.cylinder.display();
+        // this.cylinder.display();
         //this.prism.display();
+       
         //this.tree.display(); 
-        this.treeGroupPatch.display(); 
+        //this.treeGroupPatch.display(); 
+        this.treeRowPatch.display();
         
 
         // ---- END Primitive drawing section
