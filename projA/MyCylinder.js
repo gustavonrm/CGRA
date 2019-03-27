@@ -15,6 +15,7 @@ class MyCylinder extends CGFobject {
         this.vertices = [];
         this.indices = [];
         this.normals = [];
+        this.texCoords=[];
 
         var cylinderHeight = 1;
         
@@ -31,6 +32,11 @@ class MyCylinder extends CGFobject {
             this.vertices.push(xTwo, 0, zTwo);
             this.vertices.push(xTwo, cylinderHeight, zTwo);
             this.vertices.push(xOne, cylinderHeight, zOne);
+
+            this.texCoords.push(0, 1);
+            this.texCoords.push(1, 1);
+            this.texCoords.push(0, 0);
+            this.texCoords.push(1, 0);
 
             var normalOne= [
                 xOne,
@@ -78,4 +84,8 @@ class MyCylinder extends CGFobject {
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
     }
+    updateTexCoord(coords){
+		this.texCoords = [...coords];
+		this.updateTexCoordsGLBuffers();
+	}
 }

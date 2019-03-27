@@ -22,23 +22,15 @@ class MyScene extends CGFscene {
 
         //------ Material
         //wood 
-        this.woodMaterial = new CGFappearance(this);
-        this.woodMaterial.setAmbient(1, 1, 1, 1);
-        this.woodMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.woodMaterial.setSpecular(0.1, 0.1, 0.1, 1);
-        this.woodMaterial.setShininess(10.0);
+        this.trunkTexture = new CGFtexture(this, 'images/wood.png');
         //leaves 
-        this.leaveMaterial = new CGFappearance(this);
-        this.leaveMaterial.setAmbient(1, 1, 1, 1);
-        this.leaveMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.leaveMaterial.setSpecular(0.1, 0.1, 0.1, 1);
-        this.leaveMaterial.setShininess(10.0);
+        this.treeTopTexture = new CGFtexture(this, 'images/leave.png');;
 
         //Initialize scene objects
         this.axis = new CGFaxis(this);
         this.cylinder = new MyCylinder(this, 100, 1);
         this.prism = new MyPrism(this, 5, 1);
-        this.tree = new MyTree(this,2,1/2,5,2.5,this.woodMaterial,this.leaveMaterial);
+        this.tree = new MyTree(this,2,1/2,5,2.5,this.trunkTexture,this.treeTopTexture);
 
         //Objects connected to MyInterface
     }

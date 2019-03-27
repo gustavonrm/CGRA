@@ -97,4 +97,5 @@ class MyUnitCubeQuad extends CGFobject {
     updateBuffers() {
         
     }
+    
 }
