@@ -25,9 +25,7 @@ class MyUnitCubeQuad extends CGFobject {
         this.cube.enableDisableViz(); 
     }
     display(){
-       for(var i =0; i<){
-
-       }
+       
         
     }
     updateBuffers() {
