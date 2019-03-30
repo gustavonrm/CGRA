@@ -34,6 +34,8 @@ class MyScene extends CGFscene {
         this.treeGroupPatch = new MyTreeGroupPatch(this); 
         this.treeRowPatch = new MyTreeRowPatch(this);
 
+        //background
+        this.cubeMap = new MyCubeMap(this); 
         //Objects connected to MyInterface
     }
     initLights() {
@@ -69,6 +71,9 @@ class MyScene extends CGFscene {
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
+        //background
+        this.cubeMap.display(); 
+
         // this.cylinder.display();
         //this.prism.display();
        
