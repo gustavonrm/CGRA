@@ -4,14 +4,24 @@
  * @param scene - Reference to MyScene object
  */
 class MyHouse extends CGFobject {
-	constructor(scene) {
+	constructor(scene, tex) {
 		super(scene);
         this.pyramid = new MyPyramid(this.scene, 4, 1);
         this.unitCubeQuad = new MyUnitCubeQuad(this.scene);
+        this.topfloor = new MyUnitCubeQuad(this.scene);
         this.prism1 = new MyPrism(this.scene, 5, 1);
         this.prism2 = new MyPrism(this.scene, 5, 1);
         this.prism3 = new MyPrism(this.scene, 5, 1);
         this.prism4 = new MyPrism(this.scene, 5, 1);
+
+      //  this.doorTexture = new CFGtexture(this.scene, 'images/door.png');
+
+        this.door = new CGFappearance(this.scene);
+        this.door.setAmbient(1, 1, 1, 1);
+        this.door.setDiffuse(0.8, 0.4, 0, 1.0);
+        this.door.setSpecular(0.2, 0, 0, 1.0);
+        this.door.setShininess(10.0);
+        this.door.setTexture(tex);
 
         this.initBuffers();
 
@@ -70,62 +80,59 @@ class MyHouse extends CGFobject {
 	display() {
         // Pyramid -- Roof
         this.scene.pushMatrix();
-        /*this.scene.multMatrix(mT);
-        this.scene.multMatrix(mR);
-        this.scene.customMaterial.apply(); */
-        this.scene.translate(0,2,0);
-        this.scene.scale(2,1,2);
+        this.scene.translate(-1.5,4,0);
+        this.scene.scale(6,1,5);
+        this.scene.rotate(Math.PI/4,0, 1, 0); 
         this.pyramid.display();
         this.scene.popMatrix();
 
         // UnitCubeQuad -- Walls
         this.scene.pushMatrix();
-        /*this.scene.translate(-3,-1,0); 
-        this.pink.apply();*/
-        this.scene.scale(2,2,2);
-        this.scene.rotate(Math.PI/4,0, 1, 0);
+        //this.scene.scale(2,2,2);
+       // this.scene.rotate(Math.PI/4,0, 1, 0);
+       this.scene.translate(0,0,-1)
+        this.scene.scale(5,2,5);
         this.scene.translate(0,0.5,0);
+        this.unitCubeQuad.display();
+        this.scene.popMatrix();   
+
+        // TopFloor -- Walls
+        this.scene.pushMatrix();
+        //this.scene.scale(2,2,2);
+       // this.scene.rotate(Math.PI/4,0, 1, 0);
+       this.scene.translate(-3, 2, 0);
+        this.scene.scale(5,2,7);
+        this.scene.translate(0,0.5,0);
+        this.door.apply();
+        this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
         this.unitCubeQuad.display();
         this.scene.popMatrix();   
     
 
         // Prism1 -- Column1
         this.scene.pushMatrix();
-        /*this.scene.scale(-1, 1, 1);
-        this.scene.rotate(Math.PI/4, 0,0,1);
-        this.yellow.apply();*/
-        this.scene.translate(0,0,-1.8);
+        this.scene.translate(2.2,2,1.2);
         this.scene.scale(0.2, 2, 0.2);
         this.prism1.display();
         this.scene.popMatrix();
     
         // Prism2 -- Column2
         this.scene.pushMatrix();            
-        /*this.scene.rotate(Math.PI/2 + Math.PI/4, 0,0,1);
-        this.scene.translate(1,0,0);
-        this.purple.apply();*/
-        this.scene.translate(0,0,1.8);
+        this.scene.translate(2.2,2,-3.2);
         this.scene.scale(0.2, 2, 0.2);
         this.prism2.display();
         this.scene.popMatrix();
     
         // Prism3 -- Column3
         this.scene.pushMatrix();
-        /*this.scene.translate(0,Math.sqrt(2),0);
-        this.scene.rotate(-Math.PI/4, 0,0,1);
-        this.scene.translate(-1,0,0);
-        this.red.apply();*/
-        this.scene.translate(-1.8, 0, 0);
+        this.scene.translate(-5.2, 0, 0);
         this.scene.scale(0.2, 2, 0.2);
         this.prism3.display();
         this.scene.popMatrix();
 
         // Prism4 -- Column4
         this.scene.pushMatrix();
-        /*this.scene.translate(Math.sqrt(2),Math.sqrt(2),0); 
-        this.scene.rotate(Math.PI/4,0,0,1);
-        this.orange.apply();*/
-        this.scene.translate(1.8,0,0);
+        this.scene.translate(-5.2,0,1);
         this.scene.scale(0.2, 2, 0.2);
         this.prism4.display();
         this.scene.popMatrix();    

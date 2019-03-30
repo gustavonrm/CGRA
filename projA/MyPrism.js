@@ -58,7 +58,7 @@ class MyPrism extends CGFobject {
             this.indices.push(4*i, (4*i + 2), (4*i+3));
 
             ang+=delta;
-        }
+        }    
 
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
