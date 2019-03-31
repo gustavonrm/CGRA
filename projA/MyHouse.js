@@ -14,14 +14,26 @@ class MyHouse extends CGFobject {
         this.prism3 = new MyPrism(this.scene, 5, 1);
         this.prism4 = new MyPrism(this.scene, 5, 1);
 
-      //  this.doorTexture = new CFGtexture(this.scene, 'images/door.png');
+        //texture
+        this.tex = tex; 
 
+      //  this.doorTexture = new CFGtexture(this.scene, 'images/door.png');
         this.door = new CGFappearance(this.scene);
         this.door.setAmbient(1, 1, 1, 1);
         this.door.setDiffuse(0.8, 0.4, 0, 1.0);
         this.door.setSpecular(0.2, 0, 0, 1.0);
         this.door.setShininess(10.0);
         this.door.setTexture(tex);
+
+        //roof material
+        this.roof = new CGFappearance(this.scene);
+        this.roof.setAmbient(1, 1, 1, 1);
+        this.roof.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.roof.setSpecular(0.1, 0.1, 0.1, 1);
+        this.roof.setShininess(10.0);
+        this.roof.loadTexture('images/roof.png');
+
+
 
         this.initBuffers();
 
@@ -83,6 +95,7 @@ class MyHouse extends CGFobject {
         this.scene.translate(-1.5,4,0);
         this.scene.scale(6,1,5);
         this.scene.rotate(Math.PI/4,0, 1, 0); 
+        this.roof.apply();
         this.pyramid.display();
         this.scene.popMatrix();
 

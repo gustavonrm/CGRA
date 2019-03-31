@@ -38,6 +38,8 @@ class MyScene extends CGFscene {
         this.treeRowPatch = new MyTreeRowPatch(this);
         this.biiigCube = new MyCubeMap(this);
 
+        //background
+        this.cubeMap = new MyCubeMap(this); 
         //Objects connected to MyInterface
     }
     initLights() {
@@ -86,6 +88,10 @@ class MyScene extends CGFscene {
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
+        //background
+        this.cubeMap.display(); 
+
+        // this.cylinder.display();
        // this.cylinder.display();
         //this.prism.display();
         this.house.display();
