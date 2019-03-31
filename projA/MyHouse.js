@@ -31,7 +31,7 @@ class MyHouse extends CGFobject {
         this.vertices = [];
         this.normals = [];
         this.indices = [];
-        
+                
         this.vertices.push(this.pyramid.vertices);
         this.normals.push(this.pyramid.normals);
         this.indices.push(this.pyramid.indices);
