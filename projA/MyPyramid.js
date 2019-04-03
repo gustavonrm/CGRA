@@ -33,7 +33,7 @@ class MyPyramid extends CGFobject {
             this.vertices.push(caa, 0, -saa);
            
             //defnir os vertices s,t
-            this.texCoords.push(1/2,0);
+            this.texCoords.push(1/2,0); 
             this.texCoords.push(0,1);
             this.texCoords.push(1,1);
 
