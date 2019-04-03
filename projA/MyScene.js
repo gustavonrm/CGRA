@@ -24,7 +24,7 @@ class MyScene extends CGFscene {
         //wood 
         this.trunkTexture = new CGFtexture(this, 'images/wood.png');
         //leaves 
-        this.treeTopTexture = new CGFtexture(this, 'images/leave.png');
+        this.treeTopTexture = new CGFtexture(this, 'images/mineLeaves.png');
         //door
         //this.doorTexture = new CFGtexture(this, 'images/door.png');
 
@@ -37,6 +37,7 @@ class MyScene extends CGFscene {
         this.treeGroupPatch = new MyTreeGroupPatch(this); 
         this.treeRowPatch = new MyTreeRowPatch(this);
         this.biiigCube = new MyCubeMap(this);
+        this.hill = new MyVoxelHill(this,4);
 
         //background
         this.cubeMap = new MyCubeMap(this); 
@@ -88,13 +89,12 @@ class MyScene extends CGFscene {
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
-        //background
-        this.cubeMap.display(); 
+        //background 
 
         // this.cylinder.display();
        // this.cylinder.display();
         //this.prism.display();
-        this.house.display();
+       // this.house.display();
 
         this.pushMatrix();
         this.translate(0,10,0);
@@ -105,6 +105,7 @@ class MyScene extends CGFscene {
         //this.tree.display(); 
         //this.treeGroupPatch.display(); 
        // this.treeRowPatch.display();
+       this.hill.display();
         
 
         // ---- END Primitive drawing section
