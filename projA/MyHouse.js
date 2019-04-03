@@ -23,7 +23,8 @@ class MyHouse extends CGFobject {
         this.door.setDiffuse(0.8, 0.4, 0, 1.0);
         this.door.setSpecular(0.2, 0, 0, 1.0);
         this.door.setShininess(10.0);
-        this.door.setTexture(tex);
+        //this.door.setTexture(tex);
+        this.door.loadTexture('images/door.png');
 
         //roof material
         this.roof = new CGFappearance(this.scene);
@@ -113,7 +114,7 @@ class MyHouse extends CGFobject {
         this.scene.pushMatrix();
         //this.scene.scale(2,2,2);
        // this.scene.rotate(Math.PI/4,0, 1, 0);
-       this.scene.translate(-3, 2, 0);
+        this.scene.translate(-3, 2, 0);
         this.scene.scale(5,2,7);
         this.scene.translate(0,0.5,0);
         this.door.apply();

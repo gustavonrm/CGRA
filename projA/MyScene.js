@@ -33,36 +33,36 @@ class MyScene extends CGFscene {
         this.cylinder = new MyCylinder(this, 100, 1);
         this.prism = new MyPrism(this, 5, 1);
         this.house = new MyHouse(this, this.trunkTexture);
+        this.terrain =  new MyQuad(this);
         this.tree = new MyTree(this,2,1/2,5,2.5,this.trunkTexture,this.treeTopTexture);
         this.treeGroupPatch = new MyTreeGroupPatch(this); 
         this.treeRowPatch = new MyTreeRowPatch(this);
-        this.biiigCube = new MyCubeMap(this);
-
-        //background
-        this.cubeMap = new MyCubeMap(this); 
+        this.cubeMap = new MyCubeMap(this);
+        
         //Objects connected to MyInterface
     }
     initLights() {
         this.setGlobalAmbientLight(0.1, 0.1, 0.1, 1);
 
-        this.lights[0].setPosition(15, 2, 5, 1);
-        this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
+        this.lights[0].setPosition(5, 2, 5, 1);
+        this.lights[0].setDiffuse(0.8, 0.7, 0.6, 1.0);
         this.lights[0].enable();
-        this.lights[0].disable();
+        //this.lights[0].disable();
+        this.lights[0].setVisible(true);
         this.lights[0].update();
 
-        this.lights[1].setPosition(15, 100, 15, 1);
+        this.lights[1].setPosition(15, 50, 15, 1);
         this.lights[1].setDiffuse(1.0,1.0,1.0,1.0);
         this.lights[1].setSpecular(0.2,0.2,0.2,0.2);
         this.lights[1].enable();
-        //this.lights[1].disable();
+        this.lights[1].disable();
         this.lights[1].setVisible(true);
         this.lights[1].update();
 
 
     }
     initCameras() {
-        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
+        this.camera = new CGFcamera(0.4, 0.1, 800, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
     }
     setDefaultAppearance() {
         this.setAmbient(0.2, 0.4, 0.8, 1.0);
@@ -89,7 +89,7 @@ class MyScene extends CGFscene {
 
         // ---- BEGIN Primitive drawing section
         //background
-        this.cubeMap.display(); 
+        //this.cubeMap.display(); 
 
         // this.cylinder.display();
        // this.cylinder.display();
@@ -97,9 +97,16 @@ class MyScene extends CGFscene {
         this.house.display();
 
         this.pushMatrix();
-        this.translate(0,10,0);
-        this.scale(150,20,150);
-        this.biiigCube.display();
+        this.scale(30,0,30);
+        this.rotate(-Math.PI/2, 1,0,0);
+        this.terrain.display();
+        this.popMatrix();
+        
+        
+        this.pushMatrix();
+        this.translate(0,50,0);
+        this.scale(700,100,700);
+        this.cubeMap.display();
         this.popMatrix();
        
         //this.tree.display(); 
