@@ -20,6 +20,10 @@ class MyScene extends CGFscene {
         this.gl.depthFunc(this.gl.LEQUAL);
         this.enableTextures(true);
 
+        //GUI variables
+        this.displayAxis = true;
+        this.displayTextures = true;
+
         //------ Material
         //wood 
         this.trunkTexture = new CGFtexture(this, 'images/wood.png');
@@ -84,8 +88,16 @@ class MyScene extends CGFscene {
         // Apply transformations corresponding to the camera position relative to the origin
         this.applyViewMatrix();
 
+        //GUI
         // Draw axis
-        this.axis.display();
+        if (this.displayAxis)
+            this.axis.display();
+        
+        if(this.displayTextures)
+            this.enableTextures(true);
+        else this.enableTextures(false); 
+        
+
 
         //Apply default appearance
         this.setDefaultAppearance();
@@ -115,6 +127,7 @@ class MyScene extends CGFscene {
         //this.treeGroupPatch.display(); 
        // this.treeRowPatch.display();
        this.hill.display();
+
         
 
         // ---- END Primitive drawing section

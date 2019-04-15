@@ -9,7 +9,7 @@ class MyTreeRowPatch extends CGFobject {
     //wood 
     this.trunkTexture = new CGFtexture(this.scene, 'images/wood.png');
     //leaves 
-    this.treeTopTexture = new CGFtexture(this.scene, 'images/leave.png');;
+    this.treeTopTexture = new CGFtexture(this.scene, 'images/mineLeaves.png');;
     
     this.tree1 = new MyTree(this.scene,2.3,1/4,4,2.3,this.trunkTexture,this.treeTopTexture);
     this.tree2 = new MyTree(this.scene,2,1/2,5,2.5,this.trunkTexture,this.treeTopTexture);
