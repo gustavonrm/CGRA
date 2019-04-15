@@ -45,12 +45,12 @@ class MyScene extends CGFscene {
         //Objects connected to MyInterface
     }
     initLights() {
-        this.setGlobalAmbientLight(0.1, 0.1, 0.1, 1);
+        /*this.setGlobalAmbientLight(0.1, 0.1, 0.1, 1);
 
         this.lights[0].setPosition(5, 2, 5, 1);
         this.lights[0].setDiffuse(0.8, 0.7, 0.6, 1.0);
         this.lights[0].enable();
-        //this.lights[0].disable();
+        this.lights[0].disable();
         this.lights[0].setVisible(true);
         this.lights[0].update();
 
@@ -58,9 +58,19 @@ class MyScene extends CGFscene {
         this.lights[1].setDiffuse(1.0,1.0,1.0,1.0);
         this.lights[1].setSpecular(0.2,0.2,0.2,0.2);
         this.lights[1].enable();
-        this.lights[1].disable();
+        //this.lights[1].disable();
         this.lights[1].setVisible(true);
-        this.lights[1].update();
+        this.lights[1].update();*/
+
+        this.setGlobalAmbientLight(0.3, 0.3, 0.3, 1);
+
+        this.lights[0].setPosition(2.0, 2.0, -1.0, 1.0);
+        this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
+        this.lights[0].setSpecular(1.0, 1.0, 1.0, 1.0);
+        this.lights[0].enable();
+        //this.lights[0].disable();
+        this.lights[0].setVisible(true);
+        this.lights[0].update();
 
 
     }
@@ -107,10 +117,10 @@ class MyScene extends CGFscene {
         
         this.pushMatrix();
         this.translate(0,50,0);
-        this.scale(700,100,700);
+        this.scale(500,100,500);
         this.cubeMap.display();
         this.popMatrix();
-       
+        console.log(this.lights[0].position);
         //this.tree.display(); 
         //this.treeGroupPatch.display(); 
        // this.treeRowPatch.display();

@@ -15,11 +15,14 @@ class MyPrism extends CGFobject {
         this.vertices = [];
         this.indices = [];
         this.normals = [];
+        this.texCoords = [];
 
         var prismHeight = 1;
         
         var ang = 0;
+        var texCoord = 0;
         var delta = 2*Math.PI/this.slices;
+        var deltaCoords = 1/this.slices;
 
         for(var i = 0; i < this.slices; i++){
             var xOne = Math.cos(ang);
@@ -32,6 +35,11 @@ class MyPrism extends CGFobject {
             this.vertices.push(xTwo, 0, zTwo);
             this.vertices.push(xTwo, prismHeight, zTwo);
             this.vertices.push(xOne, prismHeight, zOne);
+            
+            this.texCoords.push(0, texCoord);
+            this.texCoords.push(0, texCoord + deltaCoords);
+            this.texCoords.push(1, texCoord);
+            this.texCoords.push(1, texCoord + deltaCoords);
 
             var normalOne= [
                 xNorm,
