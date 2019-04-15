@@ -69,7 +69,9 @@ class ShaderScene extends CGFscene {
 			new CGFshader(this.gl, "shaders/texture3anim.vert", "shaders/texture3anim.frag"),
 			new CGFshader(this.gl, "shaders/texture1.vert", "shaders/sepia.frag"),
 			new CGFshader(this.gl, "shaders/texture1.vert", "shaders/convolution.frag"),
-			new CGFshader(this.gl, "shaders/ex1.vert", "shaders/ex1.frag")
+			//new CGFshader(this.gl, "shaders/ex1.vert", "shaders/ex1.frag")
+
+			new CGFshader(this.gl, "shaders/exercise1.vert", "shaders/exercise1.frag")
 		];
 
 		// additional texture will have to be bound to texture unit 1 later, when using the shader, with "this.texture2.bind(1);"
@@ -91,7 +93,7 @@ class ShaderScene extends CGFscene {
 			'Animation example': 6,
 			'Sepia': 7,
 			'Convolution': 8,
-			'Exercise 1' : 9
+			'Exercise 1': 9
 		};
 
 		// shader code panels references

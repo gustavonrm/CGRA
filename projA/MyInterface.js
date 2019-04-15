@@ -16,6 +16,9 @@ class MyInterface extends CGFinterface {
         
         var obj = this;
 
+        this.gui.add(this.scene,'displayAxis').name("Display Axis");
+        this.gui.add(this.scene,'displayTextures').name("Enable Textures");
+
         return true;
     }
 }
