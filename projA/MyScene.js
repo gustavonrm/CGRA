@@ -23,6 +23,7 @@ class MyScene extends CGFscene {
         //GUI variables
         this.displayAxis = true;
         this.displayTextures = true;
+        this.scaleFactor = 0.5;
 
         //------ Material
         //wood 
@@ -43,6 +44,7 @@ class MyScene extends CGFscene {
         this.treeRowPatch = new MyTreeRowPatch(this);
         this.biiigCube = new MyCubeMap(this);
         this.hill = new MyVoxelHill(this,4);
+        this.bonfire = new MyBonfire(this);
 
         //background
         this.cubeMap = new MyCubeMap(this); 
@@ -96,20 +98,12 @@ class MyScene extends CGFscene {
         if(this.displayTextures)
             this.enableTextures(true);
         else this.enableTextures(false); 
-        
-
 
         //Apply default appearance
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
         //background 
-
-        // this.cylinder.display();
-       // this.cylinder.display();
-        //this.prism.display();
-       // this.house.display();
-
         this.pushMatrix();
         this.scale(30,0,30);
         this.rotate(-Math.PI/2, 1,0,0);
@@ -123,11 +117,45 @@ class MyScene extends CGFscene {
         this.cubeMap.display();
         this.popMatrix();
        
-        //this.tree.display(); 
-        //this.treeGroupPatch.display(); 
-       // this.treeRowPatch.display();
-       this.hill.display();
+// remove after tests
 
+        //scene objects 
+        this.pushMatrix();
+        this.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
+        this.house.display();
+        this.popMatrix();
+
+        //HILLS
+        this.pushMatrix();
+        this.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
+        this.translate(10,0,5);
+        this.hill.display();
+        this.popMatrix();
+        
+        this.pushMatrix();
+        this.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
+        this.translate(-5,0,10);
+        this.hill.display();
+        this.popMatrix();
+        
+        //TRESS
+        this.pushMatrix();
+        this.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
+        this.translate(-20,0,5);
+        this.treeGroupPatch.display(); 
+        this.popMatrix();
+
+        this.pushMatrix();
+        this.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
+        this.translate(20,0,-20);
+        this.treeRowPatch.display();
+        this.popMatrix();
+     
+        this.pushMatrix();
+        this.scale(0.4*this.scaleFactor,0.4*this.scaleFactor,0.4*this.scaleFactor);
+        this.translate(20,0,-10);
+        this.bonfire.display();
+        this.popMatrix();
         
 
         // ---- END Primitive drawing section
