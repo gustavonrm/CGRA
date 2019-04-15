@@ -77,7 +77,7 @@ class MyBonfire extends CGFobject {
         this.scene.rotate(Math.PI/4,0,1,0);
         this.scene.rotate(Math.PI/4,0,0,1);
         this.scene.scale(0.5,4,0.5);
-        this.woodMaterial.apply();1
+        this.woodMaterial.apply();
         this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
         this.woodBlock.display(); 
         this.scene.popMatrix(); 
@@ -87,7 +87,7 @@ class MyBonfire extends CGFobject {
         this.scene.rotate(Math.PI/4,0,1,0);
         this.scene.rotate(-Math.PI/4,0,0,1);
         this.scene.scale(0.5,4,0.5);
-        this.woodMaterial.apply();1
+        this.woodMaterial.apply();
         this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
         this.woodBlock.display(); 
         this.scene.popMatrix(); 

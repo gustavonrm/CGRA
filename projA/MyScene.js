@@ -32,6 +32,15 @@ class MyScene extends CGFscene {
         this.treeTopTexture = new CGFtexture(this, 'images/mineLeaves.png');
         //door
         //this.doorTexture = new CFGtexture(this, 'images/door.png');
+        
+        //terrain
+        this.terrainMaterial = new CGFappearance(this);
+        this.terrainMaterial.setAmbient(1, 1, 1, 1);
+        this.terrainMaterial.setDiffuse(0.8, 0.4, 0, 1.0);
+        this.terrainMaterial.setSpecular(0.2, 0, 0, 1.0);
+        this.terrainMaterial.setShininess(10.0);
+        this.terrainMaterial.loadTexture('images/grass.png');
+
 
         //Initialize scene objects
         this.axis = new CGFaxis(this);
@@ -107,6 +116,7 @@ class MyScene extends CGFscene {
         this.pushMatrix();
         this.scale(30,0,30);
         this.rotate(-Math.PI/2, 1,0,0);
+        this.terrainMaterial.apply();
         this.terrain.display();
         this.popMatrix();
         
