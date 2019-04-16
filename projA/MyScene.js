@@ -183,6 +183,8 @@ class MyScene extends CGFscene {
         this.pushMatrix();
         this.scale(700,1,700);
         this.rotate(-Math.PI/2, 1,0,0);
+        this.terrainTexCoords = [0.0, 50.0, 50.0, 50.0, 0.0, 0.0, 50.0, 0.0];
+        this.terrain.updateTexCoords(this.terrainTexCoords);
         this.terrainMaterial.apply();  //TDO tratar da retpeticao de textura
         this.terrain.updateTexCoordsGLBuffers();
         this.terrain.display();
