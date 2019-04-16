@@ -7,8 +7,8 @@ class MyHouse extends CGFobject {
 	constructor(scene, tex) {
 		super(scene);
         this.pyramid = new MyPyramid(this.scene, 4, 1);
-        this.unitCubeQuad = new MyUnitCubeQuad(this.scene);
-        this.topfloor = new MyUnitCubeQuad(this.scene);
+        this.unitCubeQuad = new MyUnitCubeQuad(this.scene, 1);
+        this.topfloor = new MyUnitCubeQuad(this.scene, 1);
         this.prism1 = new MyPrism(this.scene, 5, 1);
         this.prism2 = new MyPrism(this.scene, 5, 1);
         this.prism3 = new MyPrism(this.scene, 5, 1);
@@ -16,15 +16,6 @@ class MyHouse extends CGFobject {
 
         //texture
         this.tex = tex; 
-
-      //  this.doorTexture = new CFGtexture(this.scene, 'images/door.png');
-        this.door = new CGFappearance(this.scene);
-        this.door.setAmbient(1, 1, 1, 1);
-        this.door.setDiffuse(0.8, 0.4, 0, 1.0);
-        this.door.setSpecular(0.2, 0, 0, 1.0);
-        this.door.setShininess(10.0);
-        //this.door.setTexture(tex);
-        this.door.loadTexture('images/door.png');
 
         //roof material
         this.roof = new CGFappearance(this.scene);
@@ -107,7 +98,7 @@ class MyHouse extends CGFobject {
        this.scene.translate(0,0,-1)
         this.scene.scale(5,2,5);
         this.scene.translate(0,0.5,0);
-        this.unitCubeQuad.display();
+        this.unitCubeQuad.displayHouse();
         this.scene.popMatrix();   
 
         // TopFloor -- Walls
@@ -117,9 +108,7 @@ class MyHouse extends CGFobject {
         this.scene.translate(-3, 2, 0);
         this.scene.scale(5,2,7);
         this.scene.translate(0,0.5,0);
-        this.door.apply();
-        this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
-        this.unitCubeQuad.display();
+        this.unitCubeQuad.displayHouse();
         this.scene.popMatrix();   
     
 
