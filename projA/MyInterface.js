@@ -18,8 +18,10 @@ class MyInterface extends CGFinterface {
 
         this.gui.add(this.scene,'displayAxis').name("Display Axis");
         this.gui.add(this.scene,'displayTextures').name("Enable Textures");
-
         this.gui.add(this.scene, 'scaleFactor', 0.1, 10.0).name('Scale');
+
+        this.gui.add(this.scene, 'selectedLight', this.scene.lightIDs).name('Select Light').onChange(this.scene.updateLights.bind(this.scene));
+
 
         return true;
     }
