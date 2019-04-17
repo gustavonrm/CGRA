@@ -35,14 +35,6 @@ class MyHouse extends CGFobject {
         this.column.setShininess(10.0);
         this.column.loadTexture('images/column.jpg');
 
-        this.floor = new CGFappearance(this.scene);
-        this.floor.setAmbient(1, 1, 1, 1);
-        this.floor.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.floor.setSpecular(0.1, 0.1, 0.1, 1);
-        this.floor.setShininess(10.0);
-        this.floor.loadTexture('images/floor.jpg');
-
-
         this.initBuffers();
 
     }

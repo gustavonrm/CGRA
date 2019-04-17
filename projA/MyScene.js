@@ -72,6 +72,7 @@ class MyScene extends CGFscene {
         this.hill = new MyVoxelHill(this,4);
         this.highhill = new MyVoxelHill(this, 10);
         this.bonfire = new MyBonfire(this);
+        this.lamp = new MyLamp(this);
 
         //background
         this.cubeMapDay = new MyCubeMap(this,this.dayTimeUp,this.dayTimeLf,this.dayTimeFt,this.dayTimeRt,this.dayTimeBk,this.dayTimeDn); 
@@ -84,7 +85,7 @@ class MyScene extends CGFscene {
         this.selectedLight = 0;
     }
     initLights() {
-        this.setGlobalAmbientLight(0.3, 0.3, 0.3, 1);
+        this.setGlobalAmbientLight(0.2, 0.2, 0.2, 1);
 
         // Sol
         this.lights[0].setPosition(-10.0, 80.0, 10.0, 1.0);
@@ -100,24 +101,32 @@ class MyScene extends CGFscene {
         this.lights[1].setPosition(-10, 70, 10, 1); 
         this.lights[1].setDiffuse(0.0,0.0,1.0,1.0);
         this.lights[1].setSpecular(0.1,0.1,0.5,1.0);
-        this.lights[1].setConstantAttenuation(1);
-        //this.lights[1].setLinearAttenuation(0.1);
+        this.lights[1].setConstantAttenuation(0.8);
+        //this.lights[1].setLinearAttenuation(0.05);
         //this.lights[1].setQuadraticAttenuation(0.1);
         this.lights[1].disable();
         this.lights[1].setVisible(true);
         this.lights[1].update();
 
         // Fogueira
-        this.lights[2].setPosition(4, 0.5, 0, 1);
+        this.lights[2].setPosition(4, 0.5, -2, 1);
         this.lights[2].setDiffuse(1.0,0.1,0.0,1.0);
         this.lights[2].setSpecular(1.0,0.1,0.1,1.0);
         this.lights[2].setSpecular(0.1,0.1,0.5,1.0);
-        //this.lights[2].setConstantAttenuation(0.8);
-        //this.lights[2].setLinearAttenuation(1.0);
         this.lights[2].setQuadraticAttenuation(0.5);
         this.lights[2].disable();
         this.lights[2].setVisible(true);
         this.lights[2].update();
+
+        // Candeeiro
+        this.lights[3].setPosition(-1.5, 6*0.2, 6, 1);
+        this.lights[3].setDiffuse(1.0, 1.0, 0.4, 1.0);
+        this.lights[3].setSpecular(1.0, 1.0, 0.4, 1.0);
+        this.lights[3].setLinearAttenuation(1);
+        //this.lights[3].setConstantAttenuation(1);
+        this.lights[3].disable();
+        this.lights[3].setVisible(true);
+        this.lights[3].update();
 
     }
     initCameras() {
@@ -135,11 +144,13 @@ class MyScene extends CGFscene {
             this.lights[0].enable();
             this.lights[1].disable();
             this.lights[2].enable();
+            this.lights[3].disable();
         }
         if(this.selectedLight == 1){
             this.lights[1].enable();
            this.lights[2].enable();
             this.lights[0].disable();
+            this.lights[3].enable();
         }
     
     }
@@ -158,6 +169,7 @@ class MyScene extends CGFscene {
         this.lights[0].update();
         this.lights[1].update();
         this.lights[2].update();
+        this.lights[3].update();
 
         //GUI
         // Draw axis
@@ -235,13 +247,17 @@ class MyScene extends CGFscene {
         this.popMatrix();
      
         this.pushMatrix();
-        this.translate(4,0,0);
+        this.translate(4,0,-2);
         this.scale(0.15*this.scaleFactor,0.15*this.scaleFactor,0.15*this.scaleFactor);
         this.bonfire.display();
         this.popMatrix();
 
+        this.pushMatrix();
         
-        
+        this.translate(-1.5,0,6);
+        this.scale(0.15,0.15,0.15);
+        this.lamp.display();
+        this.popMatrix();
 
         // ---- END Primitive drawing section
     }
