@@ -20,10 +20,12 @@ class MyLamp extends CGFobject {
 
     }
     enableNormalViz(){
-        woodBlock.enableNormalViz();
+        cylinder.enableNormalViz();
+        cone.enableNormalViz();
     }
     enableDisableViz(){
-        woodBlock.enableDisableViz();       
+        cylinder.enableDisableViz();       
+        cone.enableDisableViz();       
     }
 	display() {
         

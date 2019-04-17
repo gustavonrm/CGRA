@@ -23,7 +23,7 @@ class MyHouse extends CGFobject {
         //roof material
         this.roof = new CGFappearance(this.scene);
         this.roof.setAmbient(1, 1, 1, 1);
-        this.roof.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.roof.setDiffuse(0.9, 0.2, 0.7, 1);
         this.roof.setSpecular(0.1, 0.1, 0.1, 1);
         this.roof.setShininess(10.0);
         this.roof.loadTexture('images/roof.png');

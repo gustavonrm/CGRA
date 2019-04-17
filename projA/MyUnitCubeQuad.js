@@ -40,7 +40,7 @@ class MyUnitCubeQuad extends CGFobject {
 
         this.houseFloor = new CGFappearance(this.scene);
         this.houseFloor.setAmbient(1, 1, 1, 1);
-        this.houseFloor.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.houseFloor.setDiffuse(0.9, 0.1, 0.9, 1);
         this.houseFloor.setSpecular(0.1, 0.1, 0.1, 1);
         this.houseFloor.setShininess(10.0);
         this.houseFloor.loadTexture('images/floor.jpg');

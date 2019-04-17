@@ -45,9 +45,8 @@ class MyScene extends CGFscene {
         //leaves 
         this.treeTopTexture = new CGFtexture(this, 'images/mineLeaves.png');
         //terrain
-        this.terrainTexture = new CGFtexture( this,'images/grass.png');
-        //door
-       // this.doorTexture = new CFGtexture(this,'images/grass.png');
+        this.terrainTexture = new CGFtexture(this,'images/grass.png');
+    
         
         //terrain
         this.terrainMaterial = new CGFappearance(this);
@@ -93,7 +92,6 @@ class MyScene extends CGFscene {
         this.lights[0].setSpecular(1.0, 1.0, 1.0, 1.0);
         this.lights[0].setConstantAttenuation(1);
         this.lights[0].enable();
-        //this.lights[0].disable();
         this.lights[0].setVisible(true);
         this.lights[0].update();
 
@@ -102,8 +100,6 @@ class MyScene extends CGFscene {
         this.lights[1].setDiffuse(0.0,0.0,1.0,1.0);
         this.lights[1].setSpecular(0.1,0.1,0.5,1.0);
         this.lights[1].setConstantAttenuation(0.8);
-        //this.lights[1].setLinearAttenuation(0.05);
-        //this.lights[1].setQuadraticAttenuation(0.1);
         this.lights[1].disable();
         this.lights[1].setVisible(true);
         this.lights[1].update();
@@ -123,7 +119,6 @@ class MyScene extends CGFscene {
         this.lights[3].setDiffuse(1.0, 1.0, 0.4, 1.0);
         this.lights[3].setSpecular(1.0, 1.0, 0.4, 1.0);
         this.lights[3].setLinearAttenuation(1);
-        //this.lights[3].setConstantAttenuation(1);
         this.lights[3].disable();
         this.lights[3].setVisible(true);
         this.lights[3].update();
