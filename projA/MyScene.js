@@ -92,7 +92,7 @@ class MyScene extends CGFscene {
         this.lights[0].setSpecular(1.0, 1.0, 1.0, 1.0);
         this.lights[0].setConstantAttenuation(1);
         this.lights[0].enable();
-        this.lights[0].setVisible(true);
+        //this.lights[0].setVisible(true);
         this.lights[0].update();
 
         // Lua
@@ -101,17 +101,17 @@ class MyScene extends CGFscene {
         this.lights[1].setSpecular(0.1,0.1,0.5,1.0);
         this.lights[1].setConstantAttenuation(0.8);
         this.lights[1].disable();
-        this.lights[1].setVisible(true);
+        //this.lights[1].setVisible(true);
         this.lights[1].update();
 
         // Fogueira
         this.lights[2].setPosition(4, 0.5, -2, 1);
         this.lights[2].setDiffuse(1.0,0.1,0.0,1.0);
         this.lights[2].setSpecular(1.0,0.1,0.1,1.0);
-        this.lights[2].setSpecular(0.1,0.1,0.5,1.0);
+        //this.lights[2].setSpecular(0.1,0.1,0.5,1.0);
         this.lights[2].setQuadraticAttenuation(0.5);
         this.lights[2].disable();
-        this.lights[2].setVisible(true);
+        //this.lights[2].setVisible(true);
         this.lights[2].update();
 
         // Candeeiro
@@ -120,7 +120,7 @@ class MyScene extends CGFscene {
         this.lights[3].setSpecular(1.0, 1.0, 0.4, 1.0);
         this.lights[3].setLinearAttenuation(1);
         this.lights[3].disable();
-        this.lights[3].setVisible(true);
+        //this.lights[3].setVisible(true);
         this.lights[3].update();
 
     }
@@ -138,13 +138,13 @@ class MyScene extends CGFscene {
         if(this.selectedLight == 0){
             this.lights[0].enable();
             this.lights[1].disable();
-            this.lights[2].enable();
+            this.lights[2].disable();
             this.lights[3].disable();
         }
         if(this.selectedLight == 1){
-            this.lights[1].enable();
-           this.lights[2].enable();
             this.lights[0].disable();
+            this.lights[1].enable();
+            this.lights[2].enable();
             this.lights[3].enable();
         }
     

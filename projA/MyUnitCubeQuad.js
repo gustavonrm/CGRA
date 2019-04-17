@@ -33,23 +33,23 @@ class MyUnitCubeQuad extends CGFobject {
 
         this.houseWall = new CGFappearance(this.scene);
         this.houseWall.setAmbient(1, 1, 1, 1);
-        this.houseWall.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.houseWall.setDiffuse(0.8, 0.8, 0.8, 1);
         this.houseWall.setSpecular(0.1, 0.1, 0.1, 1);
         this.houseWall.setShininess(10.0);
         this.houseWall.loadTexture('images/wall.jpg');
 
         this.houseFloor = new CGFappearance(this.scene);
         this.houseFloor.setAmbient(1, 1, 1, 1);
-        this.houseFloor.setDiffuse(0.9, 0.1, 0.9, 1);
+        this.houseFloor.setDiffuse(0.4, 0.2, 0.0, 1);
         this.houseFloor.setSpecular(0.1, 0.1, 0.1, 1);
         this.houseFloor.setShininess(10.0);
         this.houseFloor.loadTexture('images/floor.jpg');
 
         this.houseWindow = new CGFappearance(this.scene);
         this.houseWindow.setAmbient(1, 1, 1, 1);
-        this.houseWindow.setDiffuse(0.4, 0.4, 0.4, 1);
-        this.houseWindow.setSpecular(0.9, 0.9, 0.9, 1);
-        this.houseWindow.setShininess(20.0);
+        this.houseWindow.setDiffuse(0.2, 0.2, 0.2, 1);
+        this.houseWindow.setSpecular(1, 1, 1, 1);
+        this.houseWindow.setShininess(10.0);
         this.houseWindow.loadTexture('images/window.jpg');
 
         this.quad.initBuffers();

@@ -23,15 +23,15 @@ class MyHouse extends CGFobject {
         //roof material
         this.roof = new CGFappearance(this.scene);
         this.roof.setAmbient(1, 1, 1, 1);
-        this.roof.setDiffuse(0.9, 0.2, 0.7, 1);
-        this.roof.setSpecular(0.1, 0.1, 0.1, 1);
+        this.roof.setDiffuse(0.8, 0.6, 0, 1);
+        this.roof.setSpecular(0.1, 0.1, 0.2, 1);
         this.roof.setShininess(10.0);
         this.roof.loadTexture('images/roof.png');
 
         this.column = new CGFappearance(this.scene);
         this.column.setAmbient(1, 1, 1, 1);
         this.column.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.column.setSpecular(0.1, 0.1, 0.1, 1);
+        this.column.setSpecular(0.3, 0.3, 0.3, 1);
         this.column.setShininess(10.0);
         this.column.loadTexture('images/column.jpg');
 
@@ -102,9 +102,7 @@ class MyHouse extends CGFobject {
 
         // UnitCubeQuad -- Walls
         this.scene.pushMatrix();
-        //this.scene.scale(2,2,2);
-       // this.scene.rotate(Math.PI/4,0, 1, 0);
-       this.scene.translate(0,0,-1)
+        this.scene.translate(0,0,-1)
         this.scene.scale(5,2,5);
         this.scene.translate(0,0.5,0);
         this.scene.rotate(-Math.PI/2, 0,1,0);
@@ -113,8 +111,6 @@ class MyHouse extends CGFobject {
 
         // TopFloor -- Walls
         this.scene.pushMatrix();
-        //this.scene.scale(2,2,2);
-       // this.scene.rotate(Math.PI/4,0, 1, 0);
         this.scene.translate(-3, 2, 0);
         this.scene.scale(5,2,7);
         this.scene.translate(0,0.5,0);
