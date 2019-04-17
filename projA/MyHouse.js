@@ -13,6 +13,9 @@ class MyHouse extends CGFobject {
         this.prism2 = new MyPrism(this.scene, 5, 1);
         this.prism3 = new MyPrism(this.scene, 5, 1);
         this.prism4 = new MyPrism(this.scene, 5, 1);
+        this.prism5 = new MyPrism(this.scene, 5, 1);
+        this.prism6 = new MyPrism(this.scene, 5, 1);
+        this.prism7 = new MyPrism(this.scene, 5, 1);
 
         //texture
         this.tex = tex; 
@@ -25,6 +28,19 @@ class MyHouse extends CGFobject {
         this.roof.setShininess(10.0);
         this.roof.loadTexture('images/roof.png');
 
+        this.column = new CGFappearance(this.scene);
+        this.column.setAmbient(1, 1, 1, 1);
+        this.column.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.column.setSpecular(0.1, 0.1, 0.1, 1);
+        this.column.setShininess(10.0);
+        this.column.loadTexture('images/column.jpg');
+
+        this.floor = new CGFappearance(this.scene);
+        this.floor.setAmbient(1, 1, 1, 1);
+        this.floor.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.floor.setSpecular(0.1, 0.1, 0.1, 1);
+        this.floor.setShininess(10.0);
+        this.floor.loadTexture('images/floor.jpg');
 
 
         this.initBuffers();
@@ -82,6 +98,7 @@ class MyHouse extends CGFobject {
         this.parallelogram.enableDisableViz();
     }
 	display() {
+    
         // Pyramid -- Roof
         this.scene.pushMatrix();
         this.scene.translate(-1.5,4,0);
@@ -98,6 +115,7 @@ class MyHouse extends CGFobject {
        this.scene.translate(0,0,-1)
         this.scene.scale(5,2,5);
         this.scene.translate(0,0.5,0);
+        this.scene.rotate(-Math.PI/2, 0,1,0);
         this.unitCubeQuad.displayHouse();
         this.scene.popMatrix();   
 
@@ -116,6 +134,7 @@ class MyHouse extends CGFobject {
         this.scene.pushMatrix();
         this.scene.translate(2.2,2,1.2);
         this.scene.scale(0.2, 2, 0.2);
+        this.column.apply();
         this.prism1.display();
         this.scene.popMatrix();
     
@@ -123,21 +142,51 @@ class MyHouse extends CGFobject {
         this.scene.pushMatrix();            
         this.scene.translate(2.2,2,-3.2);
         this.scene.scale(0.2, 2, 0.2);
+        this.column.apply();
         this.prism2.display();
         this.scene.popMatrix();
     
         // Prism3 -- Column3
         this.scene.pushMatrix();
-        this.scene.translate(-5.2, 0, 0);
+        this.scene.translate(-5.2, 0, 3.2);
         this.scene.scale(0.2, 2, 0.2);
+        this.column.apply();
         this.prism3.display();
         this.scene.popMatrix();
 
         // Prism4 -- Column4
         this.scene.pushMatrix();
-        this.scene.translate(-5.2,0,1);
+        this.scene.translate(-5.2,0,1.5);
         this.scene.scale(0.2, 2, 0.2);
+        this.column.apply();
         this.prism4.display();
         this.scene.popMatrix();    
+
+        // Prism5 -- Column5
+        this.scene.pushMatrix();
+        this.scene.translate(-5.2, 0, -1.5);
+        this.scene.scale(0.2, 2, 0.2);
+        this.column.apply();
+        this.prism5.display();
+        this.scene.popMatrix();
+
+        // Prism6 -- Column6
+        this.scene.pushMatrix();
+        this.scene.translate(-5.2,0,-3.2);
+        this.scene.scale(0.2, 2, 0.2);
+        this.column.apply();
+        this.prism6.display();
+        this.scene.popMatrix();  
+
+        // Prism7 -- Column7
+        this.scene.pushMatrix();
+        this.scene.translate(-5.2,0,0);
+        this.scene.scale(0.2, 2, 0.2);
+        this.column.apply();
+        this.prism7.display();
+        this.scene.popMatrix();
+    }
+    updateBuffers() {
+        
     }
 }

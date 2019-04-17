@@ -31,12 +31,26 @@ class MyUnitCubeQuad extends CGFobject {
         this.bottom.setShininess(10.0);
         this.bottom.loadTexture('images/mineBottom.png');
 
-        this.houseDoor = new CGFappearance(this.scene);
-        this.houseDoor.setAmbient(1, 1, 1, 1);
-        this.houseDoor.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.houseDoor.setSpecular(0.1, 0.1, 0.1, 1);
-        this.houseDoor.setShininess(10.0);
-        this.houseDoor.loadTexture('images/door.png');
+        this.houseWall = new CGFappearance(this.scene);
+        this.houseWall.setAmbient(1, 1, 1, 1);
+        this.houseWall.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.houseWall.setSpecular(0.1, 0.1, 0.1, 1);
+        this.houseWall.setShininess(10.0);
+        this.houseWall.loadTexture('images/wall.jpg');
+
+        this.houseFloor = new CGFappearance(this.scene);
+        this.houseFloor.setAmbient(1, 1, 1, 1);
+        this.houseFloor.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.houseFloor.setSpecular(0.1, 0.1, 0.1, 1);
+        this.houseFloor.setShininess(10.0);
+        this.houseFloor.loadTexture('images/floor.jpg');
+
+        this.houseWindow = new CGFappearance(this.scene);
+        this.houseWindow.setAmbient(1, 1, 1, 1);
+        this.houseWindow.setDiffuse(0.4, 0.4, 0.4, 1);
+        this.houseWindow.setSpecular(0.9, 0.9, 0.9, 1);
+        this.houseWindow.setShininess(20.0);
+        this.houseWindow.loadTexture('images/window.jpg');
 
         this.quad.initBuffers();
 
@@ -106,7 +120,7 @@ class MyUnitCubeQuad extends CGFobject {
         //quad1
         this.scene.pushMatrix();
         this.scene.translate(0,0,1/2);
-        this.houseDoor.apply();
+        this.houseWindow.apply();
         this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
         this.quad.display();
         this.scene.popMatrix();
@@ -115,7 +129,7 @@ class MyUnitCubeQuad extends CGFobject {
          this.scene.pushMatrix();
          this.scene.translate(0,0,-1/2);
          this.scene.rotate(-Math.PI,0,1,0);
-         this.houseDoor.apply();
+         this.houseWall.apply();
          this.quad.display();
          this.scene.popMatrix();
 
@@ -123,7 +137,7 @@ class MyUnitCubeQuad extends CGFobject {
         this.scene.pushMatrix();
         this.scene.translate(-1/2,0,0);
         this.scene.rotate(-Math.PI/2,0,1,0);
-        this.houseDoor.apply();
+        this.houseWindow.apply();
         this.quad.display();
         this.scene.popMatrix();
 
@@ -131,7 +145,7 @@ class MyUnitCubeQuad extends CGFobject {
         this.scene.pushMatrix();
         this.scene.translate(1/2,0,0);
         this.scene.rotate(Math.PI/2,0,1,0);
-        this.houseDoor.apply();
+        this.houseWall.apply();
         this.quad.display();
         this.scene.popMatrix();
 
@@ -139,7 +153,7 @@ class MyUnitCubeQuad extends CGFobject {
         this.scene.pushMatrix();
         this.scene.translate(0,1/2,0);
         this.scene.rotate(-Math.PI/2,1,0,0);
-        this.top.apply();
+        this.houseFloor.apply();
         this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
         this.quad.display();
         this.scene.popMatrix();
