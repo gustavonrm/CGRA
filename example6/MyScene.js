@@ -27,6 +27,10 @@ class MyScene extends CGFscene {
         this.axiom = "X"; //
         this.ruleF = "FF"; //
         this.ruleX = "F[-X][X]F[-X]+FX";
+        this.rule1 = "F+F--F+F";
+        this.rule2 = "F[-X][X]F[-X]+X";
+        this.rule3 = "F[-X][x]+X";
+        this.rule4 = "F[+X]-X";
         this.angle = 30.0;
         this.iterations = 4;
         this.scaleFactor = 0.5;
@@ -37,8 +41,14 @@ class MyScene extends CGFscene {
             this.lSystem.generate(
                 this.axiom,
                 {
+                    /* 
                     "F": [ this.ruleF ],
                     "X": [ this.ruleX ]
+                    */
+                   //exercise 3
+                    "F" :[this.rule1],
+                    "X" :[this.rule2,this.rule3,this.rule4]
+    
                 },
                 this.angle,
                 this.iterations,
