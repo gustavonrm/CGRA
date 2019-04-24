@@ -11,6 +11,7 @@ class MyScene extends CGFscene {
         this.initCameras();
         this.initLights();
 
+ 
         //Background color
         this.gl.clearColor(1.0, 1.0, 1.0, 1.0);
 
@@ -21,13 +22,16 @@ class MyScene extends CGFscene {
         this.enableTextures(true);
 
         //Objects connected to MyInterface
-        this.axiom = "F--F--F"; // "X"; //
-        this.ruleF = "F+F--F+F"; // "FF"; //
-        //this.ruleX = "F[-X][X]F[-X]+FX";
-        this.angle = 60.0;
-        this.iterations = 2;
-        this.scaleFactor = 1;
-        this.lSystem = new MyLSystem(this);
+        // this.axiom = "F--F--F"; // "X"; //
+        // this.ruleF = "F+F--F+F"; // "FF"; //
+        this.axiom = "X"; //
+        this.ruleF = "FF"; //
+        this.ruleX = "F[-X][X]F[-X]+FX";
+        this.angle = 30.0;
+        this.iterations = 4;
+        this.scaleFactor = 0.5;
+        //this.lSystem = new MyLSystem(this);
+        this.lSystem = new MyLSPlant(this);
 
         this.doGenerate = function () {
             this.lSystem.generate(
