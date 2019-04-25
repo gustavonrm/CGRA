@@ -68,9 +68,8 @@ class ShaderScene extends CGFscene {
 			new CGFshader(this.gl, "shaders/texture3.vert", "shaders/texture3.frag"),
 			new CGFshader(this.gl, "shaders/texture3anim.vert", "shaders/texture3anim.frag"),
 			new CGFshader(this.gl, "shaders/texture1.vert", "shaders/sepia.frag"),
+			new CGFshader(this.gl, "shaders/texture1.vert", "shaders/grayscale.frag"),
 			new CGFshader(this.gl, "shaders/texture1.vert", "shaders/convolution.frag"),
-			//new CGFshader(this.gl, "shaders/ex1.vert", "shaders/ex1.frag")
-
 			new CGFshader(this.gl, "shaders/exercise1.vert", "shaders/exercise1.frag")
 		];
 
@@ -92,8 +91,9 @@ class ShaderScene extends CGFscene {
 			'Multiple textures in VS and FS': 5,
 			'Animation example': 6,
 			'Sepia': 7,
-			'Convolution': 8,
-			'Exercise 1': 9
+			'Grayscale' : 8,
+			'Convolution': 9,
+			'Exercise 1': 10
 		};
 
 		// shader code panels references
