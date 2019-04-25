@@ -12,13 +12,15 @@ uniform sampler2D uSampler2;
 
 uniform float normScale;
 
+uniform float timeFactor;
+
 void main() {
-	vec3 offset=vec3(0.0,0.0,0.0);
+	vec3 offset=vec3(1.0,1.0,1.0);
 	
 	vTextureCoord = aTextureCoord;
 	
 	//if (texture2D(uSampler2, vec2(0.0,0.1)+vTextureCoord).r > 0.5)
-		offset=aVertexNormal*0.1*texture2D(uSampler2, vec2(0.0,0.1)+vTextureCoord).r; //only one of the componets 
+		offset=offset*aVertexNormal*0.1*texture2D(uSampler2, vec2(timeFactor*.01,timeFactor*.01)+vTextureCoord).r; //only one of the componets 
 		//*texture2D(uSampler2, vec2(0.0,0.1)+vTextureCoord).g
 		//*texture2D(uSampler2, vec2(0.0,0.1)+vTextureCoord).b;
 	
