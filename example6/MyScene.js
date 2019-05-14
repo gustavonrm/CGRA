@@ -28,7 +28,7 @@ class MyScene extends CGFscene {
         this.ruleF = "FF"; //
         this.ruleX = "F[-X][X]F[-X]+FX";
         //ex 3/4
-        this.rule1 = "F+F--F+F";
+        this.rule1 = "FF";
         this.rule2 = "F[-X][X]F[-X]+X";
         this.rule3 = "F[-X][x]+X";
         this.rule4 = "F[+X]-X";
