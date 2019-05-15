@@ -5,9 +5,9 @@ class ShaderScene extends CGFscene {
 		this.appearance = null;
 
 		// initial configuration of interface
-		this.selectedObject = 0;
+		this.selectedObject = 1; //change later if needed
 		this.wireframe = false;
-		this.selectedExampleShader = 0;
+		this.selectedExampleShader = 11;
 		this.showShaderCode = false;
 
 		this.scaleFactor = 16.0;
@@ -51,11 +51,23 @@ class ShaderScene extends CGFscene {
 		this.appearance.setSpecular(0.0, 0.0, 0.0, 1);
 		this.appearance.setShininess(120);
 
+		this.water = new CGFappearance(this);
+		this.water.setAmbient(0.3, 0.3, 0.3, 1);
+		this.water.setDiffuse(0.7, 0.7, 0.7, 1);
+		this.water.setSpecular(0.0, 0.0, 0.0, 1);
+		this.water.setShininess(120);
+
 		this.texture = new CGFtexture(this, "textures/texture.jpg");
 		this.appearance.setTexture(this.texture);
 		this.appearance.setTextureWrap('REPEAT', 'REPEAT');
 
 		this.texture2 = new CGFtexture(this, "textures/FEUP.jpg");
+
+		this.waterMap = new CGFtexture(this, "textures/waterMap.jpg");
+		this.waterTex = new CGFtexture(this, "textures/waterTex.jpg");
+		this.water.setTexture(this.waterTex);
+		this.water.setTextureWrap('REPEAT', 'REPEAT');
+
 
 		// shaders initialization
 
@@ -68,10 +80,10 @@ class ShaderScene extends CGFscene {
 			new CGFshader(this.gl, "shaders/texture3.vert", "shaders/texture3.frag"),
 			new CGFshader(this.gl, "shaders/texture3anim.vert", "shaders/texture3anim.frag"),
 			new CGFshader(this.gl, "shaders/texture1.vert", "shaders/sepia.frag"),
+			new CGFshader(this.gl, "shaders/texture1.vert", "shaders/grayscale.frag"),
 			new CGFshader(this.gl, "shaders/texture1.vert", "shaders/convolution.frag"),
-			//new CGFshader(this.gl, "shaders/ex1.vert", "shaders/ex1.frag")
-
-			new CGFshader(this.gl, "shaders/exercise1.vert", "shaders/exercise1.frag")
+			new CGFshader(this.gl, "shaders/exercise1.vert", "shaders/exercise1.frag"),
+			new CGFshader(this.gl, "shaders/water.vert", "shaders/water.frag")
 		];
 
 		// additional texture will have to be bound to texture unit 1 later, when using the shader, with "this.texture2.bind(1);"
@@ -79,6 +91,9 @@ class ShaderScene extends CGFscene {
 		this.testShaders[5].setUniformsValues({ uSampler2: 1 });
 		this.testShaders[6].setUniformsValues({ uSampler2: 1 });
 		this.testShaders[6].setUniformsValues({ timeFactor: 0 });
+		this.testShaders[10].setUniformsValues({ timeFactor: 0 });
+		this.testShaders[11].setUniformsValues({ uSampler2: 2 });
+		this.testShaders[11].setUniformsValues({ timeFactor: 0 });
 
 
 		// Shaders interface variables
@@ -92,8 +107,10 @@ class ShaderScene extends CGFscene {
 			'Multiple textures in VS and FS': 5,
 			'Animation example': 6,
 			'Sepia': 7,
-			'Convolution': 8,
-			'Exercise 1': 9
+			'Grayscale' : 8,
+			'Convolution': 9,
+			'Exercise 1': 10,
+			'Water' : 11
 		};
 
 		// shader code panels references
@@ -176,6 +193,12 @@ class ShaderScene extends CGFscene {
 		// only shader 6 is using time factor
 		if (this.selectedExampleShader == 6)
 			this.testShaders[6].setUniformsValues({ timeFactor: t / 100 % 1000 });
+		// only shader 10 is using time factor
+		if (this.selectedExampleShader == 10)
+		this.testShaders[10].setUniformsValues({ timeFactor: t / 100 % 1000 });
+		// only shader 11 is using time factor
+		if (this.selectedExampleShader == 11)
+			this.testShaders[11].setUniformsValues({ timeFactor: t / 100 % 100000 });
 	}
 
 	// main display function
@@ -199,7 +222,10 @@ class ShaderScene extends CGFscene {
 		this.axis.display();
 
 		// aplly main appearance (including texture in default texture unit 0)
-		this.appearance.apply();
+		if(this.selectedExampleShader == 11){
+			this.water.apply();
+		}
+		else this.appearance.apply();
 
 		// activate selected shader
 		this.setActiveShader(this.testShaders[this.selectedExampleShader]);
@@ -207,10 +233,11 @@ class ShaderScene extends CGFscene {
 
 		// bind additional texture to texture unit 1
 		this.texture2.bind(1);
+		this.waterMap.bind(2);
 
 		//Uncomment following lines in case texture must have wrapping mode 'REPEAT'
-		//this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_S, this.gl.REPEAT);
-		//this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_T, this.gl.REPEAT);
+		this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_S, this.gl.REPEAT);
+		this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_T, this.gl.REPEAT);
 
 		if (this.selectedObject==0) {
 			// teapot (scaled and rotated to conform to our axis)

@@ -11,6 +11,7 @@ class MyScene extends CGFscene {
         this.initCameras();
         this.initLights();
 
+ 
         //Background color
         this.gl.clearColor(1.0, 1.0, 1.0, 1.0);
 
@@ -21,20 +22,53 @@ class MyScene extends CGFscene {
         this.enableTextures(true);
 
         //Objects connected to MyInterface
-        this.axiom = /*"F--F--F";*/  "X"; //
-        this.ruleF = /*"F+F--F+F";*/ "FF"; //
+        // this.axiom = "F--F--F"; // "X"; //
+        // this.ruleF = "F+F--F+F"; // "FF"; //
+        this.axiom = "X"; //
+        this.ruleF = "FF"; //
         this.ruleX = "F[-X][X]F[-X]+FX";
+        //ex 3/4
+        this.rule1 = "FF";
+        this.rule2 = "F[-X][X]F[-X]+X";
+        this.rule3 = "F[-X][x]+X";
+        this.rule4 = "F[+X]-X";
+        this.rule5 = "F[/X][X]F[\\X]+X";
+        this.rule6 = "F[\X][X]/X";
+        this.rule7 = "F[/X]\X";
+        this.rule8 = "F[^X][X]F[&X]^X";
+        this.rule9 = "F[^X]&X";
+        this.rule10 = " F[&X]^X";
+
+        //ex3
         this.angle = 30.0;
-        this.iterations = 1;
+        this.iterations = 4;
         this.scaleFactor = 0.5;
+        //this.lSystem = new MyLSystem(this);
         this.lSystem = new MyLSPlant(this);
 
         this.doGenerate = function () {
             this.lSystem.generate(
                 this.axiom,
                 {
+                    /* 
                     "F": [ this.ruleF ],
                     "X": [ this.ruleX ]
+                    */
+                   //exercise 3/4
+                    "F" :[this.rule1],
+                    "X" :[
+                        this.rule2,
+                        this.rule3,
+                        this.rule4,
+                        this.rule5,
+                        this.rule6,
+                        this.rule7,
+                        this.rule8,
+                        this.rule9,
+                        this.rule10
+                    
+                    ]
+
                 },
                 this.angle,
                 this.iterations,

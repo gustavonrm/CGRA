@@ -17,11 +17,19 @@ varying vec4 normal;
 uniform float timeFactor;
 
 
+varying vec2 vTextureCoord;
+uniform sampler2D uSampler2;
+
+
 
 void main() {
-	vec3 offset=vec3(normScale,0.0,0.0)*sin(timeFactor);
+	vec3 offset=vec3(1.0,0.0,0.0);
+	
+	offset=offset*2.0*normScale*0.1*sin(timeFactor); //animation to move on XX
 
-	vec4 vertex=vec4(aVertexPosition+aVertexNormal+offset*normScale*0.1, 1.0);
+	vTextureCoord = aTextureCoord;
+
+	vec4 vertex=vec4(aVertexPosition+aVertexNormal+offset, 1.0);
 
 	gl_Position = uPMatrix * uMVMatrix * vertex;
 
@@ -30,3 +38,5 @@ void main() {
 	coords=gl_Position;
 
 }
+
+	
