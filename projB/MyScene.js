@@ -21,9 +21,21 @@ class MyScene extends CGFscene {
         this.enableTextures(true);
         this.setUpdatePeriod(50);
 
+        //Textures
+        //DAY TIME
+        this.dayTimeBk = new CGFtexture(this, 'images/ely_nevada/nevada_bk.jpg');
+        this.dayTimeDn = new CGFtexture(this, 'images/ely_nevada/nevada_dn.jpg');
+        this.dayTimeFt = new CGFtexture(this, 'images/ely_nevada/nevada_ft.jpg');
+        this.dayTimeLf = new CGFtexture(this, 'images/ely_nevada/nevada_lf.jpg');
+        this.dayTimeRt = new CGFtexture(this, 'images/ely_nevada/nevada_rt.jpg');
+        this.dayTimeUp = new CGFtexture(this, 'images/ely_nevada/nevada_up.jpg');
+
         //Initialize scene objects
         this.axis = new CGFaxis(this);
+        this.cubeMap = new MyCubeMap(this,this.dayTimeUp,this.dayTimeLf,this.dayTimeFt,this.dayTimeRt,this.dayTimeBk,this.dayTimeDn);
         this.plane = new Plane(this, 32);
+        this.house = new MyHouse(this, this.terrainTexture);
+
 
         //Objects connected to MyInterface
     }
@@ -43,7 +55,6 @@ class MyScene extends CGFscene {
         this.setShininess(10.0);
     }
     update(t){
-
     }
 
     display() {
@@ -65,10 +76,22 @@ class MyScene extends CGFscene {
 
         // ---- BEGIN Primitive drawing section
         this.pushMatrix();
+        this.translate(0,49.9,0); //cant be 50 bc if colides with plane cant write
+        this.scale(400,100,400);
+        this.cubeMap.display();
+        this.popMatrix();
+
+        /*this.pushMatrix();
         this.rotate(-0.5*Math.PI, 1, 0, 0);
         this.scale(60, 60, 1);
         this.plane.display();
+        this.popMatrix();*/
+
+        this.pushMatrix();
+        this.scale(1/3, 1/3, 1/3);
+        this.house.display();
         this.popMatrix();
         // ---- END Primitive drawing section
     }
+
 }
