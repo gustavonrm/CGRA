@@ -24,6 +24,7 @@ class MyScene extends CGFscene {
         //Initialize scene objects
         this.axis = new CGFaxis(this);
         this.plane = new Plane(this, 32);
+        this.bird = new MyBird(this);
 
         //Objects connected to MyInterface
     }
@@ -34,7 +35,7 @@ class MyScene extends CGFscene {
         this.lights[0].update();
     }
     initCameras() {
-        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(45, 45, 45), vec3.fromValues(0, 0, 0));
+        this.camera = new CGFcamera(0.2, 0.1, 500, vec3.fromValues(45, 45, 45), vec3.fromValues(0, 0, 0));
     }
     setDefaultAppearance() {
         this.setAmbient(0.2, 0.4, 0.8, 1.0);
@@ -69,6 +70,10 @@ class MyScene extends CGFscene {
         this.scale(60, 60, 1);
         this.plane.display();
         this.popMatrix();
+
+        this.bird.display();
+
+
         // ---- END Primitive drawing section
     }
 }

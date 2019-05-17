@@ -15,21 +15,21 @@ class MyUnitCubeQuad extends CGFobject {
         this.top.setDiffuse(0.9, 0.9, 0.9, 1);
         this.top.setSpecular(0.1, 0.1, 0.1, 1);
         this.top.setShininess(10.0);
-        this.top.loadTexture('images/mineTop.png');
+      //  this.top.loadTexture('images/mineTop.png');
 
         this.side = new CGFappearance(this.scene);
         this.side.setAmbient(1, 1, 1, 1);
         this.side.setDiffuse(0.9, 0.9, 0.9, 1);
         this.side.setSpecular(0.1, 0.1, 0.1, 1);
         this.side.setShininess(10.0);
-        this.side.loadTexture('images/mineSide.png');
+        //this.side.loadTexture('images/mineSide.png');
 
         this.bottom = new CGFappearance(this.scene);
         this.bottom.setAmbient(1, 1, 1, 1);
         this.bottom.setDiffuse(0.9, 0.9, 0.9, 1);
         this.bottom.setSpecular(0.1, 0.1, 0.1, 1);
         this.bottom.setShininess(10.0);
-        this.bottom.loadTexture('images/mineBottom.png');
+        //this.bottom.loadTexture('images/mineBottom.png');
 
         this.houseWall = new CGFappearance(this.scene);
         this.houseWall.setAmbient(1, 1, 1, 1);
