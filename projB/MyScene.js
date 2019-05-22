@@ -22,21 +22,76 @@ class MyScene extends CGFscene {
         this.setUpdatePeriod(50);
 
         //Textures
-        //DAY TIME
-        this.dayTimeBk = new CGFtexture(this, 'images/ely_nevada/nevada_bk.jpg');
-        this.dayTimeDn = new CGFtexture(this, 'images/ely_nevada/nevada_dn.jpg');
-        this.dayTimeFt = new CGFtexture(this, 'images/ely_nevada/nevada_ft.jpg');
-        this.dayTimeLf = new CGFtexture(this, 'images/ely_nevada/nevada_lf.jpg');
-        this.dayTimeRt = new CGFtexture(this, 'images/ely_nevada/nevada_rt.jpg');
-        this.dayTimeUp = new CGFtexture(this, 'images/ely_nevada/nevada_up.jpg');
+        this.loadTextures()
+
+
+        // LSPlant
+        this.axiom = "X"; //
+        this.ruleF = "FF"; //
+        this.ruleX = "F[-X][X]F[-X]+FX";
+        //ex 3/4
+        this.rule1 = "FF";
+        this.rule2 = "F[-X][X]F[-X]+X";
+        this.rule3 = "F[-X][x]+X";
+        this.rule4 = "F[+X]-X";
+        this.rule5 = "F[/X][X]F[\\X]+X";
+        this.rule6 = "F[\X][X]/X";
+        this.rule7 = "F[/X]\X";
+        this.rule8 = "F[^X][X]F[&X]^X";
+        this.rule9 = "F[^X]&X";
+        this.rule10 = " F[&X]^X";
+
 
         //Initialize scene objects
         this.axis = new CGFaxis(this);
         this.cubeMap = new MyCubeMap(this,this.dayTimeUp,this.dayTimeLf,this.dayTimeFt,this.dayTimeRt,this.dayTimeBk,this.dayTimeDn);
         this.plane = new Plane(this, 32);
         this.bird = new MyBird(this);
-        this.house = new MyHouse(this, this.terrainTexture);
+        this.house = new MyHouse(this, this.terrainTexture);  
+        this.trees = [];  
+        /*this.trees.push(new MyLSPlant(this));
+        this.trees.push(new MyLSPlant(this));
+        this.trees.push(new MyLSPlant(this));
+        this.trees.push(new MyLSPlant(this));
+        this.trees.push(new MyLSPlant(this));
+        this.trees.push(new MyLSPlant(this));*/
 
+        this.angle = 35.0;
+        this.iterations = 4;
+        this.scaleFactor = 0.5;
+        //this.lSystem = new MyLSystem(this);
+        
+
+        this.doGenerate = function (num, array) {
+            for (let i = 0; i < 6; i++){
+            this.trees[i].generate(
+                this.axiom,
+                {
+                    "F" :[this.rule1],
+                    "X" :[
+                        this.rule2,
+                        this.rule3,
+                        this.rule4,
+                        this.rule5,
+                        this.rule6,
+                        this.rule7,
+                        this.rule8,
+                        this.rule9,
+                        this.rule10
+                    
+                    ]
+
+                },
+                this.angle,
+                this.iterations,
+                this.scaleFactor
+            );
+            }
+        }
+
+        // do initial generation
+        //this.doGenerate();
+        this.generateTrees(6);
 
         //Objects connected to MyInterface
     }
@@ -55,6 +110,44 @@ class MyScene extends CGFscene {
         this.setSpecular(0.2, 0.4, 0.8, 1.0);
         this.setShininess(10.0);
     }
+
+    loadTextures(){
+        this.dayTimeBk = new CGFtexture(this, 'images/ely_nevada/nevada_bk.jpg');
+        this.dayTimeDn = new CGFtexture(this, 'images/ely_nevada/nevada_dn.jpg');
+        this.dayTimeFt = new CGFtexture(this, 'images/ely_nevada/nevada_ft.jpg');
+        this.dayTimeLf = new CGFtexture(this, 'images/ely_nevada/nevada_lf.jpg');
+        this.dayTimeRt = new CGFtexture(this, 'images/ely_nevada/nevada_rt.jpg');
+        this.dayTimeUp = new CGFtexture(this, 'images/ely_nevada/nevada_up.jpg');
+    }
+
+    generateTrees(num){
+        for (let i = 0; i < num; i++){
+            this.trees.push(new MyLSPlant(this));
+            this.trees[i].generate(
+                this.axiom,
+                {
+                    "F" :[this.rule1],
+                    "X" :[
+                        this.rule2,
+                        this.rule3,
+                        this.rule4,
+                        this.rule5,
+                        this.rule6,
+                        this.rule7,
+                        this.rule8,
+                        this.rule9,
+                        this.rule10
+                    
+                    ]
+
+                },
+                this.angle,
+                this.iterations,
+                this.scaleFactor
+            );
+            }
+    }
+
     update(t){
     }
 
@@ -95,8 +188,20 @@ class MyScene extends CGFscene {
 
         this.bird.display();
 
+        this.displayTrees();
 
         // ---- END Primitive drawing section
+    }
+
+    displayTrees(){ // TODO "ramdomize" position to display and improve tree display
+        var x = 4;
+        for (let i = 0; i < 6; i++) {
+            this.pushMatrix();
+            this.translate(x, 0, 0);
+            this.trees[i].display();
+            this.popMatrix();
+            x += 2;
+        }
     }
 
 }
