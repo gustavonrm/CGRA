@@ -39,7 +39,7 @@ class MyScene extends CGFscene {
         this.rule7 = "F[/X]\X";
         this.rule8 = "F[^X][X]F[&X]^X";
         this.rule9 = "F[^X]&X";
-        this.rule10 = " F[&X]^X";
+        this.rule10 = "F[&X]^X";
 
 
         //Initialize scene objects
@@ -49,48 +49,15 @@ class MyScene extends CGFscene {
         this.bird = new MyBird(this);
         this.house = new MyHouse(this, this.terrainTexture);  
         this.trees = [];  
-        /*this.trees.push(new MyLSPlant(this));
-        this.trees.push(new MyLSPlant(this));
-        this.trees.push(new MyLSPlant(this));
-        this.trees.push(new MyLSPlant(this));
-        this.trees.push(new MyLSPlant(this));
-        this.trees.push(new MyLSPlant(this));*/
+        
 
-        this.angle = 35.0;
+        this.angle = 30.0;
         this.iterations = 4;
         this.scaleFactor = 0.5;
         //this.lSystem = new MyLSystem(this);
         
 
-        this.doGenerate = function (num, array) {
-            for (let i = 0; i < 6; i++){
-            this.trees[i].generate(
-                this.axiom,
-                {
-                    "F" :[this.rule1],
-                    "X" :[
-                        this.rule2,
-                        this.rule3,
-                        this.rule4,
-                        this.rule5,
-                        this.rule6,
-                        this.rule7,
-                        this.rule8,
-                        this.rule9,
-                        this.rule10
-                    
-                    ]
-
-                },
-                this.angle,
-                this.iterations,
-                this.scaleFactor
-            );
-            }
-        }
-
         // do initial generation
-        //this.doGenerate();
         this.generateTrees(6);
 
         //Objects connected to MyInterface
@@ -194,13 +161,13 @@ class MyScene extends CGFscene {
     }
 
     displayTrees(){ // TODO "ramdomize" position to display and improve tree display
-        var x = 4;
-        for (let i = 0; i < 6; i++) {
+        var x = 3;
+        for (let i = 0; i < this.trees.length; i++) {
             this.pushMatrix();
             this.translate(x, 0, 0);
             this.trees[i].display();
             this.popMatrix();
-            x += 2;
+            x += 0.5;
         }
     }
 
