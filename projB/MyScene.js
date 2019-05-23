@@ -24,16 +24,7 @@ class MyScene extends CGFscene {
         // GUI
         this.speedFactor = 1.0;
         this.scaleFactor = 1.0;
-
-
-        //Textures
-        //DAY TIME
-        this.dayTimeBk = new CGFtexture(this, 'images/ely_nevada/nevada_bk.jpg');
-        this.dayTimeDn = new CGFtexture(this, 'images/ely_nevada/nevada_dn.jpg');
-        this.dayTimeFt = new CGFtexture(this, 'images/ely_nevada/nevada_ft.jpg');
-        this.dayTimeLf = new CGFtexture(this, 'images/ely_nevada/nevada_lf.jpg');
-        this.dayTimeRt = new CGFtexture(this, 'images/ely_nevada/nevada_rt.jpg');
-        this.dayTimeUp = new CGFtexture(this, 'images/ely_nevada/nevada_up.jpg');
+        
 
         //Initialize scene objects
         this.axis = new CGFaxis(this);
@@ -41,6 +32,9 @@ class MyScene extends CGFscene {
         this.plane = new Plane(this, 32);
         this.house = new MyHouse(this, this.terrainTexture);
 
+        this.initMaterials();
+        this.initTextures();
+        this.initShaders();
 
         //Objects connected to MyInterface
     }
@@ -52,6 +46,42 @@ class MyScene extends CGFscene {
     }
     initCameras() {
         this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(45, 45, 45), vec3.fromValues(0, 0, 0));
+    }
+    initMaterials(){
+        this.material = new CGFappearance(this);
+		this.material.setAmbient(0.3, 0.3, 0.3, 1);
+		this.material.setDiffuse(0.7, 0.7, 0.7, 1);
+		this.material.setSpecular(0.0, 0.0, 0.0, 1);
+		this.material.setShininess(120);
+    }
+    initTextures(){
+        this.dayTimeBk = new CGFtexture(this, 'images/ely_nevada/nevada_bk.jpg');
+        this.dayTimeDn = new CGFtexture(this, 'images/ely_nevada/nevada_dn.jpg');
+        this.dayTimeFt = new CGFtexture(this, 'images/ely_nevada/nevada_ft.jpg');
+        this.dayTimeLf = new CGFtexture(this, 'images/ely_nevada/nevada_lf.jpg');
+        this.dayTimeRt = new CGFtexture(this, 'images/ely_nevada/nevada_rt.jpg');
+        this.dayTimeUp = new CGFtexture(this, 'images/ely_nevada/nevada_up.jpg');
+
+        this.heightMap = new CGFtexture(this, "images/heightmap.jpg");
+        this.terrain = new CGFtexture(this, "images/terrain.jpg");
+        this.altimetry = new CGFtexture(this, "images/altimetry.jpg");
+
+        this.material.setTexture(this.terrain);
+		//this.material.setTextureWrap('REPEAT', 'REPEAT');        
+    }
+    initShaders(){
+        this.shader = new CGFshader(this.gl, "shaders/shader.vert", "shaders/shader.frag");
+        this.shader.setUniformsValues({ uSampler2: 1 });
+
+        /*// shader code panels references
+		this.shadersDiv = document.getElementById("shaders");
+		this.vShaderDiv = document.getElementById("vshader");
+		this.fShaderDiv = document.getElementById("fshader");
+
+		// force initial setup of shader code panels
+
+		this.onShaderCodeVizChanged(this.showShaderCode);
+		this.onSelectedShaderChanged(this.selectedExampleShader);*/
     }
     setDefaultAppearance() {
         this.setAmbient(0.2, 0.4, 0.8, 1.0);
@@ -78,20 +108,33 @@ class MyScene extends CGFscene {
         this.axis.display();
 
         //Apply default appearance
-        this.setDefaultAppearance();
+        //this.setDefaultAppearance();
+        this.material.apply();
+
+        // activate selected shader
+		this.setActiveShader(this.shader);
+		this.pushMatrix();
+
+		// bind additional texture to texture unit 1
+		this.heightMap.bind(1);
 
         // ---- BEGIN Primitive drawing section
-        this.pushMatrix();
+        /*this.pushMatrix();
         this.translate(0,49.9,0); //cant be 50 bc if colides with plane cant write
         this.scale(400,100,400);
         this.cubeMap.display();
-        this.popMatrix();
+        this.popMatrix();*/
 
-        /*this.pushMatrix();
+        //this.setActiveShader(this.shader);
+
+        this.pushMatrix();
+        this.translate(0,-3,0);
         this.rotate(-0.5*Math.PI, 1, 0, 0);
         this.scale(60, 60, 1);
         this.plane.display();
-        this.popMatrix();*/
+        this.popMatrix();
+
+        this.setActiveShader(this.defaultShader);
 
         this.pushMatrix();
         this.scale(1/3, 1/3, 1/3);

@@ -26,8 +26,10 @@ class MyInterface extends CGFinterface {
 
     initKeys() {
         // create reference from the scene to the GUI
-        this.scene.gui = this;// disable the processKeyboard function
-        this.processKeyboard = function () { };// create a named array to store which keys are being pressed
+        this.scene.gui = this;
+        // disable the processKeyboard function
+        this.processKeyboard = function () { };
+        // create a named array to store which keys are being pressed
         this.activeKeys = {};
     } 
 

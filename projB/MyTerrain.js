@@ -4,7 +4,7 @@
 * @param scene - Reference to MyScene object
 */
 
-class MyCubeMap extends CGFobject {
+class MyTerrain extends CGFobject {
 	constructor(scene,up,lf,ft,rt,bk,dn) {
         super(scene);
 
