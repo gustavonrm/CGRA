@@ -38,6 +38,10 @@ class MyInterface extends CGFinterface {
         var obj = this;
 
         this.initKeys();
+
+        this.gui.add(this.scene,'speedFactor', 0.1, 3).name('speedFactor');
+        this.gui.add(this.scene,'scaleFactor', 0.5, 3).name('scaleFactor');
+
         return true;
     }
         

@@ -20,8 +20,16 @@ class MyScene extends CGFscene {
         this.gl.depthFunc(this.gl.LEQUAL);
         this.enableTextures(true);
         this.setUpdatePeriod(50);
-        this.time = 0; 
+        
+        //mi vars 
+        this.ticks = 0; 
         this.oldTime = 0;
+        this.birdOff
+
+        //GUI vars
+        this.speedFactor = 0.1;
+        this.scaleFactor = 0.5;
+
         //Textures
         //DAY TIME
         this.dayTimeBk = new CGFtexture(this, 'images/ely_nevada/nevada_bk.jpg');
@@ -62,33 +70,31 @@ class MyScene extends CGFscene {
         if (this.gui.isKeyPressed("KeyW")) {
         text+=" W ";
         keysPressed=true;
-        this.bird.keyMove("W");
+        this.bird.accelerate(this.speedFactor);  
         }
         if (this.gui.isKeyPressed("KeyS")) {
         text+=" S ";
         keysPressed=true;
-        this.bird.keyMove("S");
+        this.bird.accelerate(-this.speedFactor);  
         }
         if (this.gui.isKeyPressed("KeyA")) {
         text+=" A ";
         keysPressed=true;
-        this.bird.keyMove("A");
+        this.bird.turn('+');
         }
         if (this.gui.isKeyPressed("KeyD")) {
         text+=" D ";
         keysPressed=true;
-        this.bird.keyMove("D");
+        this.bird.turn('-');
         }
         if (keysPressed)
         console.log(text);
         }
         
     update(t){
-        this.time++; 
-        /* if(this.time= 20){
-            this.oldtime = 0; 
-        }*/
-        this.bird.update(Math.sin(this.time*1/2));
+        this.ticks++; 
+        //20 ticks = 1 sec
+        this.bird.update(Math.sin(this.ticks/5));
         this.checkKeys();
     }
 
@@ -130,10 +136,15 @@ class MyScene extends CGFscene {
         this.house.display();
         this.popMatrix();
         */
+        this.pushMatrix(); 
+        //this.translate(0,3,0);
+        this.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
         this.bird.display();
+        this.popMatrix(); 
 
 
         // ---- END Primitive drawing section
     }
 
 }
+//TODO COLOCAR O TAMANHO ORIGEM DA AVE A REPEITAR A BOUNDARIES DO ENUNCIADO 
