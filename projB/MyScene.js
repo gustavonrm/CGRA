@@ -48,18 +48,22 @@ class MyScene extends CGFscene {
         this.plane = new Plane(this, 32);
         this.bird = new MyBird(this);
         this.house = new MyHouse(this, this.terrainTexture);  
-        this.trees = [];  
+        this.trees = [];
+        this.lightning = new MyLightning(this);
         
 
         this.angle = 30.0;
         this.iterations = 4;
         this.scaleFactor = 0.5;
         //this.lSystem = new MyLSystem(this);
-        
+        this.lightningAngle = 25.0;
+        this.lightningIterations = 3.0;
 
         // do initial generation
         this.generateTrees(6);
+        this.generateLightning();
 
+        this.lightning.startAnimation();
         //Objects connected to MyInterface
     }
     initLights() {
@@ -115,7 +119,20 @@ class MyScene extends CGFscene {
             }
     }
 
+    generateLightning(){
+        this.lightning.generate(
+            this.axiom,
+            {"F" :[this.ruleF],
+             "X" :[this.ruleX]
+            },
+            this.lightningAngle,
+            this.lightningIterations,
+            this.scaleFactor
+        );
+    }
+
     update(t){
+        this.lightning.update(t);
     }
 
     display() {
@@ -156,6 +173,13 @@ class MyScene extends CGFscene {
         this.bird.display();
 
         this.displayTrees();
+
+        this.pushMatrix();
+        this.translate(0, 8, 0);
+        this.rotate(-Math.PI/2 * 1.5, 0, 1, 0);
+        this.rotate(Math.PI, 1, 0, 0);
+        this.lightning.display();
+        this.popMatrix();
 
         // ---- END Primitive drawing section
     }

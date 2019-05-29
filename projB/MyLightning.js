@@ -7,29 +7,34 @@ class MyLightning extends MyLSystem {
 	constructor(scene) {
         super(scene);
 
+        this.lightningMaterial = new CGFappearance(this.scene);
+		this.lightningMaterial.setAmbient(1,1,1,1);
+        this.lightningMaterial.setDiffuse(0.9, 0.9, 0.01, 1);
+		this.lightningMaterial.setShininess(10.0);
+
         this.init();
     }
     // cria o lexico da gramática
     initGrammar(){
         this.grammar = {
-            "F": new MyRectangle(this.scene),
-            "X": new MyRectangle(this.scene)
+            "F": new MyRectangle(this.scene,0.1, 1.0),
+            "X": new MyRectangle(this.scene,0.1, 1.0)
         };
     }
 
     startAnimation(t){
+        //this.iterate();
         this.startTime = t;
-        this.depth = 0;
+        this.depth = this.axiom.length;
     }
     update(t){
         var diff = t - this.startTime;
-        if (diff < 0.25)
+        if (diff >= 1.2)
             this.depth = 0;
-        else if (diff < 0.5)
-            this.depth = 1;
-        else if (diff < 0.75)
-            this.depth = 2;
-        else this.depth = 3;
+        else if (diff >= 1.0)
+            this.depth = this.axiom.length;
+        else this.depth = Number(diff * this.axiom.length);
+        this.depth = this.axiom.length;
     }
 
     display(){
@@ -37,9 +42,10 @@ class MyLightning extends MyLSystem {
         this.scene.scale(this.scale, this.scale, this.scale);
 
         var i;
+        var pushpopController = 0;
 
         // percorre a cadeia de caracteres
-        for (i=0; i<this.axiom.length; ++i){
+        for (i=0; i<this.depth; ++i){
 
             // verifica se sao caracteres especiais
             switch(this.axiom[i]){
@@ -76,11 +82,13 @@ class MyLightning extends MyLSystem {
                     
                 case "]":
                     // pop
+                    pushpopController--;
                     this.scene.popMatrix();
                     break;
 
                 case "[":
                     // push
+                    pushpopController++;
                     this.scene.pushMatrix();
                     break;
 
@@ -95,12 +103,17 @@ class MyLightning extends MyLSystem {
 
                     if ( primitive )
                     {
+                        this.lightningMaterial.apply();
                         primitive.display();
                         this.scene.translate(0, 1, 0);
                     }
                     break;
             }
         }
-        this.scene.popMatrix();
+
+        for (i = 0; i <= pushpopController; i++)
+            this.scene.popMatrix();
+        
+        
     }
 }
