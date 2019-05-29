@@ -25,7 +25,7 @@ class MyLightning extends MyLSystem {
     startAnimation(t){
         //this.iterate();
         this.startTime = t;
-        this.depth = this.axiom.length;
+        this.depth = /*this.axiom.length*/0;
     }
     update(t){
         var diff = t - this.startTime;
@@ -34,7 +34,7 @@ class MyLightning extends MyLSystem {
         else if (diff >= 1.0)
             this.depth = this.axiom.length;
         else this.depth = Number(diff * this.axiom.length);
-        this.depth = this.axiom.length;
+        //this.depth = this.axiom.length;
     }
 
     display(){
