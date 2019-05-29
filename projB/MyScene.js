@@ -20,7 +20,8 @@ class MyScene extends CGFscene {
         this.gl.depthFunc(this.gl.LEQUAL);
         this.enableTextures(true);
         this.setUpdatePeriod(50);
-
+        this.time = 0; 
+        this.oldTime = 0;
         //Textures
         //DAY TIME
         this.dayTimeBk = new CGFtexture(this, 'images/ely_nevada/nevada_bk.jpg');
@@ -36,7 +37,6 @@ class MyScene extends CGFscene {
         this.plane = new Plane(this, 32);
         this.bird = new MyBird(this);
         this.house = new MyHouse(this, this.terrainTexture);
-
 
         //Objects connected to MyInterface
     }
@@ -55,7 +55,41 @@ class MyScene extends CGFscene {
         this.setSpecular(0.2, 0.4, 0.8, 1.0);
         this.setShininess(10.0);
     }
+    checkKeys() {
+        var text="Keys pressed: ";
+        var keysPressed=false;
+        // Check for key codes e.g. in https://keycode.info/
+        if (this.gui.isKeyPressed("KeyW")) {
+        text+=" W ";
+        keysPressed=true;
+        this.bird.keyMove("W");
+        }
+        if (this.gui.isKeyPressed("KeyS")) {
+        text+=" S ";
+        keysPressed=true;
+        this.bird.keyMove("S");
+        }
+        if (this.gui.isKeyPressed("KeyA")) {
+        text+=" A ";
+        keysPressed=true;
+        this.bird.keyMove("A");
+        }
+        if (this.gui.isKeyPressed("KeyD")) {
+        text+=" D ";
+        keysPressed=true;
+        this.bird.keyMove("D");
+        }
+        if (keysPressed)
+        console.log(text);
+        }
+        
     update(t){
+        this.time++; 
+        /* if(this.time= 20){
+            this.oldtime = 0; 
+        }*/
+        this.bird.update(Math.sin(this.time*1/2));
+        this.checkKeys();
     }
 
     display() {
@@ -76,23 +110,26 @@ class MyScene extends CGFscene {
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
+        /*
         this.pushMatrix();
         this.translate(0,49.9,0); //cant be 50 bc if colides with plane cant write
         this.scale(400,100,400);
         this.cubeMap.display();
         this.popMatrix();
-
-        /*this.pushMatrix();
+        */
+        /*
+        this.pushMatrix();
         this.rotate(-0.5*Math.PI, 1, 0, 0);
         this.scale(60, 60, 1);
         this.plane.display();
         this.popMatrix();*/
 
+        /*
         this.pushMatrix();
         this.scale(1/3, 1/3, 1/3);
         this.house.display();
         this.popMatrix();
-
+        */
         this.bird.display();
 
 

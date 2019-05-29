@@ -12,7 +12,7 @@ uniform sampler2D uSampler2;
 
 uniform float normScale;
 
-uniform float timeFactor;
+	uniform float timeFactor;
 
 void main() {
 	vec3 offset=vec3(1.0,1.0,1.0);
