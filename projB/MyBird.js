@@ -13,6 +13,7 @@ class MyBird extends CGFobject {
         this.offsetZ=0; 
         this.speed = 0.1;
         this.offsetWing1 =0; 
+        this.offsetWing2 =0; 
 
         this.turnFactor = 0;
 
@@ -72,7 +73,8 @@ class MyBird extends CGFobject {
     }
     update(time){
       this.offsetY=time;
-      this.offsetWing1 = 2*Math.PI+time; 
+      this.offsetWing1 = 2*Math.PI+time/2;  // todo wing clap speed
+      this.offsetWing2 = 2*Math.PI+time/1.5; 
       this.offsetX += Math.sin(this.turnFactor) * this.speed;
       this.offsetZ += Math.cos(this.turnFactor) * this.speed;
     }
@@ -98,6 +100,7 @@ class MyBird extends CGFobject {
                     this.offsetZ=0; 
                     this.speed = 0;
                     this.offsetWing1 =0; 
+                    this.offsetWing2 =0; 
                     this.turnFactor = 0;
     }
 	display() {
@@ -106,10 +109,13 @@ class MyBird extends CGFobject {
         this.scene.rotate(this.turnFactor,0, 1, 0); //turn
       
         //left wing 
+        
+        this.scene.pushMatrix();
+        this.scene.rotate(this.offsetWing1,0,0,1);
+
         this.scene.pushMatrix();
         this.scene.translate(0.5,0,0);
         this.scene.scale(1.7,1,1.3);
-        this.scene.rotate(this.offsetWing1,0,0,1);
         this.scene.rotate(-Math.PI/2,1,0,0);
         this.scene.translate(0.5,0,0);
         this.featherMaterial.apply();
@@ -117,19 +123,26 @@ class MyBird extends CGFobject {
         this.scene.popMatrix(); 
       
         this.scene.pushMatrix();
-        this.scene.translate(3.0,0,0);
+        this.scene.translate(2.2,0,-0.65);
         this.scene.scale(1,1,0.65);
+        this.scene.rotate(this.offsetWing2,0,0,1);
+        //this.scene.rotate(-Math.PI/8,0,0,1);
+        this.scene.translate(1.0,0.0,1.0);
         this.scene.rotate(-Math.PI/2,0,1,0);
         this.scene.rotate(-Math.PI/2,1,0,0);
         this.featherMaterial.apply();
         this.wing2.display();
         this.scene.popMatrix(); 
-        
-        //right wing
+
+        this.scene.popMatrix(); 
+         
+         //right wing
+        this.scene.pushMatrix();
+        this.scene.rotate(-this.offsetWing1,0,0,1);
+     
         this.scene.pushMatrix();
         this.scene.translate(-0.5,0,0);
         this.scene.scale(1.7,1,1.3);
-        this.scene.rotate(-this.offsetWing1,0,0,1);
         this.scene.rotate(-Math.PI/2,1,0,0);
         this.scene.translate(-0.5,0,0);
         this.featherMaterial.apply();
@@ -137,14 +150,19 @@ class MyBird extends CGFobject {
         this.scene.popMatrix(); 
 
         this.scene.pushMatrix();
-        this.scene.translate(-3.0,0,0);
+        this.scene.translate(-2.2,0,-0.65);
         this.scene.scale(1,1,0.65);
+        this.scene.rotate(-this.offsetWing2,0,0,1);
+        //this.scene.rotate(Math.PI/8,0,0,1);
+        this.scene.translate(-1.0,-0.0,1.0);
         this.scene.rotate(Math.PI,0,1,0);
         this.scene.rotate(-Math.PI/2,1,0,0);
         this.featherMaterial.apply();
         this.wing2.display();
         this.scene.popMatrix(); 
 
+        this.scene.popMatrix(); 
+       
         //beak
         this.scene.pushMatrix();
         this.scene.translate(0,0.7,1.7);
@@ -216,6 +234,7 @@ class MyBird extends CGFobject {
         this.featherMaterial.apply();
         this.tail.display();
         this.scene.popMatrix();
+
        
         this.scene.popMatrix();
     }
