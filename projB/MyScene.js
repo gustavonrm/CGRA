@@ -39,7 +39,7 @@ class MyScene extends CGFscene {
         this.rule7 = "F[/X]\X";
         this.rule8 = "F[^X][X]F[&X]^X";
         this.rule9 = "F[^X]&X";
-        this.rule10 = " F[&X]^X";
+        this.rule10 = "F[&X]^X";
 
 
         //Initialize scene objects
