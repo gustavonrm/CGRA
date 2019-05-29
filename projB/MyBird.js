@@ -3,18 +3,29 @@
  * @constructor
  * @param scene - Reference to MyScene object
  */
+
 class MyBird extends CGFobject {
 	constructor(scene) {
         super(scene);
         //objects
+        this.offsetY=0;
+        this.offsetX=0;
+        this.offsetZ=0; 
+        this.speed = 0;
+        this.offsetWing1 =0; 
+
+        this.turnFactor = 0;
+
         this.beak = new MyCone(this.scene, 100, 1);
         this.body= new MyUnitCube(this.scene);
         this.head = new MyUnitCube(this.scene);
-        this.eye = new MyUnitCube(this.scene,5,1);
+        this.wing1 = new MyQuad(this.scene);
+        this.wing2 = new MyTriangle(this.scene);
         this.tail = new MyTriangle(this.scene);
 
         //test sphere
-        this.headS = new MySemiSphere(this.scene,100,100);
+        this.Sphere = new MySemiSphere(this.scene,100,100);
+        this.Sphere = new MySemiSphere(this.scene,100,100);
 
         //textures
 
@@ -36,7 +47,6 @@ class MyBird extends CGFobject {
         this.eyeMaterial.setDiffuse(0, 0, 0, 1);
         this.eyeMaterial.setSpecular(1, 1, 1, 1);
         this.eyeMaterial.setShininess(10.0);
-
 
         this.initBuffers();
 
@@ -60,76 +70,154 @@ class MyBird extends CGFobject {
     enableDisableViz(){
         this.beak.enableDisableViz(); 
     }
+    update(time){
+      this.offsetY=time;
+      this.offsetWing1 = 2*Math.PI+time; 
+      this.offsetX += this.speed;
+      this.offsetZ += this.speed;
+    }
+    turn(v){    
+        switch(v){
+            case '-':
+                this.turnFactor -= -Math.PI/32;
+                break; 
+            case '+':
+                this.turnFactor -= Math.PI/32;
+                break; 
+        }
+    }
+    accelerate(v){
+        this.speed += v;
+        if( this.speed <= 0 ){
+            this.speed = 0.1; 
+        }
+    }
+    reset(){
+        this.offsetY=0;
+                    this.offsetX=0;
+                    this.offsetZ=0; 
+                    this.speed = 0;
+                    this.offsetWing1 =0; 
+                    this.turnFactor = 0;
+    }
 	display() {
+        this.scene.pushMatrix(); 
+        this.scene.translate(this.offsetX,this.offsetY,this.offsetZ);
+        this.scene.rotate(this.turnFactor,0, 1, 0); //turn
+      
+        //left wing 
+        this.scene.pushMatrix();
+        this.scene.translate(0.5,0,0);
+        this.scene.scale(1.7,1,1.3);
+        this.scene.rotate(this.offsetWing1,0,0,1);
+        this.scene.rotate(-Math.PI/2,1,0,0);
+        this.scene.translate(0.5,0,0);
+        this.featherMaterial.apply();
+        this.wing1.display();
+        this.scene.popMatrix(); 
+      
+        this.scene.pushMatrix();
+        this.scene.translate(3.0,0,0);
+        this.scene.scale(1,1,0.65);
+        this.scene.rotate(-Math.PI/2,0,1,0);
+        this.scene.rotate(-Math.PI/2,1,0,0);
+        this.featherMaterial.apply();
+        this.wing2.display();
+        this.scene.popMatrix(); 
+        
+        //right wing
+        this.scene.pushMatrix();
+        this.scene.translate(-0.5,0,0);
+        this.scene.scale(1.7,1,1.3);
+        this.scene.rotate(-this.offsetWing1,0,0,1);
+        this.scene.rotate(-Math.PI/2,1,0,0);
+        this.scene.translate(-0.5,0,0);
+        this.featherMaterial.apply();
+        this.wing1.display();
+        this.scene.popMatrix(); 
+
+        this.scene.pushMatrix();
+        this.scene.translate(-3.0,0,0);
+        this.scene.scale(1,1,0.65);
+        this.scene.rotate(Math.PI,0,1,0);
+        this.scene.rotate(-Math.PI/2,1,0,0);
+        this.featherMaterial.apply();
+        this.wing2.display();
+        this.scene.popMatrix(); 
 
         //beak
         this.scene.pushMatrix();
-        this.scene.translate(0,4,1.2);
+        this.scene.translate(0,0.7,1.7);
         this.scene.rotate(Math.PI/2,1, 0, 0); 
-        this.scene.scale(0.2,1,0.2);
+        this.scene.scale(0.25,1,0.25);
         this.beakMaterial.apply();
         this.beak.display();
         this.scene.popMatrix();  
 
-        //body
+        //body with sphere with sphere 
+      
         this.scene.pushMatrix();
-        this.scene.translate(0,3,0,1);
+        this.scene.translate(0,0,0);
+        this.scene.scale(0.7,0.6,1.2);
+        this.scene.rotate(Math.PI/2,1, 0, 0);
         this.featherMaterial.apply();
-        this.body.display();
+        this.Sphere.display();
         this.scene.popMatrix();
-        
-        //head/
-        /* 
+
         this.scene.pushMatrix();
-        this.scene.translate(0,4,0.7,1);
+        this.scene.translate(0,0,0);
+        this.scene.scale(0.7,0.6,1.2);
+        this.scene.rotate(-Math.PI/2,1, 0, 0);
         this.featherMaterial.apply();
-        this.head.display();
+        this.Sphere.display();
         this.scene.popMatrix();
-        */
+       
        //head with sphere 
        this.scene.pushMatrix();
-       this.scene.translate(0,4,0.7,1);
+       this.scene.translate(0,0.7,1.1);
        this.scene.scale(0.7,0.7,0.7);
        this.scene.rotate(Math.PI/2,1, 0, 0);
        this.featherMaterial.apply();
-       this.headS.display();
+       this.Sphere.display();
        this.scene.popMatrix();
 
        this.scene.pushMatrix();
-       this.scene.translate(0,4,0.7,1);
+       this.scene.translate(0,0.7,1.1);
        this.scene.scale(0.7,0.7,0.7);
        this.scene.rotate(-Math.PI/2,1, 0, 0);
        this.featherMaterial.apply();
-       this.headS.display();
+       this.Sphere.display();
        this.scene.popMatrix();
         
         //left eye
         this.scene.pushMatrix();
-        this.scene.translate(0.7,4,0.9);
+        this.scene.translate(0.4,1,1.5);
         this.scene.scale(0.2,0.2,0.2);
+        this.scene.rotate(Math.PI/3,0, 1, 0);
         this.eyeMaterial.apply();
-        this.eye.display();
+        this.Sphere.display();
         this.scene.popMatrix();
         
         //right eye  
         this.scene.pushMatrix();
-        this.scene.translate(-0.7,4,0.9);
+        this.scene.translate(-0.4,1,1.5);
         this.scene.scale(0.2,0.2,0.2);
+        this.scene.rotate(-Math.PI/3,0, 1, 0);
         this.eyeMaterial.apply();
-        this.eye.display();
+        this.Sphere.display();
         this.scene.popMatrix();
-
+        
         //tail 
         this.scene.pushMatrix();
-        this.scene.translate(0,3,-1.3);
-        this.scene.rotate(-5*Math.PI/4,0, 1, 0);
-        this.scene.rotate(Math.PI/2,1, 0, 0); 
-        this.scene.scale(0.5,0.5,0.5);
+        this.scene.translate(0,0,-2);
+        this.scene.scale(1,1,1);
+        this.scene.rotate(Math.PI/4,0, 1, 0);
+        this.scene.rotate(-Math.PI/2,1, 0, 0);
         this.featherMaterial.apply();
         this.tail.display();
         this.scene.popMatrix();
-
        
+        this.scene.popMatrix();
     }
     updateBuffers() {
         

@@ -20,6 +20,15 @@ class MyScene extends CGFscene {
         this.gl.depthFunc(this.gl.LEQUAL);
         this.enableTextures(true);
         this.setUpdatePeriod(50);
+        
+        //mi vars 
+        this.ticks = 0; 
+        this.oldTime = 0;
+        this.birdOff
+
+        //GUI vars
+        this.speedFactor = 0.1;
+        this.scaleFactor = 0.5;
 
         //Textures
         this.loadTextures()
@@ -92,6 +101,7 @@ class MyScene extends CGFscene {
         // do initial generation
         //this.doGenerate();
         this.generateTrees(6);
+        this.house = new MyHouse(this, this.terrainTexture);
 
         //Objects connected to MyInterface
     }
@@ -148,7 +158,44 @@ class MyScene extends CGFscene {
             }
     }
 
+    checkKeys() {
+        var text="Keys pressed: ";
+        var keysPressed=false;
+        // Check for key codes e.g. in https://keycode.info/
+        if (this.gui.isKeyPressed("KeyW")) {
+        text+=" W ";
+        keysPressed=true;
+        this.bird.accelerate(this.speedFactor);  
+        }
+        if (this.gui.isKeyPressed("KeyS")) {
+        text+=" S ";
+        keysPressed=true;
+        this.bird.accelerate(-this.speedFactor);  
+        }
+        if (this.gui.isKeyPressed("KeyA")) {
+        text+=" A ";
+        keysPressed=true;
+        this.bird.turn('+');
+        }
+        if (this.gui.isKeyPressed("KeyD")) {
+        text+=" D ";
+        keysPressed=true;
+        this.bird.turn('-');
+        }
+        if (this.gui.isKeyPressed("KeyR")) {
+            text+=" R ";
+            keysPressed=true;
+            this.bird.reset();
+            }
+        if (keysPressed)
+        console.log(text);
+        }
+        
     update(t){
+        this.ticks++; 
+        //20 ticks = 1 sec
+        this.bird.update(Math.sin(this.ticks/5));
+        this.checkKeys();
     }
 
     display() {
@@ -169,24 +216,31 @@ class MyScene extends CGFscene {
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
+        /*
         this.pushMatrix();
         this.translate(0,49.9,0); //cant be 50 bc if colides with plane cant write
         this.scale(400,100,400);
         this.cubeMap.display();
         this.popMatrix();
-
-        /*this.pushMatrix();
+        */
+        /*
+        this.pushMatrix();
         this.rotate(-0.5*Math.PI, 1, 0, 0);
         this.scale(60, 60, 1);
         this.plane.display();
         this.popMatrix();*/
 
+        /*
         this.pushMatrix();
         this.scale(1/3, 1/3, 1/3);
         this.house.display();
         this.popMatrix();
-
+        */
+        this.pushMatrix(); 
+        //this.translate(0,3,0);
+        this.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
         this.bird.display();
+        this.popMatrix(); 
 
         this.displayTrees();
 
