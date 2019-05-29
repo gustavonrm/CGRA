@@ -21,7 +21,7 @@ void main() {
 	/*if (texture2D(uSampler2, vec2(0.0,0.1)+vTextureCoord).b > 0.5)
 		//offset=aVertexNormal*normScale*0.1*sin(timeFactor);
 	//offset=offset*2.0*normScale*0.1*sin(timeFactor); //animation to move on XX*/
-	float height = (texture2D(uSampler2, vec2(0.0,0.1)+vTextureCoord).r + texture2D(uSampler2, vec2(0.0,0.1)+vTextureCoord).g + texture2D(uSampler2, vec2(0.0,0.1)+vTextureCoord).b);
+	float height = (texture2D(uSampler2, vec2(0.0,0.0)+vTextureCoord).r + texture2D(uSampler2, vec2(0.0,0.0)+vTextureCoord).g + texture2D(uSampler2, vec2(0.0,0.0)+vTextureCoord).b);
 	height *= 2.0;
 	offset=aVertexNormal*normScale + vec3(0,0,height);
 
