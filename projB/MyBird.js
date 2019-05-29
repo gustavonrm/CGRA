@@ -71,7 +71,8 @@ class MyBird extends CGFobject {
         this.beak.enableDisableViz(); 
     }
     update(time){
-      this.y=time;
+      this.offsetY=time;
+      this.offsetWing1 = 2*Math.PI+time; 
       this.offsetX += this.speed;
       this.offsetZ += this.speed;
     }
@@ -91,25 +92,26 @@ class MyBird extends CGFobject {
             this.speed = 0.1; 
         }
     }
-    keyMove(key){
-        switch (key){
-            case "W":
-                this.accelerate();
-            break;
-            case "S":
-                this.accelerate();  
-            break;
-        }
+    reset(){
+        this.offsetY=0;
+                    this.offsetX=0;
+                    this.offsetZ=0; 
+                    this.speed = 0;
+                    this.offsetWing1 =0; 
+                    this.turnFactor = 0;
     }
 	display() {
         this.scene.pushMatrix(); 
         this.scene.translate(this.offsetX,this.offsetY,this.offsetZ);
         this.scene.rotate(this.turnFactor,0, 1, 0); //turn
+      
         //left wing 
         this.scene.pushMatrix();
-        this.scene.translate(1.2,0,0);
+        this.scene.translate(0.5,0,0);
         this.scene.scale(1.7,1,1.3);
+        this.scene.rotate(this.offsetWing1,0,0,1);
         this.scene.rotate(-Math.PI/2,1,0,0);
+        this.scene.translate(0.5,0,0);
         this.featherMaterial.apply();
         this.wing1.display();
         this.scene.popMatrix(); 
@@ -125,9 +127,11 @@ class MyBird extends CGFobject {
         
         //right wing
         this.scene.pushMatrix();
-        this.scene.translate(-1.2,0,0);
+        this.scene.translate(-0.5,0,0);
         this.scene.scale(1.7,1,1.3);
+        this.scene.rotate(-this.offsetWing1,0,0,1);
         this.scene.rotate(-Math.PI/2,1,0,0);
+        this.scene.translate(-0.5,0,0);
         this.featherMaterial.apply();
         this.wing1.display();
         this.scene.popMatrix(); 
@@ -167,7 +171,7 @@ class MyBird extends CGFobject {
         this.featherMaterial.apply();
         this.Sphere.display();
         this.scene.popMatrix();
-        
+       
        //head with sphere 
        this.scene.pushMatrix();
        this.scene.translate(0,0.7,1.1);
