@@ -8,10 +8,10 @@ class MyNest extends CGFobject {
     constructor(scene) {
         super(scene);
         this.stick = new MyCylinder(this.scene, 30, 1);
-        //this.initMaterial();
-        //this.initTextures();
-        this.initBuffers();
-        
+        this.nestmaterial = new CGFappearance(this.scene);
+        this.nestTexture = new CGFtexture(this.scene, "images/nestTexture.jpg");
+        this.initMaterial();
+        this.initBuffers();       
 
     }
     enableNormalViz() {
@@ -20,19 +20,14 @@ class MyNest extends CGFobject {
     enableDisableViz() {
         this.plane.enableDisableViz();
     }
-    /*initMaterial(){
-        this.nestmaterial = new CGFappearance(this.scene);
+    initMaterial() {
 		this.nestmaterial.setAmbient(0.3, 0.3, 0.3, 1);
 		this.nestmaterial.setDiffuse(0.75, 0.5, 0.25, 1);
 		this.nestmaterial.setSpecular(0.0, 0.0, 0.0, 1);
-		this.nestmaterial.setShininess(120);
-    }
-    initTextures(){
-        this.nestTexture = new CGFtexture(this.scene, "images/nestTexture.jpg");
-
+        this.nestmaterial.setShininess(120);
         this.nestmaterial.setTexture(this.nestTexture);
-    }*/
-
+    }
+    
     display() {
         var ang = 0;
         var i;
@@ -42,7 +37,7 @@ class MyNest extends CGFobject {
             this.scene.rotate(-Math.PI / 2, 0, 0, 1);
             this.scene.translate(0, -0.5, 0);
             this.scene.scale(0.02, 1, 0.02);
-            //this.nestmaterial.apply();
+            this.nestmaterial.apply();
             this.stick.display();
             this.scene.popMatrix();
 
@@ -59,7 +54,7 @@ class MyNest extends CGFobject {
                 this.scene.rotate(-Math.PI / 2, 0, 0, 1);
                 this.scene.translate(0, -0.25, 0);
                 this.scene.scale(0.02, 0.5, 0.02);
-                //this.nestmaterial.apply();
+                this.nestmaterial.apply();
                 this.stick.display();
                 this.scene.popMatrix();
                 ang += Math.PI / 8;
@@ -67,7 +62,7 @@ class MyNest extends CGFobject {
             levelheight += 0.05;
             ang += Math.PI / 21;
         }
-
+        this.scene.setDefaultAppearance();
     }
     updateBuffers() {
 

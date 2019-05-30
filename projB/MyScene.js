@@ -67,7 +67,7 @@ class MyScene extends CGFscene {
         this.house = new MyHouse(this, this.terrainTexture);  
         this.trees = [];
         this.lightning = new MyLightning(this);
-        this.nest = new MyNest(this, 100, 8);
+        this.nest = new MyNest(this);
         this.stick = new MyCylinder(this,50,1);
         
 
