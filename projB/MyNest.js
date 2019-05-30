@@ -10,7 +10,7 @@ class MyNest extends CGFobject {
 
         //test sphere
         this.Sphere = new MySemiSphere(this.scene,100,100);
-        this.irregularSphere= new MySemiSphere(this.scene,5,5);
+        this.irregularSphere= new MySemiSphere(this.scene,7,7);
 
         //textures
 
@@ -100,7 +100,7 @@ class MyNest extends CGFobject {
         this.scene.scale(3,2,3);
         this.scene.rotate(Math.PI/2,1,0,0);
         this.woodMaterial.apply();
-        this.Sphere.display();
+        this.irregularSphere.display();
         this.scene.popMatrix();
 
         
