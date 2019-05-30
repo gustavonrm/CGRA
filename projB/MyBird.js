@@ -23,6 +23,11 @@ class MyBird extends CGFobject {
         this.wing1 = new MyQuad(this.scene);
         this.wing2 = new MyTriangle(this.scene);
         this.tail = new MyTriangle(this.scene);
+        this.leg = new MyCylinder(this.scene,5,1);
+        this.crest = new MyTriangle(this.scene);
+
+        this.stick = new MyCylinder(this.scene,5,1);
+
 
         //test sphere
         this.Sphere = new MySemiSphere(this.scene,100,100);
@@ -48,6 +53,10 @@ class MyBird extends CGFobject {
         this.eyeMaterial.setDiffuse(0, 0, 0, 1);
         this.eyeMaterial.setSpecular(1, 1, 1, 1);
         this.eyeMaterial.setShininess(10.0);
+
+        //utils
+        var caught=false;
+
 
         this.initBuffers();
 
@@ -94,6 +103,10 @@ class MyBird extends CGFobject {
             this.speed = 0.1; 
         }
     }
+    dropDown(){
+        this.offsetY += -6.0;
+        this.caught = true; //to test
+    }
     reset(){
         this.offsetY=0;
         this.offsetX=0;
@@ -126,7 +139,7 @@ class MyBird extends CGFobject {
         this.scene.translate(2.2,0,-0.65);
         this.scene.scale(1,1,0.65);
         this.scene.rotate(this.offsetWing2,0,0,1);
-        //this.scene.rotate(-Math.PI/8,0,0,1);
+        this.scene.rotate(-Math.PI/8,0,0,1);
         this.scene.translate(1.0,0.0,1.0);
         this.scene.rotate(-Math.PI/2,0,1,0);
         this.scene.rotate(-Math.PI/2,1,0,0);
@@ -153,7 +166,7 @@ class MyBird extends CGFobject {
         this.scene.translate(-2.2,0,-0.65);
         this.scene.scale(1,1,0.65);
         this.scene.rotate(-this.offsetWing2,0,0,1);
-        //this.scene.rotate(Math.PI/8,0,0,1);
+        this.scene.rotate(Math.PI/8,0,0,1);
         this.scene.translate(-1.0,-0.0,1.0);
         this.scene.rotate(Math.PI,0,1,0);
         this.scene.rotate(-Math.PI/2,1,0,0);
@@ -167,7 +180,7 @@ class MyBird extends CGFobject {
         this.scene.pushMatrix();
         this.scene.translate(0,0.7,1.7);
         this.scene.rotate(Math.PI/2,1, 0, 0); 
-        this.scene.scale(0.25,0.5,0.25);
+        this.scene.scale(0.25,0.75,0.25);
         this.beakMaterial.apply();
         this.beak.display();
         this.scene.popMatrix();  
@@ -227,15 +240,53 @@ class MyBird extends CGFobject {
         
         //tail 
         this.scene.pushMatrix();
-        this.scene.translate(0,0,-2);
-        this.scene.scale(1,1,1);
+        this.scene.translate(0,0,-3);
+        this.scene.scale(0.75,1,2);
         this.scene.rotate(Math.PI/4,0, 1, 0);
         this.scene.rotate(-Math.PI/2,1, 0, 0);
         this.featherMaterial.apply();
         this.tail.display();
         this.scene.popMatrix();
 
+        //Rleg
+        this.scene.pushMatrix();
+        this.scene.translate(-0.3,-0.7,-1.2);
+        this.scene.rotate(Math.PI/3,1,0,0);
+        this.scene.scale(0.1,0.75,0.1);
+        this.beakMaterial.apply();
+        this.leg.display();
+        this.scene.popMatrix();
+
+        //Lleg
+        this.scene.pushMatrix();
+        this.scene.translate(0.3,-0.7,-1.2);
+        this.scene.rotate(Math.PI/3,1,0,0);
+        this.scene.scale(0.1,0.75,0.1);
+        this.beakMaterial.apply();
+        this.leg.display();
+        this.scene.popMatrix();
        
+        //Crest
+        this.scene.pushMatrix();
+        this.scene.translate(0,1.25,1.0);
+        this.scene.scale(0.30,1,1);
+        this.scene.rotate(Math.PI/8,1,0,0);
+        this.scene.rotate(5*Math.PI/4,0,1,0);
+        this.scene.rotate(-Math.PI/2,1,0,0);
+        this.featherMaterial.apply();
+        this.crest.display();
+        this.scene.popMatrix();
+
+       if(this.caught){
+        this.scene.pushMatrix();
+        this.scene.translate(1,.65,2.1);
+        this.scene.scale(2,0.05,0.05);
+        this.scene.rotate(-Math.PI,0,1,0);
+        this.scene.rotate(-Math.PI/2,0,0,1);
+        this.stick.display();
+        this.scene.popMatrix();
+       }
+
         this.scene.popMatrix();
     }
     updateBuffers() {

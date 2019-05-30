@@ -67,7 +67,9 @@ class MyScene extends CGFscene {
         this.house = new MyHouse(this, this.terrainTexture);  
         this.trees = [];
         this.lightning = new MyLightning(this);
-        this.nest = new MyNest(this, 100, 100);
+        this.nest = new MyNest(this, 100, 8);
+        this.stick = new MyCylinder(this,50,1);
+        
 
         this.angle = 30.0;
         this.iterations = 4;
@@ -192,6 +194,11 @@ class MyScene extends CGFscene {
             keysPressed=true;
             this.bird.reset();
         }
+        if (this.gui.isKeyPressed("KeyP")) {
+            text+=" P ";
+            keysPressed=true;
+            this.bird.dropDown();
+        }
         if (this.gui.isKeyPressed("KeyL")) {
             text+=" L ";
             this.lightning.startAnimation(this.ticks/5);
@@ -276,8 +283,17 @@ class MyScene extends CGFscene {
         this.popMatrix();
 
         this.pushMatrix();
-        this.translate(0,3,0);
+        this.translate(-3,0.2,-3);
         this.nest.display();
+        this.popMatrix();
+        
+        //stick
+        this.pushMatrix();
+        //this.translate(1/2,0,4);
+        this.scale(1,0.02,0.02);
+        this.rotate(-Math.PI,0,1,0);
+        this.rotate(-Math.PI/2,0,0,1);
+        this.stick.display();
         this.popMatrix();
 
         // ---- END Primitive drawing section
