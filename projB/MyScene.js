@@ -117,7 +117,7 @@ class MyScene extends CGFscene {
     }
     initShaders(){
         this.shader = new CGFshader(this.gl, "shaders/shader.vert", "shaders/shader.frag");
-        this.shader.setUniformsValues({ uSampler2: 1 });
+        this.shader.setUniformsValues({ uSampler: 0, uSampler2: 1, uSampler3: 2 });
     }
     setDefaultAppearance() {
         this.setAmbient(0.2, 0.4, 0.8, 1.0);
@@ -170,24 +170,24 @@ class MyScene extends CGFscene {
         var keysPressed=false;
         // Check for key codes e.g. in https://keycode.info/
         if (this.gui.isKeyPressed("KeyW")) {
-        text+=" W ";
-        keysPressed=true;
-        this.bird.accelerate(this.speedFactor);
+            text+=" W ";
+            keysPressed=true;
+            this.bird.accelerate(1.2);
         }
         if (this.gui.isKeyPressed("KeyS")) {
-        text+=" S ";
-        keysPressed=true;
-        this.bird.accelerate(-this.speedFactor);  
+            text+=" S ";
+            keysPressed=true;
+            this.bird.accelerate(0.8);  
         }
         if (this.gui.isKeyPressed("KeyA")) {
-        text+=" A ";
-        keysPressed=true;
-        this.bird.turn('+');
+            text+=" A ";
+            keysPressed=true;
+            this.bird.turn('+');
         }
         if (this.gui.isKeyPressed("KeyD")) {
-        text+=" D ";
-        keysPressed=true;
-        this.bird.turn('-');
+            text+=" D ";
+            keysPressed=true;
+            this.bird.turn('-');
         }
         if (this.gui.isKeyPressed("KeyR")) {
             text+=" R ";
@@ -211,7 +211,7 @@ class MyScene extends CGFscene {
     update(t){
         this.ticks++;
         //20 ticks = 1 sec
-        this.bird.update(Math.sin(this.ticks/5));
+        this.bird.update(this.ticks/5, this.speedFactor);
         this.checkKeys();
         this.lightning.update(this.ticks/5);
     }
@@ -228,7 +228,7 @@ class MyScene extends CGFscene {
         this.applyViewMatrix();
 
         // Draw axis
-        // this.axis.display();
+        this.axis.display();
 
         //Apply default appearance
         this.setDefaultAppearance();
@@ -239,7 +239,9 @@ class MyScene extends CGFscene {
 		//this.pushMatrix();
 
 		// bind additional texture to texture unit 1
-		//this.heightMap.bind(1);
+        /*this.altimetry.bind(0);
+        this.heightMap.bind(1);
+        this.terrain.bind(2);*/
 
         // ---- BEGIN Primitive drawing section
         /*this.pushMatrix();
@@ -248,15 +250,19 @@ class MyScene extends CGFscene {
         this.cubeMap.display();
         this.popMatrix();*/
 
+        this.altimetry.bind(0);
+        this.heightMap.bind(1);
+        this.terrain.bind(2);
+
         /*this.material.apply();        
         this.setActiveShader(this.shader);
         this.pushMatrix();
-        this.heightMap.bind(1);
 
         this.pushMatrix();
         this.translate(0,-3.2,0);
         this.rotate(-0.5*Math.PI, 1, 0, 0);
         this.scale(60, 60, 1);
+        this.material.apply();  
         this.plane.display();
         this.popMatrix();
 
@@ -265,7 +271,7 @@ class MyScene extends CGFscene {
         this.pushMatrix();
         this.scale(1/3, 1/3, 1/3);
         this.house.display();
-        this.popMatrix();
+        this.popMatrix();*/
         
         this.pushMatrix(); 
         this.translate(0,3,0);
@@ -280,7 +286,7 @@ class MyScene extends CGFscene {
         this.rotate(-Math.PI/2 * 1.5, 0, 1, 0);
         this.rotate(Math.PI, 1, 0, 0);
         this.lightning.display();
-        this.popMatrix();*/
+        this.popMatrix();
 
         this.pushMatrix();
         this.translate(-3,0.2,-3);
