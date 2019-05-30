@@ -24,7 +24,8 @@ class MySemiSphere extends CGFobject
 	{
 		this.vertices = [];
 		this.normals = [];
-        this.indices = [];
+		this.indices = [];
+		this.texCoords = [];
 
         var ang = 2 * Math.PI / this.slices;
         var angVert = (Math.PI/2) / this.stacks;
@@ -38,7 +39,6 @@ class MySemiSphere extends CGFobject
 			this.normals.push(Math.cos(angVert*i)*Math.cos(ang*j),Math.cos(angVert*i)*Math.sin(ang*j),Math.sin(angVert*i));
 	    	}
 	    }
-
 //INDICES
 	for(var i = 0; i < this.stacks; i++) {
 		for(var j = 0; j < this.slices - 1; j++) {
@@ -56,5 +56,11 @@ class MySemiSphere extends CGFobject
 
 		this.primitiveType=this.scene.gl.TRIANGLES;
 		this.initGLBuffers();
-	};
-};
+
+
+	}
+	/*updateTexCoord(coords){
+		this.texCoords = [...coords];
+		this.updateTexCoordsGLBuffers();
+	}*/
+}

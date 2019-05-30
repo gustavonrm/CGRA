@@ -12,7 +12,7 @@ class MyBird extends CGFobject {
         this.offsetY=0;
         this.offsetX=0;
         this.offsetZ=0; 
-        this.speed = 0.1;
+        this.speed = 0;
         this.offsetWing1 =0; 
         this.offsetWing2 =0; 
 
@@ -31,12 +31,13 @@ class MyBird extends CGFobject {
 
 
         //test sphere
-        this.Sphere = new MySemiSphere(this.scene,100,100);
+        this.Sphere = new MySemiSphere(this.scene,30,10);
+        this.Sphere = new MySemiSphere(this.scene,30,10);
 
         //textures
         //this.beakTexture = new CGFTexture(this.scene)
         //this.eyeTexture = new CGFTexture(this.scene)
-        //this.featherTexture = new CGFTexture(this.scene)
+        this.featherTexture = new CGFtexture(this.scene, "images/bird.jpg");
 
         //materials
         this.beakMaterial = new CGFappearance(this.scene);
@@ -50,6 +51,7 @@ class MyBird extends CGFobject {
         this.featherMaterial.setDiffuse(0, 0.75, 1, 1);
         this.featherMaterial.setSpecular(0, 0.75, 1, 1);
         this.featherMaterial.setShininess(10.0);
+        this.featherMaterial.setTexture(this.featherTexture);
 
         this.eyeMaterial=new CGFappearance(this.scene);
         this.eyeMaterial.setAmbient(1, 1, 1, 1);
@@ -126,26 +128,27 @@ class MyBird extends CGFobject {
     enableDisableViz(){
         this.beak.enableDisableViz(); 
     }
-    update(time){
-      this.offsetY=time;
-      this.offsetWing1 = 2*Math.PI+time/2;  // todo wing clap speed
-      this.offsetWing2 = 2*Math.PI+time/1.5; 
-      this.offsetX += Math.sin(this.turnFactor) * this.speed;
-      this.offsetZ += Math.cos(this.turnFactor) * this.speed;
+    update(time, speedFactor){
+        var wingoffset = Math.sin(time*speedFactor);
+        this.offsetY=Math.sin(time);
+        this.offsetWing1 = 2*Math.PI+wingoffset/2; //*speedFactor;  // todo wing clap speed
+        this.offsetWing2 = 2*Math.PI+wingoffset/1.5;// *speedFactor; 
+        this.offsetX += Math.sin(this.turnFactor) * this.speed * speedFactor;
+        this.offsetZ += Math.cos(this.turnFactor) * this.speed * speedFactor;
     }
     turn(v){    
         switch(v){
             case '+':
-                this.turnFactor -= -Math.PI/32;
+                this.turnFactor += Math.PI/32;
                 break; 
             case '-':
-                this.turnFactor -= Math.PI/32;
+                this.turnFactor += -Math.PI/32;
                 break; 
         }
     }
     accelerate(v){
-        this.speed += v;
-        if( this.speed <= 0 ){
+        this.speed *= v;
+        if( this.speed <= 0.1 ){
             this.speed = 0.1; 
         }
     }
@@ -168,7 +171,7 @@ class MyBird extends CGFobject {
         this.offsetY=0;
         this.offsetX=0;
         this.offsetZ=0; 
-        this.speed = 0.1;
+        this.speed = 0;
         this.offsetWing1 =0; 
         this.offsetWing2 =0; 
         this.turnFactor = 0;
