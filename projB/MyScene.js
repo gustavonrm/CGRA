@@ -26,6 +26,7 @@ class MyScene extends CGFscene {
         this.oldTime = 0;
         this.birdOff;
         this.tolerance = 3;
+        this.lightningActive = false;
 
         //GUI vars
         this.speedFactor = 0.1;
@@ -207,19 +208,30 @@ class MyScene extends CGFscene {
         }
         if (this.gui.isKeyPressed("KeyL")) {
             text+=" L ";
-            this.lightning.startAnimation(this.ticks/5);
-            keysPressed=true;            
+            keysPressed=true;    
+            console.log(this.lightningActive); 
+            if(!this.lightningActive)
+            this.lightning.startAnimation(this.ticks/5);  
+            this.lightningActive= true;   
         }
-        if (keysPressed)
-        console.log(text);
+        if (keysPressed)   
+            console.log(text);
+        if(!keysPressed)
+            this.lightningActive= false; 
+        console.log(this.lightningActive); 
         }
-        
+      
     update(t){
         this.ticks++;
         //20 ticks = 1 sec
         this.bird.update(this.ticks/5, this.speedFactor);
         this.checkKeys();
-        this.lightning.update(this.ticks/5);
+        if(this.lightningActive)
+            this.lightning.update(this.ticks/5);
+        else
+            this.lightning.destroy();
+            //console.log("ola");
+        
 
         if(this.bird.diving){
             //to debug

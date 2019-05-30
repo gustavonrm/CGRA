@@ -36,6 +36,9 @@ class MyLightning extends MyLSystem {
         else this.depth = Number(diff * this.axiom.length);
         //this.depth = this.axiom.length;
     }
+    destroy(){
+        this.depth=0;
+    }
 
     display(){
         this.scene.pushMatrix();
