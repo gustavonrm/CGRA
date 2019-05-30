@@ -68,7 +68,7 @@ class MyScene extends CGFscene {
         this.trees = [];
         this.lightning = new MyLightning(this);
         this.nest = new MyNest(this);
-        this.stick = new MyCylinder(this,50,1);
+        this.stick = new MyTreeBranch(this);
         
 
         this.angle = 30.0;
@@ -172,7 +172,7 @@ class MyScene extends CGFscene {
         if (this.gui.isKeyPressed("KeyW")) {
         text+=" W ";
         keysPressed=true;
-        this.bird.accelerate(this.speedFactor);  
+        this.bird.accelerate(this.speedFactor);
         }
         if (this.gui.isKeyPressed("KeyS")) {
         text+=" S ";
@@ -228,7 +228,7 @@ class MyScene extends CGFscene {
         this.applyViewMatrix();
 
         // Draw axis
-        this.axis.display();
+        // this.axis.display();
 
         //Apply default appearance
         this.setDefaultAppearance();
@@ -248,7 +248,7 @@ class MyScene extends CGFscene {
         this.cubeMap.display();
         this.popMatrix();*/
 
-        this.material.apply();        
+        /*this.material.apply();        
         this.setActiveShader(this.shader);
         this.pushMatrix();
         this.heightMap.bind(1);
@@ -280,7 +280,7 @@ class MyScene extends CGFscene {
         this.rotate(-Math.PI/2 * 1.5, 0, 1, 0);
         this.rotate(Math.PI, 1, 0, 0);
         this.lightning.display();
-        this.popMatrix();
+        this.popMatrix();*/
 
         this.pushMatrix();
         this.translate(-3,0.2,-3);
@@ -290,7 +290,7 @@ class MyScene extends CGFscene {
         //stick
         this.pushMatrix();
         //this.translate(1/2,0,4);
-        this.scale(1,0.02,0.02);
+        this.scale(1,0.1,0.1);
         this.rotate(-Math.PI,0,1,0);
         this.rotate(-Math.PI/2,0,0,1);
         this.stick.display();
