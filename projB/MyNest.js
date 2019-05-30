@@ -22,7 +22,7 @@ class MyNest extends CGFobject {
     }
     initMaterial() {
 		this.nestmaterial.setAmbient(0.3, 0.3, 0.3, 1);
-		this.nestmaterial.setDiffuse(0.75, 0.5, 0.25, 1);
+		this.nestmaterial.setDiffuse(0.70, 0.4, 0.2, 1);
 		this.nestmaterial.setSpecular(0.0, 0.0, 0.0, 1);
         this.nestmaterial.setShininess(120);
         this.nestmaterial.setTexture(this.nestTexture);
