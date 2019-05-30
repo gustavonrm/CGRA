@@ -1,5 +1,5 @@
 /**
- * MyHouse
+ * MyBird
  * @constructor
  * @param scene - Reference to MyScene object
  */
@@ -31,7 +31,6 @@ class MyBird extends CGFobject {
 
         //test sphere
         this.Sphere = new MySemiSphere(this.scene,100,100);
-        this.Sphere = new MySemiSphere(this.scene,100,100);
 
         //textures
 
@@ -54,6 +53,12 @@ class MyBird extends CGFobject {
         this.eyeMaterial.setSpecular(1, 1, 1, 1);
         this.eyeMaterial.setShininess(10.0);
 
+        this.woodMaterial = new CGFappearance(this.scene);
+		this.woodMaterial.setAmbient(1,1,1,1);
+		this.woodMaterial.setDiffuse(0.8,0.4,0,1);
+		this.woodMaterial.setDiffuse(0.4,0.2,0,1);
+		this.woodMaterial.setShininess(10.0);
+
         //utils
         var caught=false;
 
@@ -70,6 +75,38 @@ class MyBird extends CGFobject {
         this.vertices.push(this.beak.vertices);
         this.normals.push(this.beak.normals);
         this.indices.push(this.beak.indices);
+
+        this.vertices.push(this.body.vertices);
+        this.normals.push(this.body.indices);
+        this.indices.push(this.body.indices);
+
+        this.vertices.push(this.head.vertices);
+        this.normals.push(this.head.indices);
+        this.indices.push(this.head.indices);
+
+        this.vertices.push(this.Sphere.vertices);
+        this.normals.push(this.Sphere.indices);
+        this.indices.push(this.Sphere.indices);
+
+        this.vertices.push(this.wing1.vertices);
+        this.normals.push(this.wing1.indices);
+        this.indices.push(this.wing1.indices);
+
+        this.vertices.push(this.wing2.vertices);
+        this.normals.push(this.wing2.indices);
+        this.indices.push(this.wing2.indices);
+
+        this.vertices.push(this.tail.vertices);
+        this.normals.push(this.tail.indices);
+        this.indices.push(this.tail.indices);
+
+        this.vertices.push(this.leg.vertices);
+        this.normals.push(this.leg.indices);
+        this.indices.push(this.leg.indices);
+
+        this.vertices.push(this.crest.vertices);
+        this.normals.push(this.crest.indices);
+        this.indices.push(this.crest.indices);
 
         this.primitiveType = this.scene.gl.TRIANGLES;
 		this.initGLBuffers();
@@ -283,6 +320,7 @@ class MyBird extends CGFobject {
         this.scene.scale(2,0.05,0.05);
         this.scene.rotate(-Math.PI,0,1,0);
         this.scene.rotate(-Math.PI/2,0,0,1);
+        this.woodMaterial.apply();
         this.stick.display();
         this.scene.popMatrix();
        }

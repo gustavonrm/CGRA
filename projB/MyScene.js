@@ -60,7 +60,7 @@ class MyScene extends CGFscene {
         this.trees = [];
         this.lightning = new MyLightning(this);
         this.stick = new MyCylinder(this,50,1);
-        
+        this.nest = new MyNest(this);
 
         this.angle = 30.0;
         this.iterations = 4;
@@ -252,6 +252,13 @@ class MyScene extends CGFscene {
         this.rotate(-Math.PI,0,1,0);
         this.rotate(-Math.PI/2,0,0,1);
         this.stick.display();
+        this.popMatrix();
+
+        //nest
+        this.pushMatrix();
+        this.translate(5,0,5);
+        this.scale(.5,.5,.5);
+        this.nest.display();
         this.popMatrix();
 
         // ---- END Primitive drawing section
