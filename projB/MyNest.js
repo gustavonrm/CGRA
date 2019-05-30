@@ -1,15 +1,15 @@
 /**
-* MyTerrain
+* MyNest
 * @constructor
 * @param scene - Reference to MyScene object
 */
 
-class MyTerrain extends CGFobject {
-	constructor(scene, n) {
+class MyNest extends CGFobject {
+	constructor(scene, slices, stacks) {
         super(scene);
 
-        this.plane = new Plane(this.scene, n);
-        this.initBuffers(); 
+        this.nestBase = new MySemiSphere(this.scene, slices, stacks);
+        this.initBuffers();
     }
     enableNormalViz(){
         this.plane.enableNormalViz();    
@@ -21,7 +21,7 @@ class MyTerrain extends CGFobject {
     display(){
         this.scene.pushMatrix();
         //this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
-        this.plane.display();
+        this.nestBase.display();
         this.scene.popMatrix();
         
     }

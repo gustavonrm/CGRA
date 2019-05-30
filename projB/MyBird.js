@@ -94,11 +94,11 @@ class MyBird extends CGFobject {
     }
     reset(){
         this.offsetY=0;
-                    this.offsetX=0;
-                    this.offsetZ=0; 
-                    this.speed = 0;
-                    this.offsetWing1 =0; 
-                    this.turnFactor = 0;
+        this.offsetX=0;
+        this.offsetZ=0; 
+        this.speed = 0.1;
+        this.offsetWing1 =0; 
+        this.turnFactor = 0;
     }
 	display() {
         this.scene.pushMatrix(); 
