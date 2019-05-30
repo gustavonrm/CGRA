@@ -2,6 +2,9 @@
 
 ## TODO: 
 
-* Fix normals on the tangram so that they can appear
-* Confirm if wood like is correct
-* Confirm last excercise - diamond custom color 
+*time variable!
+*Texturas da ave
+*speedFactor
+*shader e texturas para dentro de MyTerrain
+*Cor no terreno (shader.frag)
+*MyTreeBranch

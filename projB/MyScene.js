@@ -229,8 +229,7 @@ class MyScene extends CGFscene {
         if(this.lightningActive)
             this.lightning.update(this.ticks/5);
         else
-            this.lightning.destroy();
-            //console.log("ola");
+            this.lightning.destroy();  //Se houve keypressed eventes isto era tao fucking mais facil 
         
 
         if(this.bird.diving){
