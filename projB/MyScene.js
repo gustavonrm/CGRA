@@ -30,8 +30,12 @@ class MyScene extends CGFscene {
         this.speedFactor = 0.1;
         this.scaleFactor = 0.5;
 
+        
+        this.initMaterials();
         //Textures
-        this.loadTextures()
+        this.initTextures();
+
+        this.initShaders();
 
 
         // LSPlant
@@ -50,15 +54,20 @@ class MyScene extends CGFscene {
         this.rule9 = "F[^X]&X";
         this.rule10 = "F[&X]^X";
 
+        // GUI
+        this.speedFactor = 1.0;
+        this.scaleFactor = 0.5;
+        
 
         //Initialize scene objects
         this.axis = new CGFaxis(this);
         this.cubeMap = new MyCubeMap(this,this.dayTimeUp,this.dayTimeLf,this.dayTimeFt,this.dayTimeRt,this.dayTimeBk,this.dayTimeDn);
-        this.plane = new Plane(this, 32);
+        this.plane = new MyTerrain(this, 32);
         this.bird = new MyBird(this);
         this.house = new MyHouse(this, this.terrainTexture);  
         this.trees = [];
         this.lightning = new MyLightning(this);
+        this.nest = new MyNest(this);
         this.stick = new MyCylinder(this,50,1);
         this.nest = new MyNest(this);
 
@@ -83,7 +92,32 @@ class MyScene extends CGFscene {
         this.lights[0].update();
     }
     initCameras() {
-        this.camera = new CGFcamera(0.2, 0.1, 500, vec3.fromValues(45, 45, 45), vec3.fromValues(0, 0, 0));
+        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(45, 45, 45), vec3.fromValues(0, 0, 0));
+    }
+    initMaterials(){
+        this.material = new CGFappearance(this);
+		this.material.setAmbient(0.3, 0.3, 0.3, 1);
+		this.material.setDiffuse(0.7, 0.7, 0.7, 1);
+		this.material.setSpecular(0.0, 0.0, 0.0, 1);
+		this.material.setShininess(120);
+    }
+    initTextures(){
+        this.dayTimeBk = new CGFtexture(this, 'images/ely_nevada/nevada_bk.jpg');
+        this.dayTimeDn = new CGFtexture(this, 'images/ely_nevada/nevada_dn.jpg');
+        this.dayTimeFt = new CGFtexture(this, 'images/ely_nevada/nevada_ft.jpg');
+        this.dayTimeLf = new CGFtexture(this, 'images/ely_nevada/nevada_lf.jpg');
+        this.dayTimeRt = new CGFtexture(this, 'images/ely_nevada/nevada_rt.jpg');
+        this.dayTimeUp = new CGFtexture(this, 'images/ely_nevada/nevada_up.jpg');
+
+        this.heightMap = new CGFtexture(this, "images/newheightmap.jpg");
+        this.terrain = new CGFtexture(this, "images/terrain.jpg");
+        this.altimetry = new CGFtexture(this, "images/altimetry.jpg");
+
+        this.material.setTexture(this.terrain);
+    }
+    initShaders(){
+        this.shader = new CGFshader(this.gl, "shaders/shader.vert", "shaders/shader.frag");
+        this.shader.setUniformsValues({ uSampler2: 1 });
     }
     setDefaultAppearance() {
         this.setAmbient(0.2, 0.4, 0.8, 1.0);
@@ -91,16 +125,6 @@ class MyScene extends CGFscene {
         this.setSpecular(0.2, 0.4, 0.8, 1.0);
         this.setShininess(10.0);
     }
-
-    loadTextures(){
-        this.dayTimeBk = new CGFtexture(this, 'images/ely_nevada/nevada_bk.jpg');
-        this.dayTimeDn = new CGFtexture(this, 'images/ely_nevada/nevada_dn.jpg');
-        this.dayTimeFt = new CGFtexture(this, 'images/ely_nevada/nevada_ft.jpg');
-        this.dayTimeLf = new CGFtexture(this, 'images/ely_nevada/nevada_lf.jpg');
-        this.dayTimeRt = new CGFtexture(this, 'images/ely_nevada/nevada_rt.jpg');
-        this.dayTimeUp = new CGFtexture(this, 'images/ely_nevada/nevada_up.jpg');
-    }
-
     generateTrees(num){
         for (let i = 0; i < num; i++){
             this.trees.push(new MyLSPlant(this));
@@ -190,6 +214,18 @@ class MyScene extends CGFscene {
         this.bird.update(Math.sin(this.ticks/5));
         this.checkKeys();
         this.lightning.update(this.ticks/5);
+
+        if(this.bird.offsetZ >= 10){
+            this.bird.caughtStick = true; 
+
+        }
+
+        if(this.bird.caughtStick){
+            if(this.bird.offsetX < -3 && this.bird.offsetZ < -3){
+                this.bird.caughtStick = false; 
+
+            }
+       }
     }
 
     display() {
@@ -208,28 +244,41 @@ class MyScene extends CGFscene {
 
         //Apply default appearance
         this.setDefaultAppearance();
+         
+
+        // activate selected shader
+		//this.setActiveShader(this.shader);
+		//this.pushMatrix();
+
+		// bind additional texture to texture unit 1
+		//this.heightMap.bind(1);
 
         // ---- BEGIN Primitive drawing section
-        /*
-        this.pushMatrix();
+        /*this.pushMatrix();
         this.translate(0,49.9,0); //cant be 50 bc if colides with plane cant write
         this.scale(400,100,400);
         this.cubeMap.display();
-        this.popMatrix();
-        */
-        /*
+        this.popMatrix();*/
+
+        this.material.apply();        
+        this.setActiveShader(this.shader);
         this.pushMatrix();
+        this.heightMap.bind(1);
+
+        this.pushMatrix();
+        this.translate(0,-3.2,0);
         this.rotate(-0.5*Math.PI, 1, 0, 0);
         this.scale(60, 60, 1);
         this.plane.display();
-        this.popMatrix();*/
+        this.popMatrix();
 
-        /*
+        this.setActiveShader(this.defaultShader);
+        
         this.pushMatrix();
         this.scale(1/3, 1/3, 1/3);
         this.house.display();
         this.popMatrix();
-        */
+        
         this.pushMatrix(); 
         this.translate(0,3,0);
         this.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
@@ -245,21 +294,20 @@ class MyScene extends CGFscene {
         this.lightning.display();
         this.popMatrix();
 
-        //stick
         this.pushMatrix();
-        this.translate(1/2,0,4);
-        this.scale(1,0.02,0.02);
-        this.rotate(-Math.PI,0,1,0);
-        this.rotate(-Math.PI/2,0,0,1);
-        this.stick.display();
-        this.popMatrix();
-
-        //nest
-        this.pushMatrix();
-        this.translate(5,0,5);
-        this.scale(.5,.5,.5);
+        this.translate(-3,0.2,-3);
         this.nest.display();
         this.popMatrix();
+        
+        if(!this.bird.caughtStick){
+             //it will be vector 
+            this.pushMatrix(); 
+            this.translate(0,0,10);
+            this.scale(3,3,3);
+            this.stick.display(); 
+            this.popMatrix(); 
+        }
+
 
         // ---- END Primitive drawing section
     }

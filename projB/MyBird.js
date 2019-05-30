@@ -59,9 +59,9 @@ class MyBird extends CGFobject {
 		this.woodMaterial.setDiffuse(0.4,0.2,0,1);
 		this.woodMaterial.setShininess(10.0);
 
-        //utils
-        var caught=false;
-
+        //states
+        var diving = false;
+        var caughtStick=false;
 
         this.initBuffers();
 
@@ -146,12 +146,12 @@ class MyBird extends CGFobject {
     }
     reset(){
         this.offsetY=0;
-                    this.offsetX=0;
-                    this.offsetZ=0; 
-                    this.speed = 0;
-                    this.offsetWing1 =0; 
-                    this.offsetWing2 =0; 
-                    this.turnFactor = 0;
+        this.offsetX=0;
+        this.offsetZ=0; 
+        this.speed = 0.1;
+        this.offsetWing1 =0; 
+        this.offsetWing2 =0; 
+        this.turnFactor = 0;
     }
 	display() {
         this.scene.pushMatrix(); 
@@ -314,15 +314,15 @@ class MyBird extends CGFobject {
         this.crest.display();
         this.scene.popMatrix();
 
-       if(this.caught){
-        this.scene.pushMatrix();
-        this.scene.translate(1,.65,2.1);
-        this.scene.scale(2,0.05,0.05);
-        this.scene.rotate(-Math.PI,0,1,0);
-        this.scene.rotate(-Math.PI/2,0,0,1);
-        this.woodMaterial.apply();
-        this.stick.display();
-        this.scene.popMatrix();
+       if(this.caughtStick){
+            this.scene.pushMatrix();
+            this.scene.translate(1,.65,2.1);
+            this.scene.scale(2,0.05,0.05);
+            this.scene.rotate(-Math.PI,0,1,0);
+            this.scene.rotate(-Math.PI/2,0,0,1);
+            this.woodMaterial.apply();
+            this.stick.display();
+            this.scene.popMatrix();
        }
 
         this.scene.popMatrix();
