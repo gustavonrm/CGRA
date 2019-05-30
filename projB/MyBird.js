@@ -8,6 +8,7 @@ class MyBird extends CGFobject {
 	constructor(scene) {
         super(scene);
         //objects
+        this.offsetDive =0;
         this.offsetY=0;
         this.offsetX=0;
         this.offsetZ=0; 
@@ -33,6 +34,9 @@ class MyBird extends CGFobject {
         this.Sphere = new MySemiSphere(this.scene,100,100);
 
         //textures
+        //this.beakTexture = new CGFTexture(this.scene)
+        //this.eyeTexture = new CGFTexture(this.scene)
+        //this.featherTexture = new CGFTexture(this.scene)
 
         //materials
         this.beakMaterial = new CGFappearance(this.scene);
@@ -62,6 +66,11 @@ class MyBird extends CGFobject {
         //states
         var diving = false;
         var caughtStick=false;
+
+        //utils
+        var oldTicks = this.scene.ticks ;
+        var oneSec = oldTicks+20; //1 sec 20 ticks 50ms refresh rate 
+        var newTicks = oldTicks+40; //1 sec 20 ticks 50ms refresh rate 
 
         this.initBuffers();
 
@@ -140,11 +149,22 @@ class MyBird extends CGFobject {
             this.speed = 0.1; 
         }
     }
-    dropDown(){
-        this.offsetY += -6.0;
-        this.caught = true; //to test
+    dropDown(ticks){
+        //3 height divided by 20 ticks = 0.15 (0,.15,0) 
+        //ill try with 5pp
+        if(ticks >= this.newTicks){
+            this.offsetDive = 0; 
+            this.diving = false;  
+        }
+        if(ticks <= this.oneSec){
+            this.offsetDive -= 0.25;
+        }
+        if(ticks > this.oneSec){
+            this.offsetDive += 0.25;
+        }
+
     }
-    reset(){
+        reset(){
         this.offsetY=0;
         this.offsetX=0;
         this.offsetZ=0; 
@@ -155,7 +175,7 @@ class MyBird extends CGFobject {
     }
 	display() {
         this.scene.pushMatrix(); 
-        this.scene.translate(this.offsetX,this.offsetY,this.offsetZ);
+        this.scene.translate(this.offsetX,this.offsetY+this.offsetDive,this.offsetZ);
         this.scene.rotate(this.turnFactor,0, 1, 0); //turn
       
         //left wing 

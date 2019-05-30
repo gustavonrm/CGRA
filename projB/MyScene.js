@@ -25,6 +25,7 @@ class MyScene extends CGFscene {
         this.ticks = 0; 
         this.oldTime = 0;
         this.birdOff;
+        this.tolerance = 3;
 
         //GUI vars
         this.speedFactor = 0.1;
@@ -68,8 +69,8 @@ class MyScene extends CGFscene {
         this.trees = [];
         this.lightning = new MyLightning(this);
         this.nest = new MyNest(this);
-        this.stick = new MyCylinder(this,50,1);
-        this.nest = new MyNest(this);
+        this.stick = new MyTreeBranch(this);
+        
 
         this.angle = 30.0;
         this.iterations = 4;
@@ -172,7 +173,7 @@ class MyScene extends CGFscene {
         if (this.gui.isKeyPressed("KeyW")) {
         text+=" W ";
         keysPressed=true;
-        this.bird.accelerate(this.speedFactor);  
+        this.bird.accelerate(this.speedFactor);
         }
         if (this.gui.isKeyPressed("KeyS")) {
         text+=" S ";
@@ -196,8 +197,13 @@ class MyScene extends CGFscene {
         }
         if (this.gui.isKeyPressed("KeyP")) {
             text+=" P ";
-            keysPressed=true;
-            this.bird.dropDown();
+            if(!this.bird.diving){
+                keysPressed=true;
+                this.bird.diving = true;
+                this.bird.oldTicks = this.ticks;
+                this.bird.newTicks= this.bird.oldTicks + 40; 
+                this.bird.oneSec = this.bird.oldTicks +20;
+            }
         }
         if (this.gui.isKeyPressed("KeyL")) {
             text+=" L ";
@@ -215,13 +221,24 @@ class MyScene extends CGFscene {
         this.checkKeys();
         this.lightning.update(this.ticks/5);
 
-        if(this.bird.offsetZ >= 10){
-            this.bird.caughtStick = true; 
-
+        if(this.bird.diving){
+            console.log(this.bird.offsetX + " ");
+            console.log((this.bird.offsetY +this.bird.offsetDive)+ " "  );
+            console.log(this.bird.offsetZ);
+            this.bird.dropDown(this.ticks);
+            if( (this.bird.offsetZ+this.bird.offsetDive) <= -1 && //tolecane of 2
+             this.bird.offsetX >= 3-this.tolerance/*stick coord +tolerance */ && this.bird.offsetX <= 3+this.tolerance /*stick coord +tolerance */&&
+             this.bird.offsetZ >= -30-this.tolerance/*stick coord +tolerance */ && this.bird.offsetZ <= -30+this.tolerance /*stick coord +tolerance */){ //giving 1 unit tolerance
+                if(!this.bird.caughtStick)
+                    this.bird.caughtStick = true;
+            }
         }
 
         if(this.bird.caughtStick){
-            if(this.bird.offsetX < -3 && this.bird.offsetZ < -3){
+            if( (this.bird.offsetZ+this.bird.offsetDive) <= -1 && //tolecane of 2
+             this.bird.offsetX >= 13-this.tolerance/*stick coord +tolerance */ && this.bird.offsetX <= 13+this.tolerance /*stick coord +tolerance */&&
+             this.bird.offsetZ >= 3-this.tolerance/*stick coord +tolerance */ && this.bird.offsetZ <= 3+this.tolerance /*stick coord +tolerance */){ //giving 1 unit tolerance
+                
                 this.bird.caughtStick = false; 
 
             }
@@ -240,7 +257,7 @@ class MyScene extends CGFscene {
         this.applyViewMatrix();
 
         // Draw axis
-        this.axis.display();
+        // this.axis.display();
 
         //Apply default appearance
         this.setDefaultAppearance();
@@ -254,7 +271,7 @@ class MyScene extends CGFscene {
 		//this.heightMap.bind(1);
 
         // ---- BEGIN Primitive drawing section
-        /*this.pushMatrix();
+      /*  this.pushMatrix();
         this.translate(0,49.9,0); //cant be 50 bc if colides with plane cant write
         this.scale(400,100,400);
         this.cubeMap.display();
@@ -282,6 +299,7 @@ class MyScene extends CGFscene {
         this.pushMatrix(); 
         this.translate(0,3,0);
         this.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
+        //this.scale(.5,.5,.5);
         this.bird.display();
         this.popMatrix(); 
 
@@ -295,19 +313,20 @@ class MyScene extends CGFscene {
         this.popMatrix();
 
         this.pushMatrix();
-        this.translate(-3,0.2,-3);
+        this.translate(13,0,3);
         this.nest.display();
         this.popMatrix();
         
         if(!this.bird.caughtStick){
-             //it will be vector 
-            this.pushMatrix(); 
-            this.translate(0,0,10);
-            this.scale(3,3,3);
-            this.stick.display(); 
-            this.popMatrix(); 
+          //stick
+          this.pushMatrix();
+          this.translate(3,0,-15); //for some reason is in -30 not -15
+          this.scale(2,2,2);  
+          this.rotate(-Math.PI,0,1,0);
+          this.rotate(-Math.PI/2,0,0,1);
+          this.stick.display();
+          this.popMatrix();
         }
-
 
         // ---- END Primitive drawing section
     }
