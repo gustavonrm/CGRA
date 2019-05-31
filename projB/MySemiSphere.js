@@ -1,5 +1,5 @@
 /**
- * MyLamp
+ * MySemiSphere
  * @param gl {WebGLRenderingContext}
  * @constructor
  */
@@ -46,6 +46,10 @@ class MySemiSphere extends CGFobject
 			this.indices.push(i*this.slices + j+1, (i+1)*this.slices + j+1, (i+1)*this.slices + j);
 			this.indices.push( (i+1)*this.slices + j, i*this.slices + j+1, i*this.slices + j);
 			this.indices.push( (i+1)*this.slices + j, (i+1)*this.slices + j+1,i*this.slices + j+1);
+			this.texCoords.push(1, 1);
+			this.texCoords.push(0, 0);
+			this.texCoords.push(1, 0);
+			this.texCoords.push(0, 1);
 		}
 
 		this.indices.push(i*this.slices + this.slices - 1, i*this.slices, (i+1)*this.slices + this.slices - 1);
@@ -59,8 +63,8 @@ class MySemiSphere extends CGFobject
 
 
 	}
-	/*updateTexCoord(coords){
+	updateTexCoord(coords){
 		this.texCoords = [...coords];
 		this.updateTexCoordsGLBuffers();
-	}*/
+	}
 }

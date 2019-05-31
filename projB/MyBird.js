@@ -31,8 +31,8 @@ class MyBird extends CGFobject {
 
 
         //test sphere
-        this.Sphere = new MySemiSphere(this.scene,30,10);
-        this.Sphere = new MySemiSphere(this.scene,30,10);
+        this.Sphere = new MySemiSphere(this.scene,15,10);
+        this.Sphere = new MySemiSphere(this.scene,15,10);
 
         //textures
         //this.beakTexture = new CGFTexture(this.scene)
@@ -58,12 +58,19 @@ class MyBird extends CGFobject {
         this.eyeMaterial.setDiffuse(0, 0, 0, 1);
         this.eyeMaterial.setSpecular(1, 1, 1, 1);
         this.eyeMaterial.setShininess(10.0);
+       
+        this.eyeMaterial2 = new CGFappearance(this.scene);
+		this.eyeMaterial2.setAmbient(1,1,1,1);
+		this.eyeMaterial2.setDiffuse(1,1.1,1,1);
+		this.eyeMaterial2.setDiffuse(1,1,1,1);
+        this.eyeMaterial2.setShininess(10.0);
 
         this.woodMaterial = new CGFappearance(this.scene);
 		this.woodMaterial.setAmbient(1,1,1,1);
 		this.woodMaterial.setDiffuse(0.8,0.4,0,1);
 		this.woodMaterial.setDiffuse(0.4,0.2,0,1);
-		this.woodMaterial.setShininess(10.0);
+        this.woodMaterial.setShininess(10.0);
+        
 
         //states
         var diving = false;
@@ -276,25 +283,65 @@ class MyBird extends CGFobject {
        this.scene.translate(0,0.7,1.1);
        this.scene.scale(0.7,0.7,0.7);
        this.scene.rotate(-Math.PI/2,1, 0, 0);
-       this.featherMaterial.apply();
+       //this.featherMaterial.apply();
        this.Sphere.display();
        this.scene.popMatrix();
         
-        //left eye
+        //left eye white
         this.scene.pushMatrix();
         this.scene.translate(0.4,1,1.5);
         this.scene.scale(0.2,0.2,0.2);
         this.scene.rotate(Math.PI/3,0, 1, 0);
-        this.eyeMaterial.apply();
+        this.eyeMaterial2.apply();
         this.Sphere.display();
         this.scene.popMatrix();
+
+         //left eye pupil
+         this.scene.pushMatrix();
+         this.scene.translate(0.5,1.,1.6);
+         this.scene.scale(0.08,0.08,0.08);
+         this.scene.rotate(Math.PI/3,0, 1, 0);
+         this.eyeMaterial.apply();
+         this.Sphere.display();
+         this.scene.popMatrix();
+
+         //left eyelid
+         this.scene.pushMatrix();
+         this.scene.translate(0.4,1.02,1.5);
+         this.scene.scale(0.2,0.2,0.2);
+         this.scene.rotate(Math.PI/8,0, 0, 1);
+         this.scene.rotate(-Math.PI/2,1, 0, 0);
+         this.eyeMaterial.apply();
+         //this.featherMaterial.apply();
+         this.Sphere.display();
+         this.scene.popMatrix();
         
-        //right eye  
+        //right eye  white
         this.scene.pushMatrix();
         this.scene.translate(-0.4,1,1.5);
         this.scene.scale(0.2,0.2,0.2);
         this.scene.rotate(-Math.PI/3,0, 1, 0);
+        this.eyeMaterial2.apply();
+        this.Sphere.display();
+        this.scene.popMatrix();
+
+        //right eye  pupil
+        this.scene.pushMatrix();
+        this.scene.translate(-0.5,1,1.6);
+        this.scene.scale(0.08,0.08,0.08);
+        this.scene.rotate(-Math.PI/3,0, 1, 0);
         this.eyeMaterial.apply();
+        this.Sphere.display();
+        this.scene.popMatrix();
+
+        //right eyelid
+        this.scene.pushMatrix();
+        this.scene.translate(-0.4,1.02,1.5);
+        this.scene.scale(0.2,0.2,0.2);
+        this.scene.rotate(-Math.PI/8,0, 0, 1);
+        this.scene.rotate(-Math.PI/2,1, 0, 0);
+        this.eyeMaterial.apply();
+        //this.featherMaterial.apply();
         this.Sphere.display();
         this.scene.popMatrix();
         
