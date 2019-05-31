@@ -240,7 +240,7 @@ class MyScene extends CGFscene {
             this.bird.dropDown(this.ticks);
             if( (this.bird.offsetZ+this.bird.offsetDive) <= -1 && //tolecane of 2
              this.bird.offsetX >= 3-this.tolerance/*stick coord +tolerance */ && this.bird.offsetX <= 3+this.tolerance /*stick coord +tolerance */&&
-             this.bird.offsetZ >= -30-this.tolerance/*stick coord +tolerance */ && this.bird.offsetZ <= -30+this.tolerance /*stick coord +tolerance */){ //giving 1 unit tolerance
+             this.bird.offsetZ >= -25-this.tolerance/*stick coord +tolerance */ && this.bird.offsetZ <= -25+this.tolerance /*stick coord +tolerance */){ //giving 1 unit tolerance
                 if(!this.bird.caughtStick)
                     this.bird.caughtStick = true;
             }
