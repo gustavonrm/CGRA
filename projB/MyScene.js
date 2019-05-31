@@ -70,7 +70,14 @@ class MyScene extends CGFscene {
         this.trees = [];
         this.lightning = new MyLightning(this);
         this.nest = new MyNest(this);
-        this.stick = new MyTreeBranch(this);
+        //sticks
+    
+       this.treeBraches = [
+           new MyTreeBranch(this,3,.01,-10,0),
+           new MyTreeBranch(this,5,.5,5,Math.PI/4),
+           new MyTreeBranch(this,-5,.5,-5,-Math.PI/4),
+           new MyTreeBranch(this,7,.5,-5,Math.PI/2)
+        ];
         
 
         this.angle = 30.0;
@@ -209,7 +216,6 @@ class MyScene extends CGFscene {
         if (this.gui.isKeyPressed("KeyL")) {
             text+=" L ";
             keysPressed=true;    
-            console.log(this.lightningActive); 
             if(!this.lightningActive)
             this.lightning.startAnimation(this.ticks/5);  
             this.lightningActive= true;   
@@ -218,7 +224,6 @@ class MyScene extends CGFscene {
             console.log(text);
         if(!keysPressed)
             this.lightningActive= false; 
-        console.log(this.lightningActive); 
         }
       
     update(t){
@@ -234,25 +239,29 @@ class MyScene extends CGFscene {
 
         if(this.bird.diving){
             //to debug
-            console.log(this.bird.offsetX + " ");
-            console.log((this.bird.offsetY +this.bird.offsetDive)+ " "  );
-            console.log(this.bird.offsetZ);
+            console.log(this.bird.offsetDive);
             this.bird.dropDown(this.ticks);
-            if( (this.bird.offsetZ+this.bird.offsetDive) <= -1 && //tolecane of 2
-             this.bird.offsetX >= 3-this.tolerance/*stick coord +tolerance */ && this.bird.offsetX <= 3+this.tolerance /*stick coord +tolerance */&&
-             this.bird.offsetZ >= -25-this.tolerance/*stick coord +tolerance */ && this.bird.offsetZ <= -25+this.tolerance /*stick coord +tolerance */){ //giving 1 unit tolerance
-                if(!this.bird.caughtStick)
-                    this.bird.caughtStick = true;
+            for(var i =0; i<this.treeBraches.length; i++){
+                if( (this.bird.offsetDive) <= -3 && //tolecane of 2
+                    this.bird.offsetX/2 >= this.treeBraches[i].x-this.tolerance && this.bird.offsetX/2 <= this.treeBraches[i].x+this.tolerance &&
+                    this.bird.offsetZ/2 >= this.treeBraches[i].z-this.tolerance && this.bird.offsetZ/2 <= this.treeBraches[i].z+this.tolerance){ 
+                    if(!this.bird.caughtStick){
+                        this.bird.caughtStick = true;
+                        this.treeBraches[i].caught = true;
+                        this.bird.branchIndex = i; 
+                    }
+                }
             }
         }
 
         if(this.bird.caughtStick){
-            if( (this.bird.offsetZ+this.bird.offsetDive) <= -1 && //tolecane of 2
-             this.bird.offsetX >= 30-this.tolerance/*stick coord +tolerance */ && this.bird.offsetX <= 30+this.tolerance /*stick coord +tolerance */&&
-             this.bird.offsetZ >= 6-this.tolerance/*stick coord +tolerance */ && this.bird.offsetZ <= 6+this.tolerance /*stick coord +tolerance */){ //giving 1 unit tolerance
-                
-                this.bird.caughtStick = false; 
-
+            if(!this.bird.diving){
+                if( (this.bird.offsetZ+this.bird.offsetDive) <= -1 && //tolecane of 2
+                    this.bird.offsetX >= 0-this.tolerance && this.bird.offsetX <= 0+this.tolerance &&
+                    this.bird.offsetZ >= 0-this.tolerance && this.bird.offsetZ <= 0+this.tolerance ){ //giving 1 unit tolerance
+                    this.treeBraches[this.bird.branchIndex].inNest=true;
+                    this.bird.caughtStick = false; 
+                }
             }
        }
     }
@@ -285,7 +294,7 @@ class MyScene extends CGFscene {
         this.terrain.bind(2);*/
 
         // ---- BEGIN Primitive drawing section
-      /*  this.pushMatrix();
+      /* this.pushMatrix();
         this.translate(0,49.9,0); //cant be 50 bc if colides with plane cant write
         this.scale(400,100,400);
         this.cubeMap.display();
@@ -295,7 +304,7 @@ class MyScene extends CGFscene {
         this.heightMap.bind(1);
         this.terrain.bind(2);
 
-        /*this.material.apply();        
+        this.material.apply();        
         this.setActiveShader(this.shader);
         this.pushMatrix();
 
@@ -309,7 +318,7 @@ class MyScene extends CGFscene {
 
         this.setActiveShader(this.defaultShader);
         
-        this.pushMatrix();
+       /* this.pushMatrix();
         this.scale(1/3, 1/3, 1/3);
         this.house.display();
         this.popMatrix();*/
@@ -331,20 +340,20 @@ class MyScene extends CGFscene {
         this.popMatrix();
 
         this.pushMatrix();
-        this.translate(13,0,3);
+        this.translate(0,3,0);
+        this.scale(2,2,2);
         this.nest.display();
         this.popMatrix();
         
-        if(!this.bird.caughtStick){
-          //stick
-          this.pushMatrix();
-          this.translate(3,0,-15); //for some reason is in -30 not -15
-          this.scale(2,2,2);  
-          this.rotate(-Math.PI,0,1,0);
-          this.rotate(-Math.PI/2,0,0,1);
-          this.stick.display();
-          this.popMatrix();
+        for( var i =0; i<this.treeBraches.length; i++){
+           // this.pushMatrix();
+            if(!this.treeBraches[i].caught)
+                this.treeBraches[i].display();
+            if(this.treeBraches[i].inNest)
+                this.treeBraches[i].display();
+            //this.popMatrix();
         }
+       
 
         // ---- END Primitive drawing section
     }

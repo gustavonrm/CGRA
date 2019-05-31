@@ -15,6 +15,7 @@ class MyBird extends CGFobject {
         this.speed = 0;
         this.offsetWing1 =0; 
         this.offsetWing2 =0; 
+        this.branchIndex=5;
 
         this.turnFactor = 0;
 
