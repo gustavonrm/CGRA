@@ -242,7 +242,7 @@ class MyScene extends CGFscene {
             console.log(this.bird.offsetDive);
             this.bird.dropDown(this.ticks);
             for(var i =0; i<this.treeBraches.length; i++){
-                if( (this.bird.offsetDive) <= -3 && //tolecane of 2
+                if( (this.bird.offsetDive) <= -4.5 && //tolecane of 2
                     this.bird.offsetX/2 >= this.treeBraches[i].x-this.tolerance && this.bird.offsetX/2 <= this.treeBraches[i].x+this.tolerance &&
                     this.bird.offsetZ/2 >= this.treeBraches[i].z-this.tolerance && this.bird.offsetZ/2 <= this.treeBraches[i].z+this.tolerance){ 
                     if(!this.bird.caughtStick){
@@ -255,8 +255,8 @@ class MyScene extends CGFscene {
         }
 
         if(this.bird.caughtStick){
-            if(!this.bird.diving){
-                if( (this.bird.offsetZ+this.bird.offsetDive) <= -1 && //tolecane of 2
+            if(this.bird.diving){
+                if( (this.bird.offsetZ+this.bird.offsetDive) <= -4.5 && //tolecane of 2
                     this.bird.offsetX >= 0-this.tolerance && this.bird.offsetX <= 0+this.tolerance &&
                     this.bird.offsetZ >= 0-this.tolerance && this.bird.offsetZ <= 0+this.tolerance ){ //giving 1 unit tolerance
                     this.treeBraches[this.bird.branchIndex].inNest=true;
@@ -285,13 +285,13 @@ class MyScene extends CGFscene {
          
 
         // activate selected shader
-		//this.setActiveShader(this.shader);
-		//this.pushMatrix();
-
+		this.setActiveShader(this.shader);
+		this.pushMatrix();
 		// bind additional texture to texture unit 1
-        /*this.altimetry.bind(0);
+        this.altimetry.bind(0);
         this.heightMap.bind(1);
-        this.terrain.bind(2);*/
+        this.terrain.bind(2);
+        this.popMatrix();
 
         // ---- BEGIN Primitive drawing section
       /* this.pushMatrix();
@@ -299,10 +299,6 @@ class MyScene extends CGFscene {
         this.scale(400,100,400);
         this.cubeMap.display();
         this.popMatrix();*/
-
-        this.altimetry.bind(0);
-        this.heightMap.bind(1);
-        this.terrain.bind(2);
 
         this.material.apply();        
         this.setActiveShader(this.shader);
@@ -318,15 +314,16 @@ class MyScene extends CGFscene {
 
         this.setActiveShader(this.defaultShader);
         
-       /* this.pushMatrix();
+        this.pushMatrix();
+        this.translate(5,0,-5);
         this.scale(1/3, 1/3, 1/3);
         this.house.display();
-        this.popMatrix();*/
+        this.popMatrix();
         
         this.pushMatrix(); 
         this.translate(0,3,0);
         this.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
-        //this.scale(.5,.5,.5);
+        this.scale(.75,.75,.75);
         this.bird.display();
         this.popMatrix(); 
 
@@ -340,8 +337,8 @@ class MyScene extends CGFscene {
         this.popMatrix();
 
         this.pushMatrix();
-        this.translate(0,3,0);
-        this.scale(2,2,2);
+        this.translate(0,0.5,0);
+        this.scale(1.5,1.5,1.5);
         this.nest.display();
         this.popMatrix();
         
@@ -362,7 +359,7 @@ class MyScene extends CGFscene {
         var x = 3;
         for (let i = 0; i < this.trees.length; i++) {
             this.pushMatrix();
-            this.translate(x, 0, 0);
+            this.translate(x, 0, x);
             this.trees[i].display();
             this.popMatrix();
             x += 0.5;

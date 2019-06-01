@@ -39,7 +39,7 @@ class MyTreeBranch extends CGFobject {
 		}
 		if(this.inNest){
 			this.scene.pushMatrix();
-			this.scene.translate(0,5,0); //for some reason is in -30 not -15this.translate(3,0,-15); //for some reason is in -30 not -15
+			this.scene.translate(0,1,0); //for some reason is in -30 not -15this.translate(3,0,-15); //for some reason is in -30 not -15
 			this.scene.rotate(this.ang,0,1,0);
 			this.scene.translate(.75,0,0,)
 			this.scene.scale(3/2,1/8,1/8);

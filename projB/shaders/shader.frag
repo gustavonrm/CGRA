@@ -6,7 +6,7 @@ varying vec2 vTextureCoord;
 
 uniform sampler2D uSampler;  // altimetry 
 uniform sampler2D uSampler2; // heightmap
-uniform sampler2D uSampler3; // tex
+uniform sampler2D uSampler3; // texz
 uniform float timeFactor;
 
 void main() {
