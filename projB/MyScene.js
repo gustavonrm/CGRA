@@ -284,7 +284,15 @@ class MyScene extends CGFscene {
         this.setDefaultAppearance();
          
 
-        // activate selected shader
+
+        // ---- BEGIN Primitive drawing section
+        this.pushMatrix();
+        this.translate(0,49.9,0); //cant be 50 bc if colides with plane cant write
+        this.scale(400,100,400);
+        this.cubeMap.display();
+        this.popMatrix();
+
+        //activate selected shader
 		this.setActiveShader(this.shader);
 		this.pushMatrix();
 		// bind additional texture to texture unit 1
@@ -292,24 +300,28 @@ class MyScene extends CGFscene {
         this.heightMap.bind(1);
         this.terrain.bind(2);
         this.popMatrix();
-
-        // ---- BEGIN Primitive drawing section
-      /* this.pushMatrix();
-        this.translate(0,49.9,0); //cant be 50 bc if colides with plane cant write
-        this.scale(400,100,400);
-        this.cubeMap.display();
-        this.popMatrix();*/
-
+/*
         this.material.apply();        
         this.setActiveShader(this.shader);
         this.pushMatrix();
-
+*/
+/*
         this.pushMatrix();
         this.translate(0,-3.2,0);
         this.rotate(-0.5*Math.PI, 1, 0, 0);
         this.scale(60, 60, 1);
         this.material.apply();  
         this.plane.display();
+        this.popMatrix();
+*/
+        
+        // activate selected shader
+		this.setActiveShader(this.shader);
+		this.pushMatrix();
+		// bind additional texture to texture unit 1
+        this.altimetry.bind(0);
+        this.heightMap.bind(1);
+        this.terrain.bind(2);
         this.popMatrix();
 
         this.setActiveShader(this.defaultShader);

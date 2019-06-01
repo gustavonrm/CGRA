@@ -14,8 +14,7 @@ class MyNest extends CGFobject {
         this.initBuffers();    
         
         //test sphere
-        this.Sphere = new MySemiSphere(this.scene,100,100);
-        this.irregularSphere= new MySemiSphere(this.scene,7,7);
+        this.Sphere = new MySemiSphere(this.scene);
 
         //textures
 

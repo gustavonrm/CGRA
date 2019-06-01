@@ -10,14 +10,11 @@
   */
 class MySemiSphere extends CGFobject
 {
-	constructor(scene, slices, stacks) 
+	constructor(scene) 
 	{
 		super(scene);
-
-        this.slices = slices;
-		this.stacks = stacks;
+		
 		this.initBuffers();
-
 	};
 
 	initBuffers() 
@@ -27,40 +24,36 @@ class MySemiSphere extends CGFobject
 		this.indices = [];
 		this.texCoords = [];
 
-        var ang = 2 * Math.PI / this.slices;
-        var angVert = (Math.PI/2) / this.stacks;
+        var ang = 2 * Math.PI / 5;
+        var ang2 = (Math.PI/2) / 5;
 
-//VERTICES E NORMALS
-	    for(var i = 0; i <= this.stacks; i++)
+	    for(var i = 0; i <= 5; i++)
 	    {
-	    	for(var j = 0; j < this.slices; j++)
+	    	for(var j = 0; j < 5; j++)
 	    	{    		
-			this.vertices.push(Math.cos(angVert*i)*Math.cos(ang*j),Math.cos(angVert*i)*Math.sin(ang*j),Math.sin(angVert*i));
-			this.normals.push(Math.cos(angVert*i)*Math.cos(ang*j),Math.cos(angVert*i)*Math.sin(ang*j),Math.sin(angVert*i));
+			this.vertices.push(Math.cos(ang2*i)*Math.cos(ang*j),Math.cos(ang2*i)*Math.sin(ang*j),Math.sin(ang2*i));
+			this.normals.push(Math.cos(ang2*i)*Math.cos(ang*j),Math.cos(ang2*i)*Math.sin(ang*j),Math.sin(ang2*i));
 	    	}
 	    }
-//INDICES
-	for(var i = 0; i < this.stacks; i++) {
-		for(var j = 0; j < this.slices - 1; j++) {
-			this.indices.push(i*this.slices + j, i*this.slices + j+1, (i+1)*this.slices + j);
-			this.indices.push(i*this.slices + j+1, (i+1)*this.slices + j+1, (i+1)*this.slices + j);
-			this.indices.push( (i+1)*this.slices + j, i*this.slices + j+1, i*this.slices + j);
-			this.indices.push( (i+1)*this.slices + j, (i+1)*this.slices + j+1,i*this.slices + j+1);
+	for(var i = 0; i < 5;i++) {
+		for(var j = 0; j < 5 - 1; j++) {
+			this.indices.push(i*5 + j, i*5 + j+1, (i+1)*5 + j);
+			this.indices.push(i*5 + j+1, (i+1)*5 + j+1, (i+1)*5 + j);
+			this.indices.push( (i+1)*5 + j, i*5 + j+1, i*5 + j);
+			this.indices.push( (i+1)*5 + j, (i+1)*5 + j+1,i*5 + j+1);
 			this.texCoords.push(1, 1);
 			this.texCoords.push(0, 0);
 			this.texCoords.push(1, 0);
 			this.texCoords.push(0, 1);
 		}
 
-		this.indices.push(i*this.slices + this.slices - 1, i*this.slices, (i+1)*this.slices + this.slices - 1);
-		this.indices.push(i*this.slices, i*this.slices + this.slices, (i+1)*this.slices + this.slices - 1);
-		this.indices.push((i+1)*this.slices + this.slices - 1, i*this.slices,i*this.slices + this.slices - 1);
-		this.indices.push((i+1)*this.slices + this.slices - 1,i*this.slices + this.slices - 1,i*this.slices);
+		this.indices.push(i*5 + 5 - 1, i*5, (i+1)*5 + 5 - 1);
+		this.indices.push(i*5, i*5 + 5, (i+1)*5 + 5 - 1);
+		this.indices.push((i+1)*5 + 5 - 1, i*5,i*5 + 5 - 1);
+		this.indices.push((i+1)*5 + 5 - 1,i*5 + 5 - 1,i*5);
 	}
-
 		this.primitiveType=this.scene.gl.TRIANGLES;
 		this.initGLBuffers();
-
 
 	}
 	updateTexCoord(coords){
