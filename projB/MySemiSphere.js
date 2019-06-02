@@ -3,11 +3,6 @@
  * @param gl {WebGLRenderingContext}
  * @constructor
  */
-
- /**
-  * Isto cria uma semiesfera, apenas
-  * TEM DE SER ALTERADO PA GENTE N SER ACUSADA DE PLAGIO!!!!!!!
-  */
 class MySemiSphere extends CGFobject
 {
 	constructor(scene) 

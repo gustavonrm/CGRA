@@ -139,7 +139,7 @@ class MyBird extends CGFobject {
     update(time, speedFactor){
         var wingoffset = Math.sin(time*speedFactor);
         this.offsetY=Math.sin(time);
-        this.offsetWing1 = 2*Math.PI+wingoffset/2; //*speedFactor;  // todo wing clap speed
+        this.offsetWing1 = 2*Math.PI+wingoffset/2  * this.speed * speedFactor; //*speedFactor;  // todo wing clap speed
         this.offsetWing2 = 2*Math.PI+wingoffset/1.5;// *speedFactor; 
         this.offsetX += Math.sin(this.turnFactor) * this.speed * speedFactor;
         this.offsetZ += Math.cos(this.turnFactor) * this.speed * speedFactor;
