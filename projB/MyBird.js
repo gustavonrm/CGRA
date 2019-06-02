@@ -36,9 +36,9 @@ class MyBird extends CGFobject {
         this.Sphere = new MySemiSphere(this.scene);
 
         //textures
-        //this.beakTexture = new CGFTexture(this.scene)
         //this.eyeTexture = new CGFTexture(this.scene)
         this.featherTexture = new CGFtexture(this.scene, "images/bird.jpg");
+        this.beakTexture = new CGFtexture(this.scene, "images/Orange-Texture.jpg");
 
         //materials
         this.beakMaterial = new CGFappearance(this.scene);
@@ -46,6 +46,7 @@ class MyBird extends CGFobject {
         this.beakMaterial.setDiffuse(1, 0.5, 0, 1);
         this.beakMaterial.setSpecular(1, 0.5, 0, 1);
         this.beakMaterial.setShininess(10.0);
+        this.beakMaterial.setTexture(this.beakTexture);
 
         this.featherMaterial = new CGFappearance(this.scene);
         this.featherMaterial.setAmbient(1, 1, 1, 1);

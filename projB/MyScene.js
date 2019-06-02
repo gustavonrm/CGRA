@@ -25,7 +25,7 @@ class MyScene extends CGFscene {
         this.ticks = 0; 
         this.oldTime = 0;
         this.birdOff;
-        this.tolerance = 3;
+        this.tolerance = 3; //l9ike a hitbox 
         this.lightningActive = false;
 
         //GUI vars
@@ -120,7 +120,7 @@ class MyScene extends CGFscene {
 
         this.heightMap = new CGFtexture(this, "images/newheightmap.jpg");
         this.terrain = new CGFtexture(this, "images/terrain.jpg");
-        this.altimetry = new CGFtexture(this, "images/altimetry.jpg");
+        this.altimetry = new CGFtexture(this, "images/altimetry.png");
 
         this.material.setTexture(this.terrain);
     }
@@ -221,9 +221,9 @@ class MyScene extends CGFscene {
             this.lightningActive= true;   
         }
         if (keysPressed)   
-            console.log(text);
+            console.log(text); 
         if(!keysPressed)
-            this.lightningActive= false; 
+            this.lightningActive= false; //when you realeased the key it is impossible to draw lightning 
         }
       
     update(t){
@@ -231,10 +231,10 @@ class MyScene extends CGFscene {
         //20 ticks = 1 sec
         this.bird.update(this.ticks/5, this.speedFactor);
         this.checkKeys();
-        if(this.lightningActive)
-            this.lightning.update(this.ticks/5);
+        if(this.lightningActive) //used to check lighting while button is pressed 
+            this.lightning.update(this.ticks/5); //draw lightning while key is pressed 
         else
-            this.lightning.destroy();  //Se houve keypressed eventes isto era tao fucking mais facil 
+            this.lightning.destroy();  //Se houve keypressed eventes isto era tao mais facil 
         
 
         if(this.bird.diving){
